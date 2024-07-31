@@ -1,0 +1,7 @@
+<!-- if there is a header block for given template, then it will be used, otherwise default template will be used -->
+<!-- e.g. partials/blocks/therme/header.hbs -->
+{{#if (partial_exists (concat 'blocks/' __template '/header'))}}
+    {{> (concat 'blocks/' (lookup . '__template') '/header') }}
+{{else}}
+    {{> blocks/default/header }}
+{{/if}}

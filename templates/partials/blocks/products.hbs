@@ -1,0 +1,7 @@
+<!-- if there is a footer block for given template, then it will be used, otherwise default template will be used -->
+<!-- e.g. partials/blocks/therme/product.hbs -->
+{{#if (partial_exists (concat 'blocks/' __template '/products'))}}
+    {{> (concat 'blocks/' (lookup . '__template') '/products') }}
+{{else}}
+    {{> blocks/default/products }}
+{{/if}}

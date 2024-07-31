@@ -1,0 +1,29 @@
+{{#> layouts/email_base }}
+    {{#* inline "body"}}
+        <div class="description">
+            Your appointment on {{appointmentDate}} at {{appointmentTime}} for {{service.name}} is only a week away. Be sure to add this to your calendar using one of the add-icons below.
+        </div>
+        <div class="description">
+            If you have questions on what to expect, <a href="mailto:hello@phy.health" class="link"> reach out to Phy Health any time</a>. To cancel your appointment or book another, you can
+            <a href="https://user-portal.phy.health/" target="_blank" class="link">login and make changes here</a>.
+        </div>
+        <table>
+            <tr><h4 class="mb-0">Add To Calendar</h4></tr>
+            <tr>
+                <td class="gutter-y-15"></td>
+            </tr>
+            <tr>
+                <td>
+                    <a class="link" href="{{addToGoogleCalendarUrl}}" target="_blank">
+                        <img src="https://static-phy-assets.s3.us-east-2.amazonaws.com/emails/google-logo.png"
+                             alt="Calendar Sync" width="48" height="48"/>
+                    </a>
+                    <a class="link" href="{{downloadIcsUrl}}" target="_blank">
+                        <img src="https://static-phy-assets.s3.us-east-2.amazonaws.com/emails/ics.png"
+                             alt="Calendar Sync" width="48" height="48"/>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    {{/ inline}}
+{{/ layouts/email_base}}

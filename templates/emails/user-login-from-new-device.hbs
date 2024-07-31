@@ -1,0 +1,11 @@
+{{#> layouts/email_base }}
+    {{#* inline "body"}}
+        <table class="gutter-y"><tr><td class="gutter-y-15"></td></tr></table>
+        <div class="description">There has been a login to your Phy Health account from a new device.</div>
+        <div class="description">ID: {{device.id}}</div>
+        <div class="description">Name: {{device.name}}</div>
+        <div class="description">OS: {{device.os}}</div>
+        <div class="description">IP Address: {{device.ip}}</div>
+        <div class="description">Not you? Please reach out to us immediately at <a class="link" href="mailto:hello@phy.health"><span><font color="#EB5829">hello@phy.health</font></span></a></div>
+    {{/ inline}}
+{{/ layouts/email_base}}

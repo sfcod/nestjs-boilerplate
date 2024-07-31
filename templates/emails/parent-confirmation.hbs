@@ -1,0 +1,16 @@
+{{#> layouts/email_base }}
+    {{#* inline "body"}}
+        <div class="title">
+            <h3>Please confirm registration of your child</h3>
+        </div>
+        <div class="description">
+            <div class="description with-button">
+                <button class="button">
+                    <a href="{{{user_portal_url '/parent/confirmation' }}}/{{token}}" target="_blank">
+                        <span><font color="#ffffff">Confirm</font></span>
+                    </a>
+                </button>
+            </div>
+        </div>
+    {{/ inline}}
+{{/ layouts/email_base}}

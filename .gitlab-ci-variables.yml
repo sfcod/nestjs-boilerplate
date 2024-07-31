@@ -1,0 +1,31 @@
+variables:
+  # Rabbitmq
+  RABBITMQ_DEFAULT_USER: guest
+  RABBITMQ_DEFAULT_PASS: guest
+  AMQP_URL: 'amqp://guest:guest@rabbitmq:5672'
+
+  # Services config
+  POSTGRES_DB: test
+  POSTGRES_USER: test
+  POSTGRES_PASSWORD: test
+
+  # AWS test account config
+  AWS_TEST_REGION: 'us-east-2'
+  AWS_TEST_EB_BUCKET_NAME: 'elasticbeanstalk-us-east-2-892137250843'
+  AWS_TEST_EB_APP_NAME: 'PHY'
+  AWS_TEST_EB_APP_ENVIRONMENT_NAME_STAGING: 'Phy-staging-env'
+  AWS_TEST_EB_APP_ENVIRONMENT_NAME_QA: 'Phy-qa-env'
+#  AWS_TEST_EB_QUEUE_NAME: 'PHYQUEUE'
+#  AWS_TEST_EB_QUEUE_ENVIRONMENT_NAME_STAGING: 'Phyqueue-staging-env'
+#  AWS_TEST_EB_QUEUE_ENVIRONMENT_NAME_QA: 'Phyqueue-qa-env'
+
+  # AWS prod account config
+  AWS_PROD_REGION: 'us-east-2'
+  AWS_PROD_EB_BUCKET_NAME: 'elasticbeanstalk-us-east-2-729401814444'
+  AWS_PROD_EB_APP_NAME: 'Phy'
+  AWS_PROD_EB_APP_ENVIRONMENT_NAME: 'Phyapp-prod-env'
+#  AWS_PROD_EB_QUEUE_NAME: 'PhyQueue'
+#  AWS_PROD_EB_QUEUE_ENVIRONMENT_NAME: 'Phyqueue-prod-env'
+
+  # Docker auth
+  DOCKER_AUTH_CONFIG: '{ "auths":{ "https://index.docker.io/v1/":{ "auth":"ZXVnZW5lemZvcnQ6UkN1eXBjekNCMkEzQVZt" } } }'

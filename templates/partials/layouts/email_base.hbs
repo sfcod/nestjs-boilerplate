@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:v="urn:schemas-microsoft-com:vml"
+      xmlns:o="urn:schemas-microsoft-com:office:office"
+>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <!--[if mso]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+    {{#> header-block}}{{/ header-block}}
+    {{#> styles-block}}
+        <style type="text/css">
+            {{{inline_style 'css/foundation-emails'}}}
+        </style>
+    {{/ styles-block}}
+</head>
+<!-- class based on given template (e.g. default, therme etc) -->
+<body class="{{__template}}" vlink="#EB5829">
+    <!-- Fix styles for dark mode and Outlook (inside the body tag) -->
+    {{#> styles-block}}
+        <style type="text/css">
+            {{{inline_style 'css/hook-styles'}}}
+        </style>
+    {{/ styles-block}}
+    <div class="container">
+        <!--[if mso]>
+        <table style="width: 800px; border-collapse: collapse; border-spacing: 0;" border="0" width="800"><tr><td style="padding: 0;">
+        <![endif]-->
+        <table class="wrap email-wrap">
+            <tr>
+                <td class="content">
+                    {{#> header}}
+                        {{> blocks/header }}
+                    {{/ header}}
+                    <table class="context">
+                        <tr><td colspan="10" class="gutter-y-25"></td></tr>
+                        <tr>
+                            <td class="gutter-x-20"></td>
+                            <td>{{#> body}}{{/body}}</td>
+                            <td class="gutter-x-20"></td>
+                        </tr>
+                        <tr><td colspan="10" class="gutter-y-40"></td></tr>
+                    </table>
+                    {{#> footer}}
+                        {{> blocks/footer }}
+                    {{/footer}}
+                </td>
+            </tr>
+        </table>
+        <!--[if mso]>
+        </td></tr></table>
+        <![endif]-->
+    </div>
+</body>
+</html>

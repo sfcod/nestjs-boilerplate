@@ -1,0 +1,18 @@
+import { Command, Console } from 'nestjs-console';
+import { ChunkManager } from '../service/chunk-manager';
+
+@Console({
+    command: 'file:uploader',
+    description: 'A command to create users',
+})
+export class ClearChunkCommand {
+    constructor(private readonly chunkManager: ChunkManager) {}
+
+    @Command({
+        command: 'clear-chunks',
+        description: 'Clear old chunks',
+    })
+    async execute(): Promise<void> {
+        await this.chunkManager.clear();
+    }
+}

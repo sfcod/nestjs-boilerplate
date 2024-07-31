@@ -1,0 +1,69 @@
+a[x-apple-data-detectors], .ii a[href] {
+    color: inherit !important;
+    text-decoration: inherit!important;
+    word-break: break-all;
+    font-size: inherit !important;
+    font-family: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+}
+[data-ogsc] body, [data-ogsc] table.wrap {
+    background-color: #1d1d1b !important;
+    color: #C6C6C6 !important;
+}
+[data-ogsc] a {
+    color: #EB5829 !important;
+}
+[data-ogsc] h1, [data-ogsc] h2, [data-ogsc] h3,
+[data-ogsc] h4, [data-ogsc] h5, [data-ogsc] h6,
+[data-ogsc] .button {
+    color: #ffffff !important;
+}
+[data-ogsc] .card {
+    background: #282827 !important;
+    color: #C6C6C6 !important;
+}
+[data-ogsc] .footer {
+    background-color: #282827 !important;
+    color: #717171 !important;
+}
+[data-ogsc] .description {
+    color: #C6C6C6 !important;
+}
+:root {
+    Color-scheme: light dark;
+    supported-color-schemes: light dark;
+}
+html {
+    Color-scheme: light dark;
+    supported-color-schemes: light dark;
+}
+@media (prefers-color-scheme: dark) {
+    .email-wrap {
+        background-color: #1d1d1b !important;
+        color: #C6C6C6 !important;
+    }
+    .email-wrap a {
+        color: #EB5829 !important;
+    }
+    .email-wrap h1,
+    .email-wrap h2,
+    .email-wrap h3,
+    .email-wrap h4,
+    .email-wrap h5,
+    .email-wrap h6,
+    .email-wrap .button {
+        color: #ffffff !important;
+    }
+    .email-wrap .card {
+        background: #282827 !important;
+        color: #C6C6C6 !important;
+    }
+    .email-wrap .footer {
+        background-color: #282827 !important;
+        color: #717171 !important;
+    }
+    .email-wrap .description {
+        color: #C6C6C6 !important;
+    }
+}

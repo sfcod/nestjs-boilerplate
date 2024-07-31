@@ -1,0 +1,20 @@
+{{#> layouts/email_base }}
+    {{#* inline "body"}}
+        <div class="title">
+            <h3>Welcome to point picker!</h3>
+        </div>
+        <div class="description">
+            <b>You're now registered and ready to begin. Login to the admin panel using the credentials below:</b>
+        </div>
+        <div class="description">
+            Your username: <b>{{email}}</b>
+        </div>
+        <div class="description">
+            Your password: <b>{{password}}</b>
+        </div>
+        <div class="description">
+            From the admin panel you can add and delete providers, view users, and many other features.
+            To see users and start using Phy, make sure you download our app from the App Store.
+        </div>
+    {{/ inline}}
+{{/ layouts/email_base}}

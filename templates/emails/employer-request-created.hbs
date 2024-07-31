@@ -1,0 +1,17 @@
+{{#> layouts/email_base }}
+    {{#* inline "body"}}
+        <table class="gutter-y"><tr><td class="gutter-y-15"></td></tr></table>
+        <div class="title">
+            <h3>New request for employer:</h3>
+        </div>
+        <div class="description"><b>Name:</b> {{employerRequest.name}}</div>
+        <div class="description"><b>HR Name:</b> {{employerRequest.hrName}}</div>
+        <div class="description"><b>HR Email:</b> <a class="link" href="mailto:{{employerRequest.hrEmail}}"><span><font color="#EB5829">{{employerRequest.hrEmail}}</font></span></a></div>
+        <div class="description"><b>HR Phone:</b> <a class="link" href="tel:{{employerRequest.hrPhoneNumber}}"><span><font color="#EB5829">{{employerRequest.hrPhoneNumber}}</font></span></a></div>
+        {{#if employerRequest.invite}}
+            <div class="description"><b>Created By:</b>&nbsp;
+                {{employerRequest.invite.firstName}} {{employerRequest.invite.lastName}} ({{employerRequest.invite.email}})
+            </div>
+        {{/if}}
+    {{/ inline}}
+{{/ layouts/email_base}}

@@ -1,0 +1,30 @@
+{{#> layouts/email_base }}
+    {{#* inline "body"}}
+        <container>
+            <wrapper>
+                <row>
+                    <columns large="12">
+                        <table class="gutter-y"><tr><td class="gutter-y-15"></td></tr></table>
+                        <p class="text-left">
+                            User: {{user}}
+                        </p>
+                        <p class="text-left">
+                            Scan: {{scan}}
+                        </p>
+                        {{#if name}}
+                            <p class="text-left">
+                                File name: {{name}}
+                            </p>
+                        {{/if}}
+                        <p class="text-left">
+                            Format: {{format}}
+                        </p>
+                        <p class="text-left">
+                            File url: {{file}}
+                        </p>
+                    </columns>
+                </row>
+            </wrapper>
+        </container>
+    {{/ inline}}
+{{/ layouts/email_base}}

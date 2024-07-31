@@ -1,0 +1,33 @@
+<table class="footer">
+    <tr><td colspan="10" class="gutter-y-40"></td></tr>
+    <tr>
+        <td class="gutter-x-20"></td>
+        <td>
+            <table>
+                <tr>
+                    {{#if __unsubscribe_email}}
+                        {{#if __unsubscribe_hash}}
+                            <td style="vertical-align: top; width: 60%;">
+                                <a href="{{unsubscribe_url __unsubscribe_email __unsubscribe_hash}}">Unsubscribe</a>
+                            </td>
+                        {{/if}}
+                    {{/if}}
+                </tr>
+                <tr><td style="height: 25px; line-height: 0; font-size: 0; padding: 0;"></td></tr>
+                <tr>
+                    <td style="vertical-align: top; width: 60%;">
+                        This is a service notification mailing.<br>
+                        ©2023 Phy. All rights reserved.
+                    </td>
+                    <td style="vertical-align: top; text-align: right;">
+                        <a href="{{{user_portal_url '/'}}}" target="_blank">
+                            <img alt="Phy Health" class="footerImg" src="https://static-phy-assets.s3.us-east-2.amazonaws.com/emails/logo-footer.png" width="90" height="54">
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td class="gutter-x-20"></td>
+    </tr>
+    <tr><td colspan="10" class="gutter-y-40"></td></tr>
+</table>

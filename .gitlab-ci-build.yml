@@ -1,0 +1,94 @@
+.build:
+  stage: build
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist
+      - storage
+      - assets
+      - templates
+      - node_modules
+      - package.json
+      - .ebextensions
+      - .platform
+      - .env
+      - .env.local
+      - .npmrc
+      - Procfile
+      - tsconfig.json
+  script:
+    - npm run build
+    - npm run build:admin
+    - npm run build:aemass
+    - npm run build:arkit3
+    - npm run build:api
+    - npm run build:database
+    - npm run build:queue-processor
+    - npm run build:history-log
+    - npm run build:assessment
+    - npm run build:action-log
+    - npm run build:media-convert
+    - npm run build:credit
+    - npm run build:pdf
+
+build:test:
+  extends: .build
+  environment:
+    name: test
+#  only:
+#    refs:
+#      - merge_requests
+#      - develop
+#      - master
+#  except:
+#    refs:
+#      - qa
+#      - staging
+#      - prod
+  only:
+    refs:
+      - merge_requests
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^release\/.*$/
+  before_script:
+    - npm ci
+    - cp env/test/.env.local .env.local
+    - cp env/test/firebase.json firebase.json
+
+build:staging:
+  extends: .build
+  environment:
+    name: staging
+  only:
+    refs:
+      - staging
+      - looker-sso
+      - contact-us
+  before_script:
+    - npm ci
+    - cp $ENV_STAGING .env.local
+    - cp $FIREBASE_STAGING firebase.json
+
+build:prod:
+  extends: .build
+  environment:
+    name: prod
+  only:
+    refs:
+      - prod
+  before_script:
+    - npm ci
+    - cp $ENV_PROD .env.local
+    - cp $FIREBASE_PROD firebase.json
+
+build:qa:
+  extends: .build
+  environment:
+    name: qa
+  only:
+    refs:
+      - qa
+  before_script:
+    - npm ci
+    - cp $ENV_QA .env.local
+    - cp $FIREBASE_QA firebase.json

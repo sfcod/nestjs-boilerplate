@@ -1,0 +1,25 @@
+{{#> layouts/email_base }}
+    {{#* inline "body"}}
+        <div class="title">
+            <h3>User {{name}} baseline report is ready!</h3>
+        </div>
+        <div class="description">
+            Please review user baseline report.
+        </div>
+        <div class="description">Company: {{company}}</div>
+        <div class="description">Employer: {{employer}}</div>
+        <div class="description with-button">
+            <button class="button">
+                <a href="{{{admin_panel_url ''}}}/patient/view/{{user}}/2d-pdf-baseline-report?scan={{scan}}&modelUpload={{modelUpload}}" target="_blank">
+                    <span><font color="#ffffff">View Report</font></span>
+                </a>
+            </button>
+        </div>
+        <div class="description">
+            Accessible with phone or desktop.
+        </div>
+        <div class="description">
+            Any issues accessing your information, <a class="link" href="{{{website_url '/contact'}}}" target="_blank"><span><font color="#EB5829">contact us</font></span></a>.<br><br>
+        </div>
+    {{/ inline}}
+{{/ layouts/email_base}}

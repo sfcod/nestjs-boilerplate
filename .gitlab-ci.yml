@@ -1,0 +1,29 @@
+image: node:18-alpine
+
+services:
+  - redis:5
+  - postgres:13
+  - mongo:4
+  - name: mailhog/mailhog
+    alias: mailhog
+  - rabbitmq:3-management
+
+stages:
+  - build
+  - test
+  - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  policy: pull
+  untracked: true
+  paths:
+    - .npm/
+    - node_modules/
+
+include:
+  - '.gitlab-ci-variables.yml'
+  - '.gitlab-ci-build.yml'
+  - '.gitlab-ci-test.yml'
+  - '.gitlab-ci-deploy.yml'
+

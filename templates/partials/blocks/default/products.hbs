@@ -1,0 +1,343 @@
+{{#if count}}
+<div class="title sub">
+    {{#ifEqual count 3}}
+        <h6>Select a report type from the options below:</h6>
+    {{/ifEqual}}
+    {{#ifEqual count 2}}
+        <h6>Select a report type from the options below:</h6>
+    {{/ifEqual}}
+    {{#ifEqual count 1}}
+        <h6>One type of Phy Product available to you:</h6>
+    {{/ifEqual}}
+</div>
+
+<!--[if mso]>
+    <table style="width: 600px; border-collapse: collapse; border-spacing: 0;" border="0" width="600"><tr><td style="padding: 0;">
+<![endif]-->
+<table class="w-100 table-collapse productWrap">
+    <tr>
+        <td class="productCol">
+            {{#if products.lite }}
+                <!--Lite Start-->
+                <div class="productItemWrap">
+                    <table class="productItem table-collapse w-100">
+                        <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                        <tr>
+                            <td class="gutter-x-20"></td>
+                            <td class="productImg"><img src="https://i.ibb.co/1XZj8Jr/lite-img.png" width="536" height="202"></td>
+                            <td class="gutter-x-20"></td>
+                        </tr>
+                        <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                        <tr><td class="gutter-x-20"></td><td><hr /></td><td class="gutter-x-20"></td></tr>
+                        <tr><td colspan="10" class="gutter-y-25"></td></tr>
+                        <tr>
+                            <td class="gutter-x-20"></td>
+                            <td class="productIcon">
+                                <img src="https://i.ibb.co/N3P8jCH/lite-icon.png" width="45" height="50" />
+                            </td>
+                            <td class="gutter-x-20"></td>
+                        </tr>
+                        <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                        <tr><td class="gutter-x-20"></td><td class="productName"><span>Lite</span></td><td class="gutter-x-20"></td></tr>
+                        <tr><td colspan="10" class="gutter-y-10"></td></tr>
+                        <tr><td class="gutter-x-20"></td><td class="productPrice">
+                            {{#ifEqual invoice.currency 'usd'}}${{/ifEqual}}
+                            {{products.lite}}
+                            {{#ifNotEqual invoice.currency 'usd'}} {{currency invoice.currency}}{{/ifNotEqual}}
+                        </td><td class="gutter-x-20"></td></tr>
+                        <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                        <tr>
+                            <td class="gutter-x-20"></td>
+                            <td>
+                                <table class="table-collapse w-100 productFeatures">
+                                    <tr>
+                                        <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                        <td class="gutter-x-10"></td>
+                                        <td class="text"><span>Avatar visualization of your body</span></td>
+                                    </tr>
+                                    <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                    <tr>
+                                        <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                        <td class="gutter-x-10"></td>
+                                        <td class="text"><span>PhyScore to classify your overall MSK pain risk and functional ability</span></td>
+                                    </tr>
+                                    <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                    <tr>
+                                        <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                        <td class="gutter-x-10"></td>
+                                        <td class="text"><span>3 Phy Goals to address imbalances that need the most attention</span></td>
+                                    </tr>
+                                    <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                    <tr>
+                                        <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                        <td class="gutter-x-10"></td>
+                                        <td class="text"><span>Basic Body Zone Analysis</span></td>
+                                    </tr>
+                                    <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                    <tr>
+                                        <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                        <td class="gutter-x-10"></td>
+                                        <td class="text"><span>Automated Personalized Movement Plan</span></td>
+                                    </tr>
+                                    <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                    <tr>
+                                        <td class="icon"><img src="https://i.ibb.co/Xsv0nPQ/delete.png" width="9" height="9" /></td>
+                                        <td class="gutter-x-10"></td>
+                                        <td class="text disabled"><span>Percentile ranking to see how you compare to other Phy users</span></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="gutter-x-20"></td>
+                        </tr>
+                        <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                        <tr>
+                            <td class="gutter-x-20"></td>
+                            <td class="productFeaturesLink">
+                            {{#if invoice.id}}
+                                <a class="link" href="{{{user_portal_url '/payment/invoice' }}}/{{invoice.id}}?features=1"><span><font color="#EB5829">Show all features</font></span></a>
+                            {{/if}}
+                            </td>
+                            <td class="gutter-x-20"></td>
+                        </tr>
+                        <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                        <tr><td class="gutter-x-20"></td><td><hr /></td><td class="gutter-x-20"></td></tr>
+                        <tr><td colspan="10" class="gutter-y-25"></td></tr>
+                        <tr>
+                            <td class="gutter-x-20"></td>
+                            <td class="productCta">
+                                {{#if invoice.id}}
+                                    <button class="button secondary">
+                                        <a href="{{{user_portal_url '/payment/invoice' }}}/{{invoice.id}}" target="_blank">
+                                            <span><font color="#EB5829">Select</font></span>
+                                            <img src="https://i.ibb.co/C6DLdqy/arrow-right.png" width="14" height="14" />
+                                        </a>
+                                    </button>
+                                {{/if}}
+                            </td>
+                            <td class="gutter-x-20"></td>
+                        </tr>
+                        <tr><td colspan="10" class="gutter-y-40"></td></tr>
+                    </table>
+                </div>
+                <table class="gutter-y"><tr><td class="gutter-y-25"></td></tr></table>
+                <!--Lite End-->
+            {{/if}}
+
+        {{#if products.baseline }}
+            <!--Baseline Start-->
+            <div class="productItemWrap">
+                <table class="productItem table-collapse w-100">
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr>
+                        <td class="gutter-x-20"></td>
+                        <td class="productImg"><img src="https://i.ibb.co/hfMfRB0/baseline-img.png" width="536" height="202"></td>
+                        <td class="gutter-x-20"></td>
+                    </tr>
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr><td class="gutter-x-20"></td><td><hr /></td><td class="gutter-x-20"></td></tr>
+                    <tr><td colspan="10" class="gutter-y-25"></td></tr>
+                    <tr>
+                        <td class="gutter-x-20"></td>
+                        <td class="productIcon">
+                            <img src="https://i.ibb.co/Jr1Z842/baseline-icon.png" width="45" height="50" />
+                        </td>
+                        <td class="gutter-x-20"></td>
+                    </tr>
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr><td class="gutter-x-20"></td><td class="productName"><span>Baseline</span></td><td class="gutter-x-20"></td></tr>
+                    <tr><td colspan="10" class="gutter-y-10"></td></tr>
+                    <tr><td class="gutter-x-20"></td><td class="productPrice">
+                        {{#ifEqual invoice.currency 'usd'}}${{/ifEqual}}
+                        {{products.baseline}}
+                        {{#ifNotEqual invoice.currency 'usd'}} {{currency invoice.currency}}{{/ifNotEqual}}
+                    </td><td class="gutter-x-20"></td></tr>
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr>
+                        <td class="gutter-x-20"></td>
+                        <td>
+                            <table class="table-collapse w-100 productFeatures">
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>Avatar visualization of your body</span></td>
+                                </tr>
+                                <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>PhyScore to classify your overall MSK pain risk and functional ability</span></td>
+                                </tr>
+                                <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>3 Phy Goals to address imbalances that need the most attention</span></td>
+                                </tr>
+                                <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>Advanced Body Zone Analysis</span></td>
+                                </tr>
+                                <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>Automated Personalized Movement Plan</span></td>
+                                </tr>
+                                <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>Percentile ranking to see how you compare to other Phy users</span></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="gutter-x-20"></td>
+                    </tr>
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr>
+                        <td class="gutter-x-20"></td>
+                        <td class="productFeaturesLink">
+                        {{#if invoice.id}}
+                            <a class="link" href="{{{user_portal_url '/payment/invoice' }}}/{{invoice.id}}?features=1"><span><font color="#EB5829">Show all features</font></span></a>
+                        {{/if}}
+                        </td>
+                        <td class="gutter-x-20"></td>
+                    </tr>
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr><td class="gutter-x-20"></td><td><hr /></td><td class="gutter-x-20"></td></tr>
+                    <tr><td colspan="10" class="gutter-y-25"></td></tr>
+                    <tr>
+                        <td class="gutter-x-20"></td>
+                        <td class="productCta">
+                        {{#if invoice.id}}
+                            <button class="button secondary">
+                                <a href="{{{user_portal_url '/payment/invoice' }}}/{{invoice.id}}" target="_blank">
+                                    <span><font color="#EB5829">Select</font></span>
+                                    <img src="https://i.ibb.co/C6DLdqy/arrow-right.png" width="14" height="14" />
+                                </a>
+                            </button>
+                        {{/if}}
+                        </td>
+                        <td class="gutter-x-20"></td>
+                    </tr>
+                    <tr><td colspan="10" class="gutter-y-40"></td></tr>
+                </table>
+            </div>
+            <table class="gutter-y"><tr><td class="gutter-y-25"></td></tr></table>
+            <!--Baseline End-->
+        {{/if}}
+
+        {{#if products.performance }}
+            <!--Performance Start-->
+            <div class="productItemWrap">
+                <table class="productItem table-collapse w-100">
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr>
+                        <td class="gutter-x-20"></td>
+                        <td class="productImg"><img src="https://i.ibb.co/Pjfpxww/performance-img.png" width="536" height="209"></td>
+                        <td class="gutter-x-20"></td>
+                    </tr>
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr><td class="gutter-x-20"></td><td><hr /></td><td class="gutter-x-20"></td></tr>
+                    <tr><td colspan="10" class="gutter-y-25"></td></tr>
+                    <tr>
+                        <td class="gutter-x-20"></td>
+                        <td class="productIcon">
+                            <img src="https://i.ibb.co/TY9Rbqg/performance-icon.png" width="59" height="50" />
+                        </td>
+                        <td class="gutter-x-20"></td>
+                    </tr>
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr><td class="gutter-x-20"></td><td class="productName"><span>Performance</span></td><td class="gutter-x-20"></td></tr>
+                    <tr><td colspan="10" class="gutter-y-10"></td></tr>
+                    <tr><td class="gutter-x-20"></td><td class="productPrice">
+                        {{#ifEqual invoice.currency 'usd'}}${{/ifEqual}}
+                        {{products.performance}}
+                        {{#ifNotEqual invoice.currency 'usd'}} {{currency invoice.currency}}{{/ifNotEqual}}
+                    </td><td class="gutter-x-20"></td></tr>
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr>
+                        <td class="gutter-x-20"></td>
+                        <td>
+                            <table class="table-collapse w-100 productFeatures">
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>3D image of your body</span></td>
+                                </tr>
+                                <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>PhyScore to classify your overall MSK pain risk and functional ability</span></td>
+                                </tr>
+                                <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>3 Phy Goals to address imbalances that need the most attention</span></td>
+                                </tr>
+                                <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>Advanced Body Zone Analysis</span></td>
+                                </tr>
+                                <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>Automated + Custom Personalized Movement Plan</span></td>
+                                </tr>
+                                <tr><td colspan="10" class="gutter-y-15"></td></tr>
+                                <tr>
+                                    <td class="icon"><img src="https://i.ibb.co/vL05jFF/check.png" width="12" height="9" /></td>
+                                    <td class="gutter-x-10"></td>
+                                    <td class="text"><span>Percentile ranking to see how you compare to other Phy users</span></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="gutter-x-20"></td>
+                    </tr>
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr>
+                        <td class="gutter-x-20"></td>
+                        <td class="productFeaturesLink">
+                        {{#if invoice.id}}
+                            <a class="link" href="{{{user_portal_url '/payment/invoice' }}}/{{invoice.id}}?features=1"><span><font color="#EB5829">Show all features</font></span></a>
+                        {{/if}}
+                        </td>
+                        <td class="gutter-x-20"></td>
+                    </tr>
+                    <tr><td colspan="10" class="gutter-y-20"></td></tr>
+                    <tr><td class="gutter-x-20"></td><td><hr /></td><td class="gutter-x-20"></td></tr>
+                    <tr><td colspan="10" class="gutter-y-25"></td></tr>
+                    <tr>
+                        <td class="gutter-x-20"></td>
+                        <td class="productCta">
+                            {{#if invoice.id}}
+                                <button class="button secondary">
+                                    <a href="{{{user_portal_url '/payment/invoice' }}}/{{invoice.id}}" target="_blank">
+                                        <span><font color="#EB5829">Select</font></span>
+                                        <img src="https://i.ibb.co/C6DLdqy/arrow-right.png" width="14" height="14" />
+                                    </a>
+                                </button>
+                            {{/if}}
+                        </td>
+                        <td class="gutter-x-20"></td>
+                    </tr>
+                    <tr><td colspan="10" class="gutter-y-40"></td></tr>
+                </table>
+            </div>
+            <table class="gutter-y"><tr><td class="gutter-y-25"></td></tr></table>
+            <!--Performance End-->
+        {{/if}}
+        </td>
+    </tr>
+</table>
+<!--[if mso]>
+    </td></tr></table>
+<![endif]-->
+{{/if}}

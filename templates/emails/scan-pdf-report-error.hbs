@@ -1,0 +1,25 @@
+{{#> layouts/email_base }}
+    {{#* inline "body"}}
+        <container>
+            <wrapper>
+                <row>
+                    <columns large="12">
+                        <table class="gutter-y"><tr><td class="gutter-y-15"></td></tr></table>
+                        <p class="text-left">
+                            Patient: {{patient.id}}
+                        </p>
+                        <p class="text-left">
+                            Scan: {{scan}}
+                        </p>
+                        <p class="text-left">
+                            Pose: {{pose}}
+                        </p>
+                        <p class="text-left">
+                            Attempts Made: {{attemptsMade}}(Max 10)
+                        </p>
+                    </columns>
+                </row>
+            </wrapper>
+        </container>
+    {{/ inline}}
+{{/ layouts/email_base}}

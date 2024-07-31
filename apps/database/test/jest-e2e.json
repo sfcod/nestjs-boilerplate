@@ -1,0 +1,27 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "^@libs/core(|/.*)$": "<rootDir>/../../../libs/core/src/$1",
+    "^@libs/access-key(|/.*)$": "<rootDir>/../../../libs/access-key/src/$1",
+    "^@libs/file-storage(|/.*)$": "<rootDir>/../../../libs/file-storage/src/$1",
+    "^@libs/file-uploader(|/.*)$": "<rootDir>/../../../libs/file-uploader/src/$1",
+    "^@libs/orm-history(|/.*)$": "<rootDir>/../../../libs/orm-history/src/$1",
+    "^@libs/mailer(|/.*)$": "<rootDir>/../../../libs/mailer/src/$1",
+    "^@libs/notification(|/.*)$": "<rootDir>/../../../libs/notification/src/$1",
+    "^@libs/pusher(|/.*)$": "<rootDir>/../../../libs/pusher/src/$1",
+    "^@libs/request-context(|/.*)$": "<rootDir>/../../../libs/request-context/src/$1",
+    "^@libs/soft-delete(|/.*)$": "<rootDir>/../../../libs/soft-delete/src/$1",
+    "^@libs/twilio(|/.*)$": "<rootDir>/../../../libs/twilio/src/$1",
+    "^@libs/orm-core(|/.*)$": "<rootDir>/../../../libs/orm-core/src/$1",
+    "^@libs/orm(|/.*)$": "<rootDir>/../../../libs/orm/src/$1",
+    "^@libs/security(|/.*)$": "<rootDir>/../../../libs/security/src/$1",
+    "^@libs/test(|/.*)$": "<rootDir>/../../../libs/test/src/$1",
+    "^@libs/microservice-event(|/.*)$": "<rootDir>/../../../libs/microservice-event/src/$1"
+  }
+}

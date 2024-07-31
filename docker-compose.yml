@@ -1,0 +1,27 @@
+services:
+    postgres:
+        image: "postgres:13"
+        environment:
+            POSTGRES_PASSWORD: "postgres"
+            POSTGRES_USER: "postgres"
+        volumes:
+            - "/var/lib/postgresql/data"
+        ports:
+            - "9901:5432"
+
+    redis:
+        image: "redis:6"
+        ports:
+            - "9902:6379"
+
+    rabbitmq:
+        image: "rabbitmq:3-management"
+        ports:
+            - "9903:5672"
+            - "9904:15672"
+
+    mailhog:
+        image: mailhog/mailhog
+        ports:
+            - "9905:1025"
+            - "9906:8025"

@@ -1,0 +1,143 @@
+.test:
+  image: node:18-alpine
+  stage: test
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist
+      - node_modules
+  dependencies:
+    - build:test
+#  only:
+#    refs:
+#      - merge_requests
+#      - develop
+#      - master
+#  except:
+#    refs:
+#      - qa
+#      - staging
+#      - prod
+  only:
+    refs:
+      - merge_requests
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^release\/.*$/
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+  before_script:
+#    - echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
+    - apk update
+    - apk add postgresql postgresql-client libpq-dev
+    - export PGPASSWORD=$POSTGRES_PASSWORD
+    - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -a -f "$CI_PROJECT_DIR/gitlab-ci.sql"
+#    - npm ci --cache .npm --prefer-offline
+    - cp env/test/.env.local .env.test.local
+    - cp env/test/firebase.json firebase.json
+#  cache:
+#    key: ${CI_COMMIT_REF_SLUG}
+#    paths:
+#      - .npm/
+#      - node_modules
+
+test:linter:
+  extends: .test
+  script:
+#    - NODE_ENV=test npm run lint-errors
+    - NODE_OPTIONS=--max_old_space_size=4096 ./node_modules/.bin/eslint "libs/**/src/**/[a-b]*.ts" --quiet
+    - NODE_OPTIONS=--max_old_space_size=4096 ./node_modules/.bin/eslint "libs/**/src/**/[m-z]*.ts" --quiet
+    - NODE_OPTIONS=--max_old_space_size=4096 ./node_modules/.bin/eslint "apps/**/src/**/[a-l]*.ts" --quiet
+    - NODE_OPTIONS=--max_old_space_size=4096 ./node_modules/.bin/eslint "apps/**/src/**/[m-z]*.ts" --quiet
+
+test:api:
+  extends: .test
+  only:
+    changes:
+      - apps/api/**/*
+      - libs/**/*
+  #      - test/jest-e2e.json
+  script:
+    - NODE_ENV=test CONNECTION=Shared npm run migration:up
+    - NODE_ENV=test CONNECTION=Phy npm run migration:up
+    - NODE_ENV=test npm run test:e2e:api:dist all
+#    - NODE_ENV=test npm run test:e2e:api apps/api/test/[a-i]*
+#    - NODE_ENV=test npm run test:e2e:api apps/api/test/[j-o]*
+#    - NODE_ENV=test npm run test:e2e:api apps/api/test/[p-z]*
+#    - >
+#      for moduleDir in ./test/api/*/; do
+#        if [ -d "$moduleDir" ]; then
+#          NODE_ENV=test npm run test:e2e $moduleDir
+#        fi
+#      done
+
+#test:aemass:
+#  extends: .test
+#  only:
+#    changes:
+#      - apps/aemass/**/*
+#      - libs/**/*
+#  #      - test/jest-e2e.json
+#  script:
+#    - NODE_ENV=test CONNECTION=Shared npm run migration:up
+#    - NODE_ENV=test CONNECTION=Phy npm run migration:up
+#    - NODE_ENV=test npm run test:e2e:aemass:dist all
+
+test:arkit3:
+  extends: .test
+  only:
+    changes:
+      - apps/arkit3/**/*
+      - libs/**/*
+  #      - test/jest-e2e.json
+  script:
+    - NODE_ENV=test CONNECTION=Shared npm run migration:up
+    - NODE_ENV=test CONNECTION=Phy npm run migration:up
+    - NODE_ENV=test npm run test:e2e:arkit3:dist all
+
+test:admin:
+  extends: .test
+  only:
+    changes:
+      - apps/admin/**/*
+      - libs/**/*
+  #      - test/jest-e2e.json
+  script:
+    - NODE_ENV=test CONNECTION=Shared npm run migration:up
+    - NODE_ENV=test CONNECTION=Phy npm run migration:up
+    - NODE_ENV=test npm run test:e2e:admin:dist all
+#    - NODE_ENV=test npm run test:e2e:admin apps/admin/test/[a-i]*
+#    - NODE_ENV=test npm run test:e2e:admin apps/admin/test/[j-o]*
+#    - NODE_ENV=test npm run test:e2e:admin apps/admin/test/[p-z]*
+#    - >
+#      for moduleDir in ./test/admin/*/; do
+#        if [ -d "$moduleDir" ]; then
+#          NODE_ENV=test npm run test:e2e $moduleDir
+#        fi
+#      done
+
+test:credit:
+  extends: .test
+  only:
+    changes:
+      - apps/credit/**/*
+      - libs/**/*
+  #      - test/jest-e2e.json
+  script:
+    - NODE_ENV=test CONNECTION=Shared npm run migration:up
+    - NODE_ENV=test CONNECTION=Phy npm run migration:up
+    - NODE_ENV=test npm run test:e2e:credit:dist all
+
+test:queue-processor:
+  extends: .test
+  only:
+    changes:
+      - apps/queue-processor/**/*
+      - libs/**/*
+#      - test/jest-e2e.json
+  script:
+    - NODE_ENV=test CONNECTION=Shared npm run migration:up
+    - NODE_ENV=test CONNECTION=Phy npm run migration:up
+    - NODE_ENV=test npm run test:e2e:queue-processor:dist all

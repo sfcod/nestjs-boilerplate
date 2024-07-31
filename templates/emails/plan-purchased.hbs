@@ -1,0 +1,47 @@
+{{#> layouts/email_base }}
+    {{#* inline "body"}}
+        <div class="title">
+            <h3>Phy Health Receipt</h3>
+        </div>
+        <div class="description"><em>{{date}}</em></div>
+        <div class="description">
+            <table class="dataTable" style="border: 0; border-collapse: collapse;">
+                <tr>
+                    <td>Amount Charged</td>
+                    <td class="gutter-x-10"></td>
+                    <td><b>{{amount}} {{currency currency}}</b></td>
+                </tr>
+                <tr><td colspan="3" class="gutter-y-10"></td></tr>
+                <tr>
+                    <td>Amount Paid</td>
+                    <td class="gutter-x-10"></td>
+                    <td><b>{{amount}} {{currency currency}}</b></td>
+                </tr>
+                <tr><td colspan="3" class="gutter-y-10"></td></tr>
+                <tr>
+                    <td>Summary</td>
+                    <td class="gutter-x-10"></td>
+                    <td><b>{{program}}</b></td>
+                </tr>
+                <tr><td colspan="3" class="gutter-y-10"></td></tr>
+                <tr>
+                    <td>Payment Method</td>
+                    <td class="gutter-x-10"></td>
+                    <td><b>{{method}}</b></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="description">
+            If you have questions, get in touch at <a class="link" href="mailto:hello@phy.health"><span><font color="#EB5829">hello@phy.health</font></span></a>
+        </div>
+        <table class="gutter-y"><tr><td class="gutter-y-15"></td></tr></table>
+        <hr />
+        <div class="description">
+            <small>
+                You’re receiving this email because you made a purchase at Phy, which partners with Stripe
+                to provide invoicing and payment processing.
+            </small>
+        </div>
+    {{/ inline}}
+{{/ layouts/email_base}}

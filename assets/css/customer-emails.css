@@ -1,0 +1,23 @@
+table.container.header{
+    background: #fefefe;
+}
+
+table.container.footer{
+    background: #115E68;
+}
+
+.text-primary{
+    color: #115E68!important;
+}
+
+.background-primary{
+    background-color: #115E68!important;
+}
+
+.border-color-primary{
+    border-color: #115E68!important;
+}
+
+.menu-item a{
+    color: #0a0a0a!important;
+}

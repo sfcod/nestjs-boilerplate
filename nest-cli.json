@@ -1,0 +1,224 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/health/src",
+  "compilerOptions": {
+    "webpack": false,
+    "tsConfigPath": "apps/health/tsconfig.app.json"
+  },
+  "projects": {
+    "client": {
+      "type": "application",
+      "root": "apps/client",
+      "entryFile": "main",
+      "sourceRoot": "apps/client/src",
+      "compilerOptions": {
+        "assets": [
+          {
+            "include": "**/*.md",
+            "outDir": "./dist/apps/client/apps/client/src",
+            "watchAssets": true
+          },
+          {
+            "include": "../test/jest-e2e.dist.json",
+            "outDir": "./dist/apps/client/apps/client/test"
+          }
+        ],
+        "tsConfigPath": "apps/client/tsconfig.app.json"
+      }
+    },
+    "admin": {
+      "type": "application",
+      "root": "apps/admin",
+      "entryFile": "main",
+      "sourceRoot": "apps/admin/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/admin/tsconfig.app.json",
+        "assets": [
+          {
+            "include": "../test/jest-e2e.dist.json",
+            "outDir": "./dist/apps/admin/apps/admin/test"
+          }
+        ]
+      }
+    },
+    "queue-processor": {
+      "type": "application",
+      "root": "apps/queue-processor",
+      "entryFile": "main",
+      "sourceRoot": "apps/queue-processor/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/queue-processor/tsconfig.app.json",
+        "assets": [
+          {
+            "include": "../test/jest-e2e.dist.json",
+            "outDir": "./dist/apps/queue-processor/apps/queue-processor/test"
+          }
+        ]
+      }
+    },
+    "health": {
+      "type": "application",
+      "root": "apps/health",
+      "entryFile": "main",
+      "sourceRoot": "apps/health/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/health/tsconfig.app.json"
+      }
+    },
+    "core": {
+      "type": "library",
+      "root": "libs/core",
+      "entryFile": "index",
+      "sourceRoot": "libs/core/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/core/tsconfig.lib.json"
+      }
+    },
+    "access-key": {
+      "type": "library",
+      "root": "libs/access-key",
+      "entryFile": "index",
+      "sourceRoot": "libs/access-key/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/access-key/tsconfig.lib.json"
+      }
+    },
+    "file-storage": {
+      "type": "library",
+      "root": "libs/file-storage",
+      "entryFile": "index",
+      "sourceRoot": "libs/file-storage/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/file-storage/tsconfig.lib.json"
+      }
+    },
+    "file-uploader": {
+      "type": "library",
+      "root": "libs/file-uploader",
+      "entryFile": "index",
+      "sourceRoot": "libs/file-uploader/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/file-uploader/tsconfig.lib.json"
+      }
+    },
+    "mailer": {
+      "type": "library",
+      "root": "libs/mailer",
+      "entryFile": "index",
+      "sourceRoot": "libs/mailer/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/mailer/tsconfig.lib.json"
+      }
+    },
+    "notification": {
+      "type": "library",
+      "root": "libs/notification",
+      "entryFile": "index",
+      "sourceRoot": "libs/notification/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/notification/tsconfig.lib.json"
+      }
+    },
+    "pusher": {
+      "type": "library",
+      "root": "libs/pusher",
+      "entryFile": "index",
+      "sourceRoot": "libs/pusher/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/pusher/tsconfig.lib.json"
+      }
+    },
+    "request-context": {
+      "type": "library",
+      "root": "libs/request-context",
+      "entryFile": "index",
+      "sourceRoot": "libs/request-context/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/request-context/tsconfig.lib.json"
+      }
+    },
+    "soft-delete": {
+      "type": "library",
+      "root": "libs/soft-delete",
+      "entryFile": "index",
+      "sourceRoot": "libs/soft-delete/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/soft-delete/tsconfig.lib.json"
+      }
+    },
+    "twilio": {
+      "type": "library",
+      "root": "libs/twilio",
+      "entryFile": "index",
+      "sourceRoot": "libs/twilio/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/twilio/tsconfig.lib.json"
+      }
+    },
+    "orm": {
+      "type": "library",
+      "root": "libs/orm",
+      "entryFile": "index",
+      "sourceRoot": "libs/orm/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/orm/tsconfig.lib.json"
+      }
+    },
+    "security": {
+      "type": "library",
+      "root": "libs/security",
+      "entryFile": "index",
+      "sourceRoot": "libs/security/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/security/tsconfig.lib.json"
+      }
+    },
+    "database": {
+      "type": "application",
+      "root": "apps/database",
+      "entryFile": "main",
+      "sourceRoot": "apps/database/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/database/tsconfig.app.json"
+      }
+    },
+    "test": {
+      "type": "library",
+      "root": "libs/test",
+      "entryFile": "index",
+      "sourceRoot": "libs/test/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/test/tsconfig.lib.json"
+      }
+    },
+    "orm-core": {
+      "type": "library",
+      "root": "libs/orm-core",
+      "entryFile": "index",
+      "sourceRoot": "libs/orm-core/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/orm-core/tsconfig.lib.json"
+      }
+    },
+    "microservice-event": {
+      "type": "library",
+      "root": "libs/microservice-event",
+      "entryFile": "index",
+      "sourceRoot": "libs/microservice-event/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/microservice-event/tsconfig.lib.json"
+      }
+    },
+    "webauthn": {
+      "type": "library",
+      "root": "libs/webauthn",
+      "entryFile": "index",
+      "sourceRoot": "libs/webauthn/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/webauthn/tsconfig.lib.json"
+      }
+    }
+  },
+  "monorepo": true,
+  "root": "apps/health"
+}

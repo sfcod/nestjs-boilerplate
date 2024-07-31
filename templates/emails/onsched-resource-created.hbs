@@ -1,0 +1,37 @@
+{{#> layouts/email_base }}
+    {{#* inline "body"}}
+        <div class="title"><h3>You've been booked!</h3></div>
+        <div class="description">A new appointment has been booked, please review the details below.</div>
+        <div class="description">
+            You have been booked for a {{service.name}} with {{customer.firstName}} {{customer.lastName}}
+        </div>
+        <div class="description">
+            <a href="mailto:{{customer.email}}">
+                Click here
+            </a> to send a message to {{customer.firstName}} {{customer.lastName}}:
+        </div>
+
+        <div class="title"><h4>Appointment Info</h4></div>
+        <div class="description">
+            You are meeting {{customer.firstName}} {{customer.lastName}}
+            on {{appointmentDate}}
+            at {{appointmentTime}}
+            Conf # {{confirmationNumber}}
+        </div>
+
+        <table>
+            <tr><h4 class="mb-0">Add To Calendar</h4></tr>
+            <tr><td class="gutter-y-15"></td></tr>
+            <tr>
+                <td>
+                    <a href="{{addToGoogleCalendarUrl}}" target="_blank">
+                        <img src="https://static-phy-assets.s3.us-east-2.amazonaws.com/emails/google-logo.png" alt="Calendar Sync" width="48" height="48" />
+                    </a>
+                    <a href="{{downloadIcsUrl}}" target="_blank">
+                        <img src="https://static-phy-assets.s3.us-east-2.amazonaws.com/emails/ics.png" alt="Calendar Sync" width="48" height="48" />
+                    </a>
+                </td>
+            </tr>
+        </table>
+    {{/ inline}}
+{{/ layouts/email_base}}

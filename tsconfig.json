@@ -1,0 +1,158 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "allowJs": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictBindCallApply": true,
+    "paths": {
+      "@app/admin/*": [
+        "apps/admin/src/*"
+      ],
+      "@app/client/*": [
+        "apps/client/src/*"
+      ],
+      "@app/database/*": [
+        "apps/database/src/*"
+      ],
+      "@app/queue-processor/*": [
+        "apps/queue-processor/src/*"
+      ],
+      "@app/health/*": [
+        "apps/health/src/*"
+      ],
+      "@app-client/common": [
+        "apps/client/src/common"
+      ],
+      "@app-client/common/*": [
+        "apps/client/src/common/*"
+      ],
+      "@app-admin/common": [
+        "apps/admin/src/common"
+      ],
+      "@app-admin/common/*": [
+        "apps/admin/src/common/*"
+      ],
+      "@app-queue-processor/common": [
+        "apps/queue-processor/src/common"
+      ],
+      "@app-queue-processor/common/*": [
+        "apps/queue-processor/src/common/*"
+      ],
+      "@libs/core": [
+        "libs/core/src"
+      ],
+      "@libs/core/*": [
+        "phy/core/*"
+      ],
+      "@libs/access-key": [
+        "libs/access-key/src"
+      ],
+      "@libs/access-key/*": [
+        "libs/access-key/src/*"
+      ],
+      "@libs/file-storage": [
+        "libs/file-storage/src"
+      ],
+      "@libs/file-storage/*": [
+        "libs/file-storage/src/*"
+      ],
+      "@libs/file-uploader": [
+        "libs/file-uploader/src"
+      ],
+      "@libs/file-uploader/*": [
+        "libs/file-uploader/src/*"
+      ],
+      "@libs/mailer": [
+        "libs/mailer/src"
+      ],
+      "@libs/mailer/*": [
+        "libs/mailer/src/*"
+      ],
+      "@libs/notification": [
+        "libs/notification/src"
+      ],
+      "@libs/notification/*": [
+        "libs/notification/src/*"
+      ],
+      "@libs/pusher": [
+        "libs/pusher/src"
+      ],
+      "@libs/pusher/*": [
+        "libs/pusher/src/*"
+      ],
+      "@libs/request-context": [
+        "libs/request-context/src"
+      ],
+      "@libs/request-context/*": [
+        "libs/request-context/src/*"
+      ],
+      "@libs/soft-delete": [
+        "libs/soft-delete/src"
+      ],
+      "@libs/soft-delete/*": [
+        "libs/soft-delete/src/*"
+      ],
+      "@libs/twilio": [
+        "libs/twilio/src"
+      ],
+      "@libs/twilio/*": [
+        "libs/twilio/src/*"
+      ],
+      "@libs/orm-core": [
+        "libs/orm-core/src"
+      ],
+      "@libs/orm-core/*": [
+        "libs/orm-core/src/*"
+      ],
+      "@libs/orm": [
+        "libs/orm/src"
+      ],
+      "@libs/orm/*": [
+        "libs/orm/src/*"
+      ],
+      "@libs/security": [
+        "libs/security/src"
+      ],
+      "@libs/security/*": [
+        "libs/security/src/*"
+      ],
+      "@libs/test": [
+        "libs/test/src"
+      ],
+      "@libs/test/*": [
+        "libs/test/src/*"
+      ],
+      "@libs/microservice-event": [
+        "libs/microservice-event/src"
+      ],
+      "@libs/microservice-event/*": [
+        "libs/microservice-event/src/*"
+      ],
+      "@libs/healthcheck": [
+        "libs/healthcheck/src"
+      ],
+      "@libs/healthcheck/*": [
+        "libs/healthcheck/src/*"
+      ],
+      "@libs/webauthn": [
+        "libs/webauthn/src"
+      ],
+      "@libs/webauthn/*": [
+        "libs/webauthn/src/*"
+      ]
+    }
+  },
+  "exclude": [
+    "storage"
+  ]
+}
