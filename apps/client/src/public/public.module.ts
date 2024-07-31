@@ -9,7 +9,7 @@ import { HealthcheckModule } from '@libs/healthcheck';
             actions: [
                 {
                     actionName: 'HealthGatewayAction',
-                    route: 'api/healthcheck',
+                    route: 'api-client/healthcheck',
                     guards: [],
                 },
             ],

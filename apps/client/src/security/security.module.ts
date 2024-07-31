@@ -8,9 +8,6 @@ import { ResetPasswordTokenNotification } from './notification/reset-password-to
 import { ChangePasswordAction } from './actions/reset-password/change-password-action';
 import { ResetPasswordAction } from './actions/reset-password/reset-password-action';
 import { VerifyCodeAction } from './actions/reset-password/verify-code-action';
-import { WebauthnModule, WebauthnDeleteDeviceGuard } from '@libs/webauthn';
-import webauthnConfig from '../../../../config/webauthn.config';
-import { uuid } from '@libs/core';
 import { UserDeleteVoter } from './voter/user/user-delete.voter';
 import { UserGetVoter } from './voter/user/user-get.voter';
 import { UserUpdateVoter } from './voter/user/user-update.voter';
@@ -29,59 +26,25 @@ const UserVoters = [UserDeleteVoter, UserGetVoter, UserUpdateVoter];
                     actionName: 'RefreshTokenAction',
                     guards: [AuthGuard('refresh')],
                     roles: [],
-                    route: `api/auths/refresh`,
+                    route: `api-client/auths/refresh`,
                 },
                 {
                     actionName: 'SignInAction',
                     guards: [AuthGuard('local-user')],
                     roles: [],
-                    route: `api/auths/user`,
+                    route: `api-client/auths/user`,
                 },
                 {
                     actionName: 'SendAuthCodeAction',
                     guards: [AuthGuard('jwt-guest')],
                     roles: [],
-                    route: `api/auths/send-code`,
+                    route: `api-client/auths/send-code`,
                 },
                 {
                     actionName: 'VerifyAuthCodeAction',
                     guards: [AuthGuard('jwt-guest')],
                     roles: [],
-                    route: `api/auths/verify-code`,
-                },
-            ],
-        }),
-        ...WebauthnModule.registerActions({
-            actions: [
-                {
-                    actionName: 'WebauthnRegistrationAction',
-                    guards: [AuthGuard(['jwt', 'jwt-guest'])],
-                    roles: [],
-                    route: `api/auths/webauthn/registration`,
-                },
-                {
-                    actionName: 'WebauthnRegistrationVerifyAction',
-                    guards: [AuthGuard(['jwt', 'jwt-guest'])],
-                    roles: [],
-                    route: `api/auths/webauthn/registration/verify`,
-                },
-                {
-                    actionName: 'WebauthnAuthenticationAction',
-                    guards: [],
-                    roles: [],
-                    route: `api/auths/webauthn/authentication`,
-                },
-                {
-                    actionName: 'WebauthnAuthenticationVerifyAction',
-                    guards: [],
-                    roles: [],
-                    route: `api/auths/webauthn/authentication/verify`,
-                },
-                {
-                    actionName: 'WebauthnDeleteDeviceAction',
-                    guards: [AuthGuard(['jwt', 'jwt-guest']), WebauthnDeleteDeviceGuard],
-                    roles: [],
-                    route: `api/auths/webauthn/device/${uuid('id')}`,
+                    route: `api-client/auths/verify-code`,
                 },
             ],
         }),
@@ -99,9 +62,6 @@ const UserVoters = [UserDeleteVoter, UserGetVoter, UserUpdateVoter];
                           },
                           inject: [RedisService],
                       },
-        }),
-        WebauthnModule.register({
-            config: webauthnConfig,
         }),
         NotificationModule.register({
             events: [ResetPasswordTokenNotification],

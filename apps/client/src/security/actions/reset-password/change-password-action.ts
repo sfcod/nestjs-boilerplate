@@ -9,7 +9,7 @@ import { plainToClass } from 'class-transformer';
 import { AuthTokenOutput, SignerBuilder } from '@libs/security';
 
 @ApiTags('User')
-@Controller('api/users/change-password')
+@Controller('api-client/users/change-password')
 export class ChangePasswordAction {
     constructor(
         private readonly eventEmitter: EventEmitter2,

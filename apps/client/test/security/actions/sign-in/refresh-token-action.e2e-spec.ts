@@ -1,9 +1,10 @@
 import { HttpStatus } from '@nestjs/common';
 import { Response } from 'supertest';
 import { Bootstrap, makeUser, refreshToken } from '@libs/test';
+import { User } from '@libs/orm';
 
 describe('UserRefreshTokenAction (e2e)', () => {
-    let user;
+    let user: User;
     let jwtRefreshToken: string;
 
     beforeAll(async () => {

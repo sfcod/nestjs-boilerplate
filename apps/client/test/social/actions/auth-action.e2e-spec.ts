@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
 import { Response } from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
-import { GoogleProvider } from '@app/api-client/social/service/provider/google-provider';
-import { Bootstrap, makePatient, makeUserSocial, truncateTables } from '@libs/test';
-import { ApiModule } from '@app/api-client/api.module';
+import { GoogleProvider } from '@app/client/social/service/provider/google-provider';
+import { Bootstrap, makeUser, makeUserSocial, truncateTables } from '@libs/test';
+import { ClientModule } from '@app/client/client.module';
 import { HttpStatus } from '@nestjs/common';
 
 describe('SocialAuth (e2e)', () => {
@@ -31,16 +31,16 @@ describe('SocialAuth (e2e)', () => {
 
     beforeAll(async () => {
         const fakeModule: TestingModule = await Test.createTestingModule({
-            imports: [ApiModule],
+            imports: [ClientModule],
         })
             .overrideProvider(GoogleProvider)
             .useValue(googleProvider)
             .compile();
         await Bootstrap.setup(
-            { module: ApiModule },
+            { module: ClientModule },
             {
                 instance: fakeModule,
-                instanceClass: ApiModule,
+                instanceClass: ClientModule,
             },
         );
     });
@@ -51,7 +51,7 @@ describe('SocialAuth (e2e)', () => {
 
     test('Test authToken', async () => {
         await makeUserSocial(1, {
-            user: await makePatient(1, {
+            user: await makeUser(1, {
                 email: EMAIL,
             }),
             socialUserId: ID,
@@ -66,7 +66,6 @@ describe('SocialAuth (e2e)', () => {
         expect(res.statusCode).toBe(HttpStatus.CREATED);
         expect(res.body.token).not.toBeNull();
         expect(res.body.refreshToken).not.toBeNull();
-        // expect(res.body.patient.email).toEqual(EMAIL);
     });
 
     test('Test sign-up', async () => {
@@ -79,6 +78,5 @@ describe('SocialAuth (e2e)', () => {
         expect(res.statusCode).toBe(HttpStatus.CREATED);
         expect(res.body.token).not.toBeNull();
         expect(res.body.refreshToken).not.toBeNull();
-        // expect(res.body.patient.email).toEqual(EMAIL);
     });
 });

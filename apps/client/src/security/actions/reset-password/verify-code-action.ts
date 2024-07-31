@@ -8,7 +8,7 @@ import { AuthTokenOutput, SignerBuilder } from '@libs/security';
 import { VerifyCodeInput } from '../../dto/input/verify-code-input';
 
 @ApiTags('User')
-@Controller('api/users/verify-reset-password-code')
+@Controller('api-client/users/verify-reset-password-code')
 export class VerifyCodeAction {
     constructor(
         private readonly eventEmitter: EventEmitter2,

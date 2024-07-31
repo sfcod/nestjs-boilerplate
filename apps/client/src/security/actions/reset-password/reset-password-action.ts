@@ -11,7 +11,7 @@ import { NotificationEmitter } from '@libs/notification';
 import { Request } from 'express';
 
 @ApiTags('User')
-@Controller('api/users/reset-password')
+@Controller('api-client/users/reset-password')
 export class ResetPasswordAction {
     constructor(
         private readonly eventEmitter: EventEmitter2,

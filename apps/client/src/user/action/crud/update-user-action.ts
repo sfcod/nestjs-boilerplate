@@ -30,7 +30,7 @@ import { UserOutput } from '../../dto/output/user-output';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('User')
-@Controller(`api-client/users/${uuid('id')}}`)
+@Controller(`api-client/users/${uuid('id')}`)
 export class UpdateUserAction {
     constructor(
         private readonly em: EntityManager,

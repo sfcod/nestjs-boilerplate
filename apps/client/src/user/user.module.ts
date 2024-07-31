@@ -8,19 +8,17 @@ import { GetUserGuard } from './guard/get-user.guard';
 import { UpdateUserGuard } from './guard/update-user.guard';
 import { DeleteUserGuard } from './guard/delete-user.guard';
 import { DELETE_USER_DATA_QUEUE, registerQueue } from '@libs/core';
-import { TwilioModule } from '@libs/twilio';
-import twilioConfig from '../../../../config/twilio.config';
+import { DeleteUserDataProcessor } from './processor/delete-user-data-processor';
 
 @Module({
     imports: [
         SecurityModule,
         SocialModule,
-        TwilioModule.register(twilioConfig),
         // ------- >Queues ------- //
         registerQueue(DELETE_USER_DATA_QUEUE),
         // ------- <Queues ------- //
     ],
     controllers: [GetUserAction, UpdateUserAction, DeleteUserAction],
-    providers: [GetUserGuard, UpdateUserGuard, DeleteUserGuard],
+    providers: [GetUserGuard, UpdateUserGuard, DeleteUserGuard, DeleteUserDataProcessor],
 })
 export class UserModule {}

@@ -23,7 +23,7 @@ import { HealthAction } from './actions/health-action';
         },
         {
             provide: 'API_URL',
-            useValue: process.env.API_URL,
+            useValue: process.env.CLIENT_API_URL,
         },
         RedisHealthIndicator,
         DatabaseHealth,

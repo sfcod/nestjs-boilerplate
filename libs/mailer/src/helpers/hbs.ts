@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import * as process from 'process';
 
 export const inlineStyle = (file: string) => {
-    const filePath = join(appRoot, `/assets/${trim(file, '/')}.css`);
+    const filePath = join(appRoot, `/templates/assets/${trim(file, '/')}.css`);
     if (existsSync(filePath)) {
         return readFileSync(filePath, 'utf8');
     }
@@ -28,21 +28,15 @@ export const adminPanelUrl = (path: string, params?: any) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const userPortalUrl = (path: string, params?: any) => {
+export const frontendUrl = (path: string, params?: any) => {
     path = trim(path, '/');
-    return `${trim(urlConfig.userPortalUrl, '/')}${path ? join('/', path) : ''}`;
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const websiteUrl = (path: string, params?: any) => {
-    path = trim(path, '/');
-    return `${trim(urlConfig.websiteUrl, '/')}${path ? join('/', path) : ''}`;
+    return `${trim(urlConfig.frontendUrl, '/')}${path ? join('/', path) : ''}`;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const apiUrl = (path: string, params?: any) => {
     path = trim(path, '/');
-    return `${trim(process.env.API_URL, '/')}${path ? join('/', path) : ''}`;
+    return `${trim(urlConfig.apiUrl, '/')}${path ? join('/', path) : ''}`;
 };
 
 export const concat = (...args: any) => {
@@ -73,10 +67,6 @@ export const increment = (value: number): number => {
     return value + 1;
 };
 
-export const currency = (code: string) => {
-    return code.toUpperCase();
-};
-
 export const unsubscribeUrl = (email: string, hash: string) => {
-    return userPortalUrl(`/email/unsubscribe?email=${encodeURIComponent(email)}&hash=${hash}`);
+    return frontendUrl(`/email/unsubscribe?email=${encodeURIComponent(email)}&hash=${hash}`);
 };

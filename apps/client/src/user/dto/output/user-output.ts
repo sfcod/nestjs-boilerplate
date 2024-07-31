@@ -1,7 +1,7 @@
 import { Exclude, Expose } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { MapClass, MapField } from '@libs/core';
-import { User, UserGender } from '@libs/orm';
+import { User, UserAttribute, UserAttributeName, UserGender } from '@libs/orm';
 import { UserSettingsOutput } from './user-settings-output';
 
 @Exclude()
@@ -78,6 +78,14 @@ export class UserOutput {
     })
     @ApiProperty()
     settings: UserSettingsOutput;
+
+    @Expose()
+    @MapField<User>(async ({ e, em }) => {
+        const attr = await em.findOne(UserAttribute, { user: e.id, name: UserAttributeName.TIMEZONE });
+        return attr?.value || null;
+    })
+    @ApiProperty({ nullable: true })
+    timezone: string | null;
 
     @Expose()
     @MapField()

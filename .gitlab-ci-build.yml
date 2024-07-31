@@ -19,17 +19,8 @@
   script:
     - npm run build
     - npm run build:admin
-    - npm run build:aemass
-    - npm run build:arkit3
-    - npm run build:api
+    - npm run build:client
     - npm run build:database
-    - npm run build:queue-processor
-    - npm run build:history-log
-    - npm run build:assessment
-    - npm run build:action-log
-    - npm run build:media-convert
-    - npm run build:credit
-    - npm run build:pdf
 
 build:test:
   extends: .build

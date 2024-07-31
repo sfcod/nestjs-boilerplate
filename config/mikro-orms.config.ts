@@ -53,6 +53,6 @@ export default [
         flushMode: FlushMode.COMMIT,
         // hydrator: PostgreSqlHydrator,
         forceUtcTimezone: true,
-        debug: process.env.NODE_ENV === 'development' ? ['query'] : false,
+        debug: process.env.NODE_ENV === 'debug' ? ['query'] : false,
     },
 ] as MikroOrmModuleSyncOptions[];

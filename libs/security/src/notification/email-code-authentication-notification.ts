@@ -24,7 +24,7 @@ export class EmailCodeAuthenticationNotification
     }
 
     async toMail(): Promise<ToMailData> {
-        const { user: authUser, code, template = 'patient-email-2fa-code' } = this.getData();
+        const { user: authUser, code, template = 'user-email-2fa-code' } = this.getData();
         const user =
             (await this.em.findOne(User, authUser.getUuid())) || (await this.em.findOne(Admin, authUser.getUuid()));
 

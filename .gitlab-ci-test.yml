@@ -52,16 +52,15 @@ test:linter:
     - NODE_OPTIONS=--max_old_space_size=4096 ./node_modules/.bin/eslint "apps/**/src/**/[a-l]*.ts" --quiet
     - NODE_OPTIONS=--max_old_space_size=4096 ./node_modules/.bin/eslint "apps/**/src/**/[m-z]*.ts" --quiet
 
-test:api:
+test:client:
   extends: .test
   only:
     changes:
-      - apps/api/**/*
+      - apps/client/**/*
       - libs/**/*
   #      - test/jest-e2e.json
   script:
-    - NODE_ENV=test CONNECTION=Shared npm run migration:up
-    - NODE_ENV=test CONNECTION=Phy npm run migration:up
+    - NODE_ENV=test CONNECTION=Default npm run migration:up
     - NODE_ENV=test npm run test:e2e:api:dist all
 #    - NODE_ENV=test npm run test:e2e:api apps/api/test/[a-i]*
 #    - NODE_ENV=test npm run test:e2e:api apps/api/test/[j-o]*
@@ -73,30 +72,6 @@ test:api:
 #        fi
 #      done
 
-#test:aemass:
-#  extends: .test
-#  only:
-#    changes:
-#      - apps/aemass/**/*
-#      - libs/**/*
-#  #      - test/jest-e2e.json
-#  script:
-#    - NODE_ENV=test CONNECTION=Shared npm run migration:up
-#    - NODE_ENV=test CONNECTION=Phy npm run migration:up
-#    - NODE_ENV=test npm run test:e2e:aemass:dist all
-
-test:arkit3:
-  extends: .test
-  only:
-    changes:
-      - apps/arkit3/**/*
-      - libs/**/*
-  #      - test/jest-e2e.json
-  script:
-    - NODE_ENV=test CONNECTION=Shared npm run migration:up
-    - NODE_ENV=test CONNECTION=Phy npm run migration:up
-    - NODE_ENV=test npm run test:e2e:arkit3:dist all
-
 test:admin:
   extends: .test
   only:
@@ -105,8 +80,7 @@ test:admin:
       - libs/**/*
   #      - test/jest-e2e.json
   script:
-    - NODE_ENV=test CONNECTION=Shared npm run migration:up
-    - NODE_ENV=test CONNECTION=Phy npm run migration:up
+    - NODE_ENV=test CONNECTION=Default npm run migration:up
     - NODE_ENV=test npm run test:e2e:admin:dist all
 #    - NODE_ENV=test npm run test:e2e:admin apps/admin/test/[a-i]*
 #    - NODE_ENV=test npm run test:e2e:admin apps/admin/test/[j-o]*
@@ -118,26 +92,3 @@ test:admin:
 #        fi
 #      done
 
-test:credit:
-  extends: .test
-  only:
-    changes:
-      - apps/credit/**/*
-      - libs/**/*
-  #      - test/jest-e2e.json
-  script:
-    - NODE_ENV=test CONNECTION=Shared npm run migration:up
-    - NODE_ENV=test CONNECTION=Phy npm run migration:up
-    - NODE_ENV=test npm run test:e2e:credit:dist all
-
-test:queue-processor:
-  extends: .test
-  only:
-    changes:
-      - apps/queue-processor/**/*
-      - libs/**/*
-#      - test/jest-e2e.json
-  script:
-    - NODE_ENV=test CONNECTION=Shared npm run migration:up
-    - NODE_ENV=test CONNECTION=Phy npm run migration:up
-    - NODE_ENV=test npm run test:e2e:queue-processor:dist all

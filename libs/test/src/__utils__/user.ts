@@ -1,4 +1,4 @@
-import { User, UserGender, UserStatus } from '@libs/orm';
+import { User, UserGender, UserSocial, UserStatus } from '@libs/orm';
 import { faker } from '@faker-js/faker';
 import { makeData } from './helpers';
 import * as moment from 'moment';
@@ -24,4 +24,16 @@ export async function makeUser(count = 1, fields?: Partial<User | any>): Promise
     });
 
     return users;
+}
+
+export async function makeUserSocial(count = 1, fields?: Partial<UserSocial>): Promise<User | User[] | any> {
+    const { user = await makeUser(1), ...rest } = fields;
+
+    return await makeData<UserSocial>(count, rest, async () => {
+        const userSocial = new UserSocial(user);
+        userSocial.provider = 'google';
+        userSocial.socialUserId = faker.string.uuid();
+
+        return userSocial;
+    });
 }

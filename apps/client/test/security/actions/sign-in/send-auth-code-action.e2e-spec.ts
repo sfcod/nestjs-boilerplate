@@ -1,4 +1,4 @@
-import { TwoFactorAuth, User } from '@libs/orm';
+import { User, TwoFactorAuth } from '@libs/orm';
 import { authToken, makeUser } from '@libs/test';
 import { Bootstrap } from '@libs/test';
 import { createStubInstance, stub } from 'sinon';
@@ -39,6 +39,8 @@ describe('SendAuthCode (e2e)', () => {
         })
             .overrideProvider(SmsSender)
             .useValue(smsSender)
+            .overrideProvider('SmsSender')
+            .useValue(smsSender)
             .overrideProvider(Mailer)
             .useValue(mailer)
             .compile();
@@ -51,8 +53,8 @@ describe('SendAuthCode (e2e)', () => {
             },
         );
 
-        userSms = await makeUser(1, { twoFactorAuth: TwoFactorAuth.SMS });
-        userMail = await makeUser(1, { twoFactorAuth: TwoFactorAuth.EMAIL });
+        userSms = await makeUser(1, { twoFactorAuth: TwoFactorAuth.SMS, plainPassword: PASSWORD });
+        userMail = await makeUser(1, { twoFactorAuth: TwoFactorAuth.EMAIL, plainPassword: PASSWORD });
         token = await authToken(userSms, true);
     });
 
@@ -96,13 +98,13 @@ describe('SendAuthCode (e2e)', () => {
     });
 
     it('/api-client/auths/send-code (POST - Mail)', async () => {
-        token = await authToken(userMail, true);
+        const token = await authToken(userMail, true);
         const res: Response = await Bootstrap.getHttpRequest()
             .post('/api-client/auths/send-code')
             .set('Authorization', `Bearer ${token}`)
             .send();
 
         expect(res.statusCode).toBe(204);
-        expect(sentUserMail).toBe(userSms.email);
+        expect(sentUserMail).toBe(userMail.email);
     });
 });

@@ -25,14 +25,14 @@ export class UpdateUserInput {
     @ApiProperty()
     @MaxLength(120)
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     firstName!: string;
 
     @Expose()
     @ApiProperty()
     @MaxLength(120)
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     lastName!: string;
 
     @Expose()
@@ -47,7 +47,7 @@ export class UpdateUserInput {
     @Expose()
     @ApiProperty({ enum: UserGender.getValues() })
     @IsIn(UserGender.getValues(), { message: 'Invalid value.' })
-    @IsNotEmpty()
+    @IsOptional()
     gender!: string;
 
     @Expose()
@@ -59,13 +59,13 @@ export class UpdateUserInput {
         { message: 'User must be at least 1 year old' },
     )
     @IsDateString()
-    @IsNotEmpty()
+    @IsOptional()
     dob!: string;
 
     @Expose()
     @ApiProperty()
     @PhoneNumber('US')
-    @IsNotEmpty()
+    @IsOptional()
     phoneNumber!: string;
 
     @Expose()

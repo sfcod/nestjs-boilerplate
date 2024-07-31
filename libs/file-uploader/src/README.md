@@ -21,7 +21,7 @@
       driverName: 'local',
       config: {
         root: join(appRoot, '/storage/'),
-        host: `${process.env.API_URL}`,
+        host: `${process.env.CLIENT_API_URL}`,
       },
     },
     {

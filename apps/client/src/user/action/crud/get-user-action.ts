@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException, HttpStatus, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import {
     ApiOkResponse,
     ApiTags,

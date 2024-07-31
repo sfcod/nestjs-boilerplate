@@ -11,8 +11,6 @@ import { ConfigModule } from '@nestjs/config';
 import configConfig from '../../../config/config.config';
 import { RedisModule } from '@songkeys/nestjs-redis';
 import redisConfig from '../../../config/redis.config';
-import twilioConfig from '../../../config/twilio.config';
-import { TwilioModule } from '@libs/twilio';
 import mikroOrmConfig from '../../../config/mikro-orms.config';
 import mailerConfig from '../../../config/mailer.config';
 import { MailerModule } from '@libs/mailer';
@@ -23,6 +21,8 @@ import eventEmitterConfig from '../../../config/event-emitter.config';
 import { PusherModule } from '@libs/pusher';
 import firebaseConfig from '../../../config/firebase.config';
 import { SocialModule } from './social/social.module';
+import { BullModule } from '@nestjs/bullmq';
+import queueConfig from '../../../config/queue.config';
 
 @Module({
     imports: [
@@ -43,9 +43,9 @@ import { SocialModule } from './social/social.module';
         CommonModule.register(),
         ConfigModule.forRoot(configConfig),
         RedisModule.forRoot(redisConfig),
-        TwilioModule.register(twilioConfig),
         MailerModule.register(mailerConfig),
         PusherModule.register(firebaseConfig),
+        BullModule.forRoot(queueConfig),
         RequestContextModule,
         // ------- <Service modules ------- //
     ],

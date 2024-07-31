@@ -1,94 +1,95 @@
 ## Installation
 
-#### PgSQL local
-First of all need to start local pgsql.
+### Prerequisites
+ - Node 18.19.0+
+ - Docker
 
+----------------
+
+
+### 1. Start docker containers required for the project: 
 ```bash
-$ docker run --name postgres13 -e POSTGRES_PASSWORD=postgres -p 54320:5432 -d postgres:13
+$ docker-compose up -d
 ```
 
-#### Redis local
-First of all need to start local redis.
+If need to override ports, envs, etc, create `docker-compose.override.yml` file in project root, 
+and override necessary values. For example:
 
-```bash
-$ docker run --name redis6 -p 63790:6379 -d redis:6
+```yaml
+# docker-compose.override.yml
+
+services:
+    postgres:
+        environment:
+            POSTGRES_PASSWORD: "my_custom_password"
+        ports:
+            - "33333:5432"
+
+    redis:
+        ports:
+            - "63790:6379"
 ```
 
-#### MongoDb local
-First of all need to start local mongodb.
+----------------
 
+
+### 2. Create `.env.local` files
 ```bash
-$ docker run --name mongo4 -p 27170:27017 -d mongo:4
+$ cp .env .env.local
+$ cp .env.test .env.test.local
 ```
 
-#### RabbitMQ local
-First of all need to start local rabbitmq.  
+----------------
 
+
+### 3. Install dependencies
 ```bash
-$ docker run -d --hostname rabbit3 --name rabbit3 -p 15670:15672 -p 5670:5672 rabbitmq:3-management
+$ npm ci
 ```
 
-#### Setting up schemas
-Open ``gitlab-ci.sql`` and copy the block that will be defined as schemas on the next start in sql terminal.
+----------------
 
-#### Setting up SQL users, roles and permissions
-Open ``multiform.sql`` and copy all uncommented SQL on the next start in sql terminal.
-
-GUI panel: http://localhost:15672
-User: guest/guest
----
-Then run:
+### 4. Run migrations
 ```bash
-# copy env files
-$ cp -a env/dev/. ./
-# install dependencies
-$ npm install
-# build database application
-$ npm run build:database
-# run migrations
-$ npm run migration:up:all
-# seed some data
-$ npm run seed:run
+$ npm run build database
+$ npm run migration:up
 ```
 
-#### SMTP local
-Start local smtp server
-```bash
-$ docker run -d --hostname mailhog --name mailhog -p 1025:1025 -p 8025:8025 mailhog/mailhog
-```
-GUI panel: http://localhost:8025  
-In `.env.local` add `MAILER_TRANSPORT=smtp://testuser:testpwd@localhost:1025`
+----------------
 
-## Running the app
+
+### 5. Running the app
 Each directory in `apps` folder contains separate application.  
 To run an application use command `npm run start app_name`, e.g.
 
 ```bash
 # development
-$ npm run start api
+$ npm run start client
 
 # watch mode
 $ npm run start:dev admin
 
 # production mode
-$ npm run start:prod aemass
+$ npm run start:prod admin
+```
+
+### 6. Fill db with data (for now it creates admin user only)
+```bash
+$ npm run seed:run
 ```
 
 ## Running tests
 To run e2e tests for a specific app use `npm run test:e2e:app_name`, e.g.
 ```bash
-# e2e tests for api
-$ npm run test:e2e:api
+# e2e tests for client
+$ npm run test:e2e:client all
 
 # e2e tests for admin and specific module
-$ npm run test:e2e:admin apps/admin/test/patient
+$ npm run test:e2e:admin user/index
 
 # run specific test
-$ npm run test:e2e:admin apps/admin/test/patient/action/move-patient-action.e2e-spec.ts
+$ npm run test:e2e:admin create-user-action.e2e-spec.ts
 
 # test coverage
 $ npm run test:cov
 ```
-
-## Ecosystem setup
-See [SETUP.md](./SETUP.md)

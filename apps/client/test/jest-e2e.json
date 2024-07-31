@@ -9,12 +9,14 @@
   },
   "setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"],
   "moduleNameMapper": {
-    "@app/api-client/(.*)$": "<rootDir>/../src/$1",
-    "@app-api-client/common/(.*)": "<rootDir>/../src/common/$1",
-    "@app-api-client/common": "<rootDir>/../src/common",
+    "@app/client/(.*)$": "<rootDir>/../src/$1",
+    "@app-client/common/(.*)": "<rootDir>/../src/common/$1",
+    "@app-client/common": "<rootDir>/../src/common",
     "^@libs/core(|/.*)$": "<rootDir>/../../../libs/core/src/$1",
+    "^@libs/access-key(|/.*)$": "<rootDir>/../../../libs/access-key/src/$1",
     "^@libs/file-storage(|/.*)$": "<rootDir>/../../../libs/file-storage/src/$1",
     "^@libs/file-uploader(|/.*)$": "<rootDir>/../../../libs/file-uploader/src/$1",
+    "^@libs/orm-history(|/.*)$": "<rootDir>/../../../libs/orm-history/src/$1",
     "^@libs/mailer(|/.*)$": "<rootDir>/../../../libs/mailer/src/$1",
     "^@libs/notification(|/.*)$": "<rootDir>/../../../libs/notification/src/$1",
     "^@libs/pusher(|/.*)$": "<rootDir>/../../../libs/pusher/src/$1",
@@ -25,6 +27,9 @@
     "^@libs/orm(|/.*)$": "<rootDir>/../../../libs/orm/src/$1",
     "^@libs/security(|/.*)$": "<rootDir>/../../../libs/security/src/$1",
     "^@libs/test(|/.*)$": "<rootDir>/../../../libs/test/src/$1",
+    "^@libs/microservice-event(|/.*)$": "<rootDir>/../../../libs/microservice-event/src/$1",
+    "^@libs/user-code(|/.*)$": "<rootDir>/../../../libs/user-code/src/$1",
+    "^@libs/user-parent(|/.*)$": "<rootDir>/../../../libs/user-parent/src/$1",
     "^@libs/healthcheck(|/.*)$": "<rootDir>/../../../libs/healthcheck/src/$1"
   }
 }

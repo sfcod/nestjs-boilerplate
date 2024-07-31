@@ -1,58 +1,34 @@
 import { Command, Console } from 'nestjs-console';
-import { EntityManager } from '@mikro-orm/core';
+import { wrap } from '@mikro-orm/core';
+import { Admin, AdminStatus, BinaryHexUuid } from '@libs/orm';
+import { EntityManagerResolver } from '@libs/orm-core';
+import { hash } from 'bcrypt';
 
 @Console({
     command: 'seed',
     description: 'A command to create users',
 })
 export class SeedCommand {
-    constructor(private readonly em: EntityManager) {}
+    constructor(private readonly emResolver: EntityManagerResolver) {}
 
     @Command({
         command: 'run',
         description: 'Run seeds',
     })
     async run(command: any): Promise<void> {
-        const args = [...command.args];
-
-        if (!args.length) {
-            args.push('');
-        }
-
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        for (const seed of args) {
-            //@TODO: refactor, should not use knex
-            // console.log(
-            //     await this.em.getKnex().seed.run({
-            //         directory: __dirname + '/../script',
-            //         specific: seed ? seed + '.js' : undefined,
-            //         extension: 'js',
-            //         loadExtensions: ['.js'],
-            //     }),
-            // );
-        }
-    }
-
-    @Command({
-        command: 'make <name>',
-        options: [
+        const em = this.emResolver.getEntityManager(Admin).fork();
+        const admin = new Admin();
+        wrap(admin).assign(
             {
-                flags: '--name',
-                required: true,
+                id: BinaryHexUuid.getBinaryHexUuid(),
+                email: 'admin@mail.com',
+                name: 'Admin',
+                phoneVerified: true,
+                status: AdminStatus.STATUS_ACTIVE,
+                password: await hash(String('123123'), parseInt(admin.getSalt() || '10')),
             },
-        ],
-        description: 'Make a seed',
-    })
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async make(name: string): Promise<void> {
-        //@TODO: refactor, should not use knex
-        // console.log(
-        //     name,
-        //     await this.em.getKnex().seed.make(name, {
-        //         directory: __dirname + '/../../../../database/seeds',
-        //         extension: 'js',
-        //         loadExtensions: ['.js'],
-        //     }),
-        // );
+            { em },
+        );
+        await em.persistAndFlush(admin);
     }
 }

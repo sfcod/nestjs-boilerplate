@@ -1,14 +1,11 @@
-{{#> layouts/email_base }}
+{{#> layouts/default }}
     {{#* inline "body"}}
         <table class="gutter-y"><tr><td class="gutter-y-15"></td></tr></table>
         <div class="description">
-            You've been added to the Phy Health Admin Portal.
-            Using the credentials below, you can now add and delete practitioners, view patients and their details, and access many other features.
+            You've been added to the Admin Portal.
+            You can sign in using credentials below.
         </div>
         <div class="description">Username: {{email}}</div>
         <div class="description">Password: {{password}}</div>
-        <div class="description">
-            Get started by logging in <a class="link" href="{{url}}" target="_blank"><span><font color="#EB5829">here</font></span></a>.
-        </div>
     {{/ inline}}
-{{/ layouts/email_base}}
+{{/ layouts/default}}
