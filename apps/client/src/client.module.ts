@@ -18,8 +18,8 @@ import { CommonModule } from './common/common.module';
 import { RequestContextModule } from '@libs/request-context';
 import { CoreModule } from '@libs/core';
 import eventEmitterConfig from '../../../config/event-emitter.config';
-import { PusherModule } from '@libs/pusher';
-import firebaseConfig from '../../../config/firebase.config';
+//import { PusherModule } from '@libs/pusher';
+//import firebaseConfig from '../../../config/firebase.config';
 import { SocialModule } from './social/social.module';
 import { BullModule } from '@nestjs/bullmq';
 import queueConfig from '../../../config/queue.config';
@@ -44,7 +44,7 @@ import queueConfig from '../../../config/queue.config';
         ConfigModule.forRoot(configConfig),
         RedisModule.forRoot(redisConfig),
         MailerModule.register(mailerConfig),
-        PusherModule.register(firebaseConfig),
+        //PusherModule.register(firebaseConfig),
         BullModule.forRoot(queueConfig),
         RequestContextModule,
         // ------- <Service modules ------- //

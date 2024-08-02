@@ -18,7 +18,7 @@ export function UseRequestContext() {
             }
             let result;
 
-            await RequestContext.createAsync(
+            await RequestContext.create(
                 context.orm instanceof Array ? context.orm.map((orm) => orm.em) : context.orm.em,
                 async () => {
                     result = await originalMethod.apply(context, args);

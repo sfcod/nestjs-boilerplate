@@ -3,12 +3,12 @@ import { appendFile, exists, mkdir, readdir, readFile, rename, stat } from 'fs';
 import { basename, join } from 'path';
 import { promisify } from 'util';
 import { File } from '../contract/file.interface';
-import * as del from 'del';
+import * as deleteAsync from 'del';
 import { orderBy } from 'lodash';
 import { path as appRoot } from 'app-root-path';
 import { ModuleRef } from '@nestjs/core';
 import { Injectable } from '@nestjs/common';
-import { fromFile } from 'file-type';
+import { fileTypeFromFile as fromFile } from 'file-type';
 
 const existsAsync = promisify(exists);
 const renameAsync = promisify(rename);
@@ -48,7 +48,7 @@ export class FilesystemChunkStorage implements ChunkStorage {
             const file = await readFileAsync(chunk.path);
             await appendFileAsync(assembledFile, file);
             if (removeChunk) {
-                await del(chunk.path);
+                await deleteAsync(chunk.path);
             }
         }
 
@@ -64,7 +64,7 @@ export class FilesystemChunkStorage implements ChunkStorage {
     }
 
     async cleanup(path: string): Promise<boolean> {
-        await del(join(path, '**'));
+        await deleteAsync(join(path, '**'));
 
         return true;
     }
