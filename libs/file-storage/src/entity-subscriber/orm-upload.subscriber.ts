@@ -5,7 +5,7 @@ import { FileHelper } from '../service/file-helper';
 import { StorageManager } from '@slynova/flydrive';
 import { Inject, Injectable } from '@nestjs/common';
 import { createReadStream } from 'fs';
-import * as del from 'del';
+import * as deleteAsync from 'del';
 
 @Injectable()
 export class OrmUploadSubscriber implements EventSubscriber<any> {
@@ -85,7 +85,7 @@ export class OrmUploadSubscriber implements EventSubscriber<any> {
                     await this.storageManager.disk(mapping.driver).put(filePath, file.stream);
                 } else if (file.path) {
                     await this.storageManager.disk(mapping.driver).put(filePath, createReadStream(file.path));
-                    await del(file.path);
+                    await deleteAsync(file.path);
                 } else if (file.buffer) {
                     await this.storageManager.disk(mapping.driver).put(filePath, file.buffer);
                 } else {

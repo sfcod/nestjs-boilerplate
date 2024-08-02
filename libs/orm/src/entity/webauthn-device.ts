@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, PrimaryKey, Property, Ref, Reference } from '@mikro-orm/core';
+import { Cascade, Entity, ManyToOne, PrimaryKey, Property, Ref, Reference } from '@mikro-orm/core';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { User } from './user';
 import { BinaryHexUuid } from '../extension/binary-hex-uuid';
@@ -18,8 +18,8 @@ export class WebauthnDevice implements WebauthnDeviceInterface {
 
     @ManyToOne(() => User, {
         fieldName: 'user_id',
-        onDelete: 'cascade',
-        onUpdateIntegrity: 'no action',
+        deleteRule: 'cascade',
+        updateRule: 'no action',
         nullable: false,
         ref: true,
     })

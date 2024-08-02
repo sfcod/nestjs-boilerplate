@@ -12,8 +12,8 @@ export class AccessKeyPermission {
 
     @ManyToOne(() => AccessKey, {
         fieldName: 'access_key_id',
-        onDelete: 'cascade',
-        onUpdateIntegrity: 'no action',
+        deleteRule: 'cascade',
+        updateRule: 'no action',
         ref: true,
         nullable: false,
     })

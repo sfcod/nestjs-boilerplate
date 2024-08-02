@@ -13,8 +13,8 @@ export class UserAttribute<T = any> {
 
     @ManyToOne(() => User, {
         fieldName: 'user_id',
-        onDelete: 'cascade',
-        onUpdateIntegrity: 'no action',
+        deleteRule: 'cascade',
+        updateRule: 'no action',
         nullable: false,
         ref: true,
     })

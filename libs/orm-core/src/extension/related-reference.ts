@@ -12,8 +12,9 @@ export class RelatedReference<T extends RelatedEntity> {
 
     async load(): Promise<T> {
         if (!this.isInitialized()) {
+            //@TODO remove any in definition
             this.entity =
-                ((await wrap(this.entity, true).__em.findOne(this.entity.constructor.name, this.entity.id, {
+                ((await wrap(this.entity, true).__em.findOne(this.entity.constructor.name, this.id as any, {
                     filters: false,
                 })) as T) || undefined;
         }

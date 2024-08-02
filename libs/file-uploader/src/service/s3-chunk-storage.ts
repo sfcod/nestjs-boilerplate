@@ -1,6 +1,6 @@
 import { createReadStream } from 'fs';
 import { join } from 'path';
-import * as del from 'del';
+import * as deleteAsync from 'del';
 import { ChunkStorage } from '../contract/chunk-storage.interface';
 import { File } from '../contract/file.interface';
 import { Inject, Injectable, Logger } from '@nestjs/common';
@@ -90,7 +90,7 @@ export class S3ChunkStorage implements ChunkStorage {
         }
 
         // Delete file from local disk
-        await del(chunk.path);
+        await deleteAsync(chunk.path);
 
         chunk.path = join(path, name);
         chunk.originalname = name;
