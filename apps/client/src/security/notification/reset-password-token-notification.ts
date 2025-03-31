@@ -26,6 +26,7 @@ export class ResetPasswordTokenNotification
 
     async toMail(): Promise<ToMailData> {
         const { user, code } = this.getData();
+        const link = `${process.env.FRONTEND_URL}/forgot-password/verify-link?username=${user.email}&code=${code}`;
 
         return {
             receiver: new UserMailReceiver(user),
@@ -33,7 +34,7 @@ export class ResetPasswordTokenNotification
                 subject: 'Reset your password.',
                 template: 'reset-password-token',
                 context: {
-                    code: code,
+                    link,
                 },
             },
         };
