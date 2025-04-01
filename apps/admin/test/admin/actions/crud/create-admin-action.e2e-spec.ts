@@ -13,7 +13,7 @@ describe('CreateAdmin (e2e)', () => {
     const EMAIL = faker.internet.email();
     const PASSWORD = `dS$35£${faker.internet.password({ length: 6 })}`;
     const NAME = faker.internet.userName();
-    const PHONE = faker.helpers.replaceSymbolWithNumber('4844######');
+    const PHONE = '4844######'.replace(/#+/g, (m) => faker.string.numeric(m.length));
 
     beforeAll(async () => {
         const mailer = createStubInstance(Mailer, {
