@@ -49,12 +49,12 @@ export class EntityManagerResolver {
     /**
      * Gets a reference to the entity identified by the given type and identifier without actually loading it, if the entity is not yet loaded
      */
-    getReference<T extends AnyEntity<T>>(entityName: EntityName<T>, id: Primary<T> | Primary<T>[]): T;
+    getReference<T extends object>(entityName: EntityName<T>, id: Primary<T> | Primary<T>[]): T;
 
     /**
      * Gets a reference to the entity identified by the given type and identifier without actually loading it, if the entity is not yet loaded
      */
-    getReference<T extends AnyEntity<T>>(
+    getReference<T extends object>(
         entityName: EntityName<T>,
         id: Primary<T>,
         options: Omit<GetReferenceOptions, 'wrapped'> & { wrapped: false },
@@ -63,7 +63,7 @@ export class EntityManagerResolver {
     /**
      * Gets a reference to the entity identified by the given type and identifier without actually loading it, if the entity is not yet loaded
      */
-    getReference<T extends AnyEntity<T>>(
+    getReference<T extends object>(
         entityName: EntityName<T>,
         id: Primary<T>,
         options?: GetReferenceOptions,
@@ -72,11 +72,11 @@ export class EntityManagerResolver {
     /**
      * Gets a reference to the entity identified by the given type and identifier without actually loading it, if the entity is not yet loaded
      */
-    getReference<T extends AnyEntity<T>>(
+    getReference<T extends object>(
         entityName: EntityName<T>,
         id: Primary<T>,
         options: GetReferenceOptions = {},
-    ): T | Reference<T> {
+    ): T | Ref<T> | Reference<T> {
         return this.ormResolver.em(entityName).getReference(entityName, id, options);
     }
 
@@ -91,6 +91,7 @@ export class EntityManagerResolver {
             registerSubscriber: (subscriber: EventSubscriber): void => {
                 for (const connection of connections) {
                     if (
+                        // TODO: validate that it works with as any
                         subscriber.getSubscribedEntities &&
                         // @ts-ignore
                         connection.config.get('entities').includes(subscriber.getSubscribedEntities().pop())
