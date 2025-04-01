@@ -76,7 +76,7 @@ export class EntityManagerResolver {
         entityName: EntityName<T>,
         id: Primary<T>,
         options: GetReferenceOptions = {},
-    ): T | Reference<T> {
+    ): T | Ref<T> | Reference<T> {
         return this.ormResolver.em(entityName).getReference(entityName, id, options);
     }
 

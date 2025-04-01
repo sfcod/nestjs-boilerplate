@@ -9,6 +9,7 @@ import {
     OneToMany,
     PrimaryKey,
     Property,
+    raw,
 } from '@mikro-orm/core';
 import { AuthenticatorType, UserInterface, User2FAInterface } from '@libs/security';
 import { File } from '@libs/file-uploader';
@@ -27,7 +28,7 @@ import { UserRole } from '../entity-enum/user-role';
 @Filter({
     name: 'email',
     cond: (args) => ({
-        'lower(email)': String(args.value).toLowerCase(),
+        [raw('lower(email)')]: String(args.value).toLowerCase(),
     }),
 })
 @Filter({

@@ -5,7 +5,7 @@ import { Request } from 'express';
 import { getClientIp } from 'request-ip';
 import { REQUEST } from '@nestjs/core';
 import { Admin, User } from '@libs/orm';
-import { EntityManager } from '@mikro-orm/core';
+import { EntityManager, raw } from '@mikro-orm/core';
 import { UserInterface } from '../../contract/user-interface';
 import { PasswordHash } from '../password-hash';
 
@@ -93,10 +93,10 @@ export class CredentialBruteForce {
     private async findUser(pattern: string, username: string): Promise<UserInterface | null> {
         switch (pattern) {
             case 'admin':
-                return await this.em.findOne(Admin, { 'lower(email)': username.toLowerCase() } as any);
+                return await this.em.findOne(Admin, { [raw('lower(email)')]: username.toLowerCase() } as any);
             case 'user':
                 return await this.em.findOne(User, {
-                    'lower(email)': username.toLowerCase(),
+                    [raw('lower(email)')]: username.toLowerCase(),
                     deletedAt: { $eq: null },
                 } as any);
         }

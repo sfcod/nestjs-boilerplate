@@ -6,7 +6,7 @@ import {
     ValidatorConstraintInterface,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-import { CountOptions, EntityName } from '@mikro-orm/core';
+import { CountOptions, EntityName, raw } from '@mikro-orm/core';
 import { SOFT_DELETABLE_QUERY_FILTER } from '@libs/soft-delete';
 import { OrmResolver } from '@libs/orm-core';
 
@@ -24,7 +24,7 @@ export class UniqueEntityConstraint implements ValidatorConstraintInterface {
                 ? { ...query, [field]: (args.object as any)[field] }
                 : {
                       ...query,
-                      [`lower(${field})`]: String((args.object as any)[field])?.toLowerCase(),
+                      [raw(`lower(${field})`)]: String((args.object as any)[field])?.toLowerCase(),
                   };
         });
         if ((args.object as any).id) {

@@ -1,4 +1,4 @@
-import { Cascade, Entity, ManyToOne, PrimaryKey, Property, Ref, Reference } from '@mikro-orm/core';
+import { Entity, ManyToOne, PrimaryKey, Property, Ref, Reference } from '@mikro-orm/core';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { User } from './user';
 import { BinaryHexUuid } from '../extension/binary-hex-uuid';
