@@ -51,8 +51,8 @@ export class AccessKey {
 
     @ManyToOne(() => Admin, {
         fieldName: 'owner_id',
-        onDelete: 'no action',
-        onUpdateIntegrity: 'no action',
+        deleteRule: 'cascade',
+        updateRule: 'no action',
         ref: true,
         nullable: false,
     })

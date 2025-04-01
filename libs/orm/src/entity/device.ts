@@ -13,8 +13,8 @@ export class Device {
 
     @ManyToOne(() => User, {
         fieldName: 'owner_id',
-        onDelete: 'cascade',
-        onUpdateIntegrity: 'no action',
+        deleteRule: 'cascade',
+        updateRule: 'no action',
         nullable: false,
         ref: true,
     })
