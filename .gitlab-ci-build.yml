@@ -53,7 +53,6 @@ build:staging:
   only:
     refs:
       - staging
-      - looker-sso
       - contact-us
   before_script:
     - npm ci
