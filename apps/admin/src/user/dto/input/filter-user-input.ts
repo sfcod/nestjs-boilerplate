@@ -20,8 +20,9 @@ export class FilterUserInput extends Paginated {
 
     @Expose()
     @ApiPropertyOptional()
+    @Transform(transformToILike, { toClassOnly: true })
     @IsOptional()
-    name?: string;
+    firstName?: string;
 
     @Expose()
     @ApiPropertyOptional()
