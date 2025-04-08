@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SecurityModule } from '../security/security.module';
 import { SocialModule } from '../social/social.module';
+import { SignUpAction } from './action/crud/sign-up-action';
 import { GetUserAction } from './action/crud/get-user-action';
 import { UpdateUserAction } from './action/crud/update-user-action';
 import { DeleteUserAction } from './action/crud/delete-user-action';
@@ -18,7 +19,7 @@ import { DeleteUserDataProcessor } from './processor/delete-user-data-processor'
         registerQueue(DELETE_USER_DATA_QUEUE),
         // ------- <Queues ------- //
     ],
-    controllers: [GetUserAction, UpdateUserAction, DeleteUserAction],
+    controllers: [SignUpAction, GetUserAction, UpdateUserAction, DeleteUserAction],
     providers: [GetUserGuard, UpdateUserGuard, DeleteUserGuard, DeleteUserDataProcessor],
 })
 export class UserModule {}
