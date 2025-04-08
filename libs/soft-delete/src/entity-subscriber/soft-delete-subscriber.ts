@@ -4,7 +4,7 @@ import { Collection, Reference } from '@mikro-orm/core';
 import { FlushEventArgs } from '@mikro-orm/core/events/EventSubscriber';
 import { SOFT_DELETABLE_OPTIONS, SoftDeletableOptions } from '../decorator/soft-deletable.decorator';
 import { AnyEntity } from '@mikro-orm/core/typings';
-import * as moment from 'moment';
+import { DateTime } from 'luxon';
 
 @Injectable()
 export class SoftDeleteSubscriber {
@@ -16,7 +16,7 @@ export class SoftDeleteSubscriber {
         const removeStack: Set<AnyEntity> = uow.getRemoveStack();
         const processedEntities: Set<AnyEntity> = new Set();
         // milliseconds
-        const deletedAt = moment().valueOf();
+        const deletedAt = DateTime.now().toMillis();
 
         for (const entity of removeStack) {
             if (processedEntities.has(entity)) {

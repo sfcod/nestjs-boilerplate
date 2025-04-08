@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CodeStorageInterface } from '../../contract/code-storage.interface';
 import { storageKeyInDb } from '../../helper/storage.helper';
-import * as moment from 'moment';
+import { DateTime } from 'luxon';
 import { CodeSendThrottleException } from '../../exception/code-send-throttle-exception';
 import { CodeVerifyThrottleException } from '../../exception/code-verify-throttle-exception';
 import * as ms from 'ms';
@@ -32,7 +32,7 @@ export abstract class AbstractCodeVerification {
 
         await this.codeStorage.set(
             `${storageKeyInDb(this, composing.to)}-${params.throttleKey}`,
-            JSON.stringify({ createdAt: moment().unix() }),
+            JSON.stringify({ createdAt: DateTime.now().toUnixInteger() }),
             params.throttleTime,
         );
     }
@@ -64,7 +64,7 @@ export abstract class AbstractCodeVerification {
                 `${storageKeyInDb(this, composing.code)}-${params.throttleKey}`,
                 JSON.stringify({
                     count: data ? ++data.count : 1,
-                    createdAt: moment().unix(),
+                    createdAt: DateTime.now().toUnixInteger(),
                 }),
                 params.throttleTime,
             );

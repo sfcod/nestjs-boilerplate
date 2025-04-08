@@ -13,7 +13,7 @@ import {
     Validate,
     ValidateNested,
 } from 'class-validator';
-import * as moment from 'moment';
+import { DateTime } from 'luxon';
 import { UserGender } from '@libs/orm';
 import { PasswordValidation } from 'class-validator-password-check';
 import { passwordRequirement } from '../../../../../../config/password-requitement.config';
@@ -54,7 +54,7 @@ export class UpdateUserInput {
     @ApiProperty()
     @Callback<UpdateUserInput, string>(
         ({ value }) => {
-            return moment().diff(moment(value).set({ hour: 0, minute: 0, second: 0 }), 'years') >= 1;
+            return DateTime.now().diff(DateTime.fromJSDate(new Date(value)).startOf('day'), 'years').years >= 1;
         },
         { message: 'User must be at least 1 year old' },
     )

@@ -3,7 +3,7 @@ import { EmailCodeAuthenticator } from './authenticator/email-code-authenticator
 import { Inject, Injectable } from '@nestjs/common';
 import { CodeStorageInterface } from '../contract/code-storage.interface';
 import { storageKeyInDb } from '../helper/storage.helper';
-import * as moment from 'moment';
+import { DateTime } from 'luxon';
 import * as ms from 'ms';
 import { CodeSendThrottleException } from '../exception/code-send-throttle-exception';
 import { CodeVerifyThrottleException } from '../exception/code-verify-throttle-exception';
@@ -48,7 +48,7 @@ export class CodeAuthenticator {
 
         await this.codeStorage.set(
             `${storageKeyInDb(this, user.getUuid())}-${throttleKey}-send`,
-            JSON.stringify({ createdAt: moment().unix() }),
+            JSON.stringify({ createdAt: DateTime.now().toUnixInteger() }),
             THROTTLE_SEND,
         );
     }
@@ -71,7 +71,7 @@ export class CodeAuthenticator {
                 `${storageKeyInDb(this, user.getUuid())}-verify`,
                 JSON.stringify({
                     count: data ? ++data.count : 1,
-                    createdAt: moment().unix(),
+                    createdAt: DateTime.now().toUnixInteger(),
                 }),
                 THROTTLE_VERIFY,
             );
