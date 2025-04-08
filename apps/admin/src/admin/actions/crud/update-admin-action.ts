@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Patch, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Param, Patch, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import {
     ApiBadRequestResponse,
@@ -26,6 +26,7 @@ export class UpdateAdminAction {
     ) {}
 
     @UseGuards(AuthGuard('jwt'), RolesGuard(AdminRole.ROLE_SYSTEM_ADMIN))
+    @HttpCode(HttpStatus.CREATED)
     @Patch()
     @ApiDescription({ roles: [AdminRole.ROLE_SYSTEM_ADMIN], summary: 'Update admin' })
     @ApiParam({ name: 'id', type: 'string' })

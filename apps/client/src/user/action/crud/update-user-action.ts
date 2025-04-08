@@ -39,7 +39,7 @@ export class UpdateUserAction {
 
     @Patch()
     @UseInterceptors(FileInterceptor('image', { limits: { fileSize: Number(process.env.IMAGE_FILESIZE_LIMIT) } }))
-    @HttpCode(HttpStatus.OK)
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(AuthGuard('jwt'), RolesGuard(UserRole.ROLE_USER), UpdateUserGuard)
     @ApiOkResponse({ type: UserOutput })
     @ApiConsumes('multipart/form-data')
