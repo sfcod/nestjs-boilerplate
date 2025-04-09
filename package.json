@@ -90,6 +90,7 @@
     "del": "6.0.0",
     "dpdm": "^3.14.0",
     "exceljs": "^4.4.0",
+    "express-basic-auth": "^1.2.1",
     "file-type": "19.3.0",
     "firebase-admin": "^12.3.0",
     "fs-extra": "11.2.0",
