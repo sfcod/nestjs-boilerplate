@@ -1,6 +1,6 @@
 import { createReadStream } from 'fs';
 import { join } from 'path';
-import { deleteAsync } from 'del';
+import * as deleteAsync from 'del';
 import { ChunkStorage } from '../contract/chunk-storage.interface';
 import { File } from '../contract/file.interface';
 import { Inject, Injectable, Logger } from '@nestjs/common';
@@ -54,10 +54,7 @@ export class S3ChunkStorage implements ChunkStorage {
         let multipart: MultyPartType;
         if (index === 0) {
             isDev && console.time(`createMultipartUpload-${uuid}`);
-            const multiPartParams = {
-                Bucket: this.bucket,
-                Key: join(path, chunk.originalname),
-            };
+            const multiPartParams = { Bucket: this.bucket, Key: join(path, chunk.originalname) };
             const createMultipartUploadCommand = new CreateMultipartUploadCommand(multiPartParams);
             multipart = {
                 originalname: chunk.originalname,
@@ -125,10 +122,7 @@ export class S3ChunkStorage implements ChunkStorage {
             ...multipart.multiPartParams,
             MultipartUpload: {
                 Parts: parts.Parts.map((part) => {
-                    return {
-                        ETag: part.ETag,
-                        PartNumber: part.PartNumber,
-                    };
+                    return { ETag: part.ETag, PartNumber: part.PartNumber };
                 }),
             },
             UploadId: multipart.multipart.UploadId,
@@ -158,15 +152,8 @@ export class S3ChunkStorage implements ChunkStorage {
     }
 
     move = async (disk: Storage, distPath: string, file: any): Promise<void> => {
-        const copyParams = {
-            CopySource: this.bucket + '/' + file.path,
-            Bucket: this.bucket,
-            Key: distPath,
-        };
-        const delParams = {
-            Key: file.path,
-            Bucket: this.bucket,
-        };
+        const copyParams = { CopySource: this.bucket + '/' + file.path, Bucket: this.bucket, Key: distPath };
+        const delParams = { Key: file.path, Bucket: this.bucket };
 
         if (file.size < COPY_OBJECT_LIMIT) {
             try {
@@ -224,13 +211,8 @@ export class S3ChunkStorage implements ChunkStorage {
             Key: distPath,
             // ContentType: getContentType(to_key),
         };
-        const multipartMap = {
-            Parts: [],
-        };
-        const headObjectCommand = new HeadObjectCommand({
-            Bucket: this.bucket,
-            Key: file.path,
-        });
+        const multipartMap = { Parts: [] };
+        const headObjectCommand = new HeadObjectCommand({ Bucket: this.bucket, Key: file.path });
 
         const info = await this.driver.send(headObjectCommand);
         const size = info.ContentLength;
@@ -267,11 +249,7 @@ export class S3ChunkStorage implements ChunkStorage {
         //
         // multipartMap.Parts.push({ ETag: result.ETag, PartNumber: Number(partNumber) });
 
-        const doneParams = {
-            ...multiPartParams,
-            MultipartUpload: multipartMap,
-            UploadId: multipartUpload.UploadId,
-        };
+        const doneParams = { ...multiPartParams, MultipartUpload: multipartMap, UploadId: multipartUpload.UploadId };
 
         await this.driver.send(new CompleteMultipartUploadCommand(doneParams));
     }

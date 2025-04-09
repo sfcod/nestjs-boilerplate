@@ -3,7 +3,7 @@ import { appendFile, exists, mkdir, readdir, readFile, rename, stat } from 'fs';
 import { basename, join } from 'path';
 import { promisify } from 'util';
 import { File } from '../contract/file.interface';
-import {deleteAsync} from 'del';
+import * as deleteAsync from 'del';
 import { orderBy } from 'lodash';
 import { path as appRoot } from 'app-root-path';
 import { ModuleRef } from '@nestjs/core';
@@ -55,12 +55,7 @@ export class FilesystemChunkStorage implements ChunkStorage {
         const stat = await statAsync(assembledFile);
         const fileType = await fromFile(assembledFile);
 
-        return {
-            originalname: name,
-            mimetype: fileType ? fileType.mime : '',
-            size: stat.size,
-            path: assembledFile,
-        };
+        return { originalname: name, mimetype: fileType ? fileType.mime : '', size: stat.size, path: assembledFile };
     }
 
     async cleanup(path: string): Promise<boolean> {
@@ -83,10 +78,7 @@ export class FilesystemChunkStorage implements ChunkStorage {
         });
         const files = orderBy(
             filteredList.map((file) => {
-                return {
-                    file,
-                    index: Number(file.substr(0, file.indexOf('_'))),
-                };
+                return { file, index: Number(file.substr(0, file.indexOf('_'))) };
             }),
             ['index'],
             ['asc'],

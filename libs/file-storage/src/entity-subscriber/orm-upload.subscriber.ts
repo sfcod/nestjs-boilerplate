@@ -5,7 +5,7 @@ import { FileHelper } from '../service/file-helper';
 import { StorageManager } from '@slynova/flydrive';
 import { Inject, Injectable } from '@nestjs/common';
 import { createReadStream } from 'fs';
-import { deleteAsync } from 'del';
+import * as deleteAsync from 'del';
 
 @Injectable()
 export class OrmUploadSubscriber implements EventSubscriber<any> {
