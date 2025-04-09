@@ -55,12 +55,7 @@ export class FilesystemChunkStorage implements ChunkStorage {
         const stat = await statAsync(assembledFile);
         const fileType = await fromFile(assembledFile);
 
-        return {
-            originalname: name,
-            mimetype: fileType ? fileType.mime : '',
-            size: stat.size,
-            path: assembledFile,
-        };
+        return { originalname: name, mimetype: fileType ? fileType.mime : '', size: stat.size, path: assembledFile };
     }
 
     async cleanup(path: string): Promise<boolean> {
@@ -83,10 +78,7 @@ export class FilesystemChunkStorage implements ChunkStorage {
         });
         const files = orderBy(
             filteredList.map((file) => {
-                return {
-                    file,
-                    index: Number(file.substr(0, file.indexOf('_'))),
-                };
+                return { file, index: Number(file.substr(0, file.indexOf('_'))) };
             }),
             ['index'],
             ['asc'],
