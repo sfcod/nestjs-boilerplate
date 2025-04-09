@@ -3,7 +3,7 @@ import { appendFile, exists, mkdir, readdir, readFile, rename, stat } from 'fs';
 import { basename, join } from 'path';
 import { promisify } from 'util';
 import { File } from '../contract/file.interface';
-import * as deleteAsync from 'del';
+import {deleteAsync} from 'del';
 import { orderBy } from 'lodash';
 import { path as appRoot } from 'app-root-path';
 import { ModuleRef } from '@nestjs/core';

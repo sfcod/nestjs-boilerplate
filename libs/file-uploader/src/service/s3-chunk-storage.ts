@@ -1,6 +1,6 @@
 import { createReadStream } from 'fs';
 import { join } from 'path';
-import * as deleteAsync from 'del';
+import { deleteAsync } from 'del';
 import { ChunkStorage } from '../contract/chunk-storage.interface';
 import { File } from '../contract/file.interface';
 import { Inject, Injectable, Logger } from '@nestjs/common';
