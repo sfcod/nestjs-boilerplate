@@ -4,7 +4,7 @@ import { EntityManager, wrap } from '@mikro-orm/core';
 import { User, UserStatus } from '@libs/orm';
 import { ApiDescription, ClearMissingPropertiesPipe, Mapper, TimeoutExceptionFilter } from '@libs/core';
 import { SignUpInput } from '../../dto/input/sign-up-input';
-import { UserOutput } from '@app/admin/common/dto/user-output';
+import { UserOutput } from '@app/client/common/dto/user-output';
 import { hash } from 'bcrypt';
 
 @ApiTags('Auth')
