@@ -25,7 +25,7 @@ export class UpdateAccessKeyAction {
         private readonly mapper: Mapper,
     ) {}
 
-    @HttpCode(HttpStatus.OK)
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(AuthGuard('jwt'), RolesGuard(AdminRole.ROLE_SYSTEM_ADMIN))
     @Patch()
     @ApiOkResponse({

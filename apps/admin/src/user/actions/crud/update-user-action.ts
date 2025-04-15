@@ -28,7 +28,7 @@ export class UpdateUserAction {
     ) {}
 
     @Patch()
-    @HttpCode(HttpStatus.OK)
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(AuthGuard('jwt'), RolesGuard(...ALLOWED_ROLES))
     @ApiDescription({ roles: ALLOWED_ROLES, summary: 'Update user' })
     @ApiParam({ name: 'id', type: 'string' })
