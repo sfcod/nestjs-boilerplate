@@ -24,7 +24,7 @@ export class ResetPasswordAction {
     @ApiOkResponse()
     @ApiBadRequestResponse()
     async invoke(@Req() req: Request, @Body() data: ResetPasswordInput): Promise<any> {
-        const user = await this.entityManager.findOne(User, {}, { filters: { email: { value: data.email } } });
+        const user = await this.entityManager.findOne(User, {}, { filters: { email: { value: data.username } } });
         if (!user || user.deletedAt) {
             throw new HttpException('The email is invalid', HttpStatus.BAD_REQUEST);
         }
