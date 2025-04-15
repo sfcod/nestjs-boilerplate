@@ -38,7 +38,7 @@
     "test:e2e:queue-processor:dist": "node --max_old_space_size=3072 --expose-gc ./node_modules/jest/bin/jest.js --config ./dist/apps/queue-processor/apps/queue-processor/test/jest-e2e.dist.json --runInBand --detectOpenHandles --logHeapUsage --forceExit",
     "seed:run": "node ./dist/apps/database/apps/database/src/console.js seed run",
     "migration:up": "node -r ./dist/apps/database/apps/dotenv.js -r tsconfig-paths/register -r ts-node/register node_modules/@mikro-orm/cli/cli.js migration:up",
-    "migration:up:all": "CONNECTION=Default npm run migration:up",
+    "migration:up:all": "CONNECTION=default npm run migration:up",
     "migration:down": "node -r ./dist/apps/database/apps/dotenv.js -r tsconfig-paths/register -r ts-node/register node_modules/@mikro-orm/cli/cli.js migration:down",
     "migration:create": "node -r ./dist/apps/database/apps/dotenv.js -r tsconfig-paths/register -r ts-node/register node_modules/@mikro-orm/cli/cli.js migration:create",
     "cli-database": "node dist/apps/database/apps/database/src/console.js"
@@ -90,6 +90,7 @@
     "del": "^6.1.1",
     "dpdm": "^3.14.0",
     "exceljs": "^4.4.0",
+    "express-basic-auth": "^1.2.1",
     "file-type": "^20.4.1",
     "firebase-admin": "^12.7.0",
     "fs-extra": "^11.3.0",

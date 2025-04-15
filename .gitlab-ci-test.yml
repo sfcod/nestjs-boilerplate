@@ -60,7 +60,7 @@ test:client:
       - libs/**/*
   #      - test/jest-e2e.json
   script:
-    - NODE_ENV=test CONNECTION=Default npm run migration:up
+    - NODE_ENV=test CONNECTION=default npm run migration:up
     - NODE_ENV=test npm run test:e2e:api:dist all
 #    - NODE_ENV=test npm run test:e2e:api apps/api/test/[a-i]*
 #    - NODE_ENV=test npm run test:e2e:api apps/api/test/[j-o]*
@@ -80,7 +80,7 @@ test:admin:
       - libs/**/*
   #      - test/jest-e2e.json
   script:
-    - NODE_ENV=test CONNECTION=Default npm run migration:up
+    - NODE_ENV=test CONNECTION=default npm run migration:up
     - NODE_ENV=test npm run test:e2e:admin:dist all
 #    - NODE_ENV=test npm run test:e2e:admin apps/admin/test/[a-i]*
 #    - NODE_ENV=test npm run test:e2e:admin apps/admin/test/[j-o]*
