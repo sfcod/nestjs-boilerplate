@@ -14,7 +14,7 @@ import {
 import { Admin, User, UserGender, UserStatus } from '@libs/orm';
 import { Callback, PasswordValidation, PhoneNumber, UniqueEntity } from '@libs/core';
 import { passwordRequirement } from '../../../../../../config/password-requitement.config';
-import * as moment from 'moment';
+import { DateTime } from 'luxon';
 
 @Exclude()
 export class CreateUserInput {
@@ -53,7 +53,7 @@ export class CreateUserInput {
     @ApiProperty()
     @Callback<CreateUserInput, string>(
         ({ value }) => {
-            return moment().diff(moment(value).set({ hour: 0, minute: 0, second: 0 }), 'years') >= 1; // 1 year old
+            return DateTime.now().diff(DateTime.fromJSDate(new Date(value)).startOf('day'), 'years').years >= 1; // 1 year old
         },
         { message: 'User must be at least 1 year old' },
     )

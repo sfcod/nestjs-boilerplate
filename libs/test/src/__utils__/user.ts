@@ -1,14 +1,14 @@
 import { User, UserGender, UserSocial, UserStatus } from '@libs/orm';
 import { faker } from '@faker-js/faker';
 import { makeData } from './helpers';
-import * as moment from 'moment';
+import { DateTime } from 'luxon';
 
 export async function makeUser(count = 1, fields?: Partial<User | any>): Promise<User | User[] | any> {
     const { plainPassword, ...rest } = fields || {};
 
     const users = await makeData<User>(count, rest, async () => {
         const user = new User();
-        user.dob = moment(faker.date.past()).format('YYYY-MM-DD HH:mm:ss');
+        user.dob = DateTime.fromJSDate(faker.date.past()).toFormat('yyyy-MM-dd HH:mm:ss');
         user.gender = UserGender.FEMALE;
         user.phoneNumber = '4844######'.replace(/#+/g, (m) => faker.string.numeric(m.length));
         user.phoneVerified = true;
