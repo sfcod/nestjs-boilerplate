@@ -10,7 +10,7 @@ export async function makeUser(count = 1, fields?: Partial<User | any>): Promise
         const user = new User();
         user.dob = moment(faker.date.past()).format('YYYY-MM-DD HH:mm:ss');
         user.gender = UserGender.FEMALE;
-        user.phoneNumber = faker.helpers.replaceSymbolWithNumber('4844######');
+        user.phoneNumber = '4844######'.replace(/#+/g, (m) => faker.string.numeric(m.length));
         user.phoneVerified = true;
         user.emailVerified = true;
         user.twoFactorAuth = null;

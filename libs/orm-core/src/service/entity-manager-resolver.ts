@@ -9,7 +9,7 @@ import {
     EventSubscriber,
     FindOneOrFailOptions,
     GetRepository,
-    IdentifiedReference,
+    Ref,
     Primary,
     Reference,
     UpdateOptions,
@@ -40,11 +40,11 @@ export class EntityManagerResolver {
     /**
      * Gets a reference to the entity identified by the given type and identifier without actually loading it, if the entity is not yet loaded
      */
-    getReference<T extends AnyEntity<T>, PK extends keyof T>(
+    getReference<T extends AnyEntity<T>>(
         entityName: EntityName<T>,
         id: Primary<T>,
         options: Omit<GetReferenceOptions, 'wrapped'> & { wrapped: true },
-    ): IdentifiedReference<T, PK>;
+    ): Ref<T>;
 
     /**
      * Gets a reference to the entity identified by the given type and identifier without actually loading it, if the entity is not yet loaded
@@ -76,7 +76,7 @@ export class EntityManagerResolver {
         entityName: EntityName<T>,
         id: Primary<T>,
         options: GetReferenceOptions = {},
-    ): T | Reference<T> {
+    ): T | Ref<T> | Reference<T> {
         return this.ormResolver.em(entityName).getReference(entityName, id, options);
     }
 
@@ -91,7 +91,9 @@ export class EntityManagerResolver {
             registerSubscriber: (subscriber: EventSubscriber): void => {
                 for (const connection of connections) {
                     if (
+                        // TODO: validate that it works with as any
                         subscriber.getSubscribedEntities &&
+                        // @ts-ignore
                         connection.config.get('entities').includes(subscriber.getSubscribedEntities().pop())
                     ) {
                         connection.em.getEventManager().registerSubscriber(subscriber);
@@ -126,7 +128,11 @@ export class EntityManagerResolver {
     /**
      * Shortcut for `wrap(entity).assign(data, { em })`
      */
-    assign<T extends AnyEntity<T>>(entity: T, data: EntityData<T>, options?: AssignOptions): T {
+    assign<T extends AnyEntity<T>, Convert extends boolean>(
+        entity: T,
+        data: EntityData<T>,
+        options?: AssignOptions<Convert>,
+    ): T {
         return this.ormResolver.em(entity as any).assign(entity, data, options);
     }
 

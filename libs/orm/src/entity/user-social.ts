@@ -15,7 +15,7 @@ export class UserSocial {
 
     @ManyToOne(() => User, {
         fieldName: 'user_id',
-        onUpdateIntegrity: 'no action',
+        updateRule: 'no action',
         ref: true,
         nullable: false,
     })

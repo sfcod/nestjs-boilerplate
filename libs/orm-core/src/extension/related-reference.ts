@@ -12,8 +12,14 @@ export class RelatedReference<T extends RelatedEntity> {
 
     async load(): Promise<T> {
         if (!this.isInitialized()) {
+            //@TODO remove any in definition
             this.entity =
-                ((await wrap(this.entity, true).__em.findOne(this.entity.constructor.name, this.entity.id, {
+                ((await wrap(this.entity, true).__em.findOne(this.entity.constructor.name, this.id as any, {
+                // The above solution is from Andrew's MR (advised by Alex)
+                // TODO: validate that the solution is correct
+                // Can be checked when there are two database connections
+                // Database with entity that has related reference from another database should work.
+                // ((await wrap(this.entity, true).__em.findOne(this.entity.constructor, this.entity.id, {
                     filters: false,
                 })) as T) || undefined;
         }

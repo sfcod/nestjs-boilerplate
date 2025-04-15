@@ -10,7 +10,7 @@ export async function makeAdmin(count = 1, fields?: Partial<Admin | any>): Promi
         admin.email = faker.internet.email();
         admin.name = faker.internet.userName();
         admin.status = AdminStatus.STATUS_ACTIVE;
-        admin.phoneNumber = faker.helpers.replaceSymbolWithNumber('4844######');
+        admin.phoneNumber = '4844######'.replace(/#+/g, (m) => faker.string.numeric(m.length));
         admin.setPlainPassword(plainPassword || faker.internet.password());
 
         return admin;

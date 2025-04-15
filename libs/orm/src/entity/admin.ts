@@ -1,4 +1,4 @@
-import { Entity, Enum, Filter, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, Enum, Filter, PrimaryKey, Property, raw } from '@mikro-orm/core';
 import { AuthenticatorType, User2FAInterface, UserInterface } from '@libs/security';
 import { BinaryHexUuid } from '../extension/binary-hex-uuid';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
@@ -11,7 +11,7 @@ import { AdminRole } from '../entity-enum/admin-role';
 @Filter({
     name: 'email',
     cond: (args) => ({
-        'lower(email)': String(args.value).toLowerCase(),
+        [raw('lower(email)')]: String(args.value).toLowerCase(),
     }),
 })
 export class Admin implements UserInterface, User2FAInterface {

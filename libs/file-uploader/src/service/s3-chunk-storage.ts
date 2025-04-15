@@ -1,6 +1,6 @@
 import { createReadStream } from 'fs';
 import { join } from 'path';
-import * as del from 'del';
+import * as deleteAsync from 'del';
 import { ChunkStorage } from '../contract/chunk-storage.interface';
 import { File } from '../contract/file.interface';
 import { Inject, Injectable, Logger } from '@nestjs/common';
@@ -29,7 +29,7 @@ type MultyPartType = {
     multipart?: CreateMultipartUploadCommandOutput;
     multipartMap?: { Parts: { ETag: string; PartNumber: number }[] };
     multiPartParams?: any;
-};
+} | null;
 
 const COPY_OBJECT_LIMIT = 1024 * 1024 * 50; // 50mb
 const COPY_OBJECT_LIMIT_VIA_CHUNK = 1024 * 1024 * 30; // 30mb
@@ -71,7 +71,7 @@ export class S3ChunkStorage implements ChunkStorage {
             multipart = await this.getMultyPartData(uuid);
             isDev && console.timeEnd(`getMultyPartData-${uuid}-${index}`);
         }
-        if (Object.keys(multipart).length <= 0) {
+        if (!multipart) {
             throw new UploadException(`The first chunk did not upload. Please upload chunk index 0.`);
         }
         isDev && console.time(`uploadPart-${multipart.multipart.UploadId}-${index}`);
@@ -90,7 +90,7 @@ export class S3ChunkStorage implements ChunkStorage {
         }
 
         // Delete file from local disk
-        await del(chunk.path);
+        await deleteAsync(chunk.path);
 
         chunk.path = join(path, name);
         chunk.originalname = name;
@@ -276,11 +276,12 @@ export class S3ChunkStorage implements ChunkStorage {
         await this.driver.send(new CompleteMultipartUploadCommand(doneParams));
     }
 
-    async getMultyPartData(uuid: string): Promise<MultyPartType> {
+    async getMultyPartData(uuid: string): Promise<MultyPartType | null> {
         const redis = this.redisService.getClient();
         const data = await redis.get(uuid);
+        const result = data ? JSON.parse(data) : {};
 
-        return data ? JSON.parse(data) : {};
+        return Object.keys(result).length > 0 ? result : null;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

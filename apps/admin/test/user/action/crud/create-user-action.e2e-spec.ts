@@ -16,7 +16,7 @@ describe('CreateUser (e2e)', () => {
     const PASSWORD = '12d^7Udad';
     const GENDER = faker.helpers.arrayElement(UserGender.getValues());
     const DOB = '1970-01-27';
-    const PHONE = faker.helpers.replaceSymbolWithNumber('4844######');
+    const PHONE = '4844######'.replace(/#+/g, (m) => faker.string.numeric(m.length));
     const STATUS = UserStatus.STATUS_ACTIVE;
 
     beforeAll(async () => {
