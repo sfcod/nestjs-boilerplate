@@ -1,9 +1,3 @@
-// driver/postgresql
-export * from './driver/postgresql/postgresql-driver';
-// export * from './driver/postgresql/postgresql-hydrator';
-export * from './driver/postgresql/postgresql-platform';
-export * from './driver/postgresql/postgresql-schema-helper';
-
 // decorator
 export * from './decorator/related-to-one.decorator';
 export * from './decorator/inject-entity-manager';
