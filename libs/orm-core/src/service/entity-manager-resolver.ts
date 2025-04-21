@@ -49,12 +49,12 @@ export class EntityManagerResolver {
     /**
      * Gets a reference to the entity identified by the given type and identifier without actually loading it, if the entity is not yet loaded
      */
-    getReference<T extends object>(entityName: EntityName<T>, id: Primary<T> | Primary<T>[]): T;
+    getReference<T extends AnyEntity<T>>(entityName: EntityName<T>, id: Primary<T> | Primary<T>[]): T;
 
     /**
      * Gets a reference to the entity identified by the given type and identifier without actually loading it, if the entity is not yet loaded
      */
-    getReference<T extends object>(
+    getReference<T extends AnyEntity<T>>(
         entityName: EntityName<T>,
         id: Primary<T>,
         options: Omit<GetReferenceOptions, 'wrapped'> & { wrapped: false },
@@ -63,7 +63,7 @@ export class EntityManagerResolver {
     /**
      * Gets a reference to the entity identified by the given type and identifier without actually loading it, if the entity is not yet loaded
      */
-    getReference<T extends object>(
+    getReference<T extends AnyEntity<T>>(
         entityName: EntityName<T>,
         id: Primary<T>,
         options?: GetReferenceOptions,
@@ -72,7 +72,7 @@ export class EntityManagerResolver {
     /**
      * Gets a reference to the entity identified by the given type and identifier without actually loading it, if the entity is not yet loaded
      */
-    getReference<T extends object>(
+    getReference<T extends AnyEntity<T>>(
         entityName: EntityName<T>,
         id: Primary<T>,
         options: GetReferenceOptions = {},
