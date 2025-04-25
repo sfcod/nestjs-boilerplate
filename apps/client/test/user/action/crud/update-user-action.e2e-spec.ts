@@ -26,7 +26,7 @@ describe('UpdateUser (e2e)', () => {
                 firstName: FIRSTNAME,
             });
 
-        expect(res.statusCode).toBe(HttpStatus.OK);
+        expect(res.statusCode).toBe(HttpStatus.CREATED);
         expect(Object.keys(res.body)).toEqual(
             expect.arrayContaining([
                 'id',
