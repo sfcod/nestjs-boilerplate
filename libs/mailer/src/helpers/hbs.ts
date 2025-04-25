@@ -3,8 +3,7 @@ import { existsSync, readFileSync } from 'fs';
 import { trim } from 'lodash';
 import { path as appRoot } from 'app-root-path';
 import urlConfig from '../../../../config/url.config';
-import * as moment from 'moment';
-import * as process from 'process';
+import { DateTime } from 'luxon';
 
 export const inlineStyle = (file: string) => {
     const filePath = join(appRoot, `/templates/assets/${trim(file, '/')}.css`);
@@ -60,7 +59,7 @@ export function ifAnd(...args: any[]) {
 }
 
 export const secondsToReadable = (seconds: number): string => {
-    return moment.utc(seconds * 1000).format('mm:ss');
+    return DateTime.fromMillis(seconds * 1000, { zone: 'utc' }).toFormat('mm:ss');
 };
 
 export const increment = (value: number): number => {

@@ -1,6 +1,5 @@
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { NestFactory } from '@nestjs/core';
-import { SwaggerModule } from '@nestjs/swagger';
 import { createDocument } from './swagger.document';
 import { ClientModule } from './client.module';
 import { bootstrapApplication } from '../../bootstrap';
@@ -10,7 +9,7 @@ import { json, urlencoded } from 'express';
 import { UnauthorizedExceptionFilter } from '@libs/security';
 import * as bodyParser from 'body-parser';
 import { microserviceInService } from '../../in-service';
-import { connectRmqMicroservice } from '@libs/core';
+import { connectRmqMicroservice, setupSwagger } from '@libs/core';
 
 export const instance = async (): Promise<NestExpressApplication> => {
     const app = await NestFactory.create<NestExpressApplication>(ClientModule, {
@@ -34,7 +33,7 @@ export const instance = async (): Promise<NestExpressApplication> => {
     app.use(bodyParser.urlencoded({ verify: rawBodyBuffer, extended: true }));
     app.use(bodyParser.json({ verify: rawBodyBuffer }));
 
-    SwaggerModule.setup('api-client', app, await createDocument(app));
+    await setupSwagger(app, { path: '/api-client', document: await createDocument(app), secured: true });
 
     app.useGlobalFilters(new UnauthorizedExceptionFilter());
     const microservice = connectRmqMicroservice(app, 'client_queue');

@@ -3,7 +3,7 @@ import { SoftDeleteModule } from '@libs/soft-delete';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs/typings';
 import { OrmCoreModule } from '@libs/orm-core';
 
-export const MIKRO_ORM_DEFAULT = 'MikroOrmDefault';
+export const MIKRO_ORM_DEFAULT = 'default';
 
 @Module({})
 export class OrmModule {

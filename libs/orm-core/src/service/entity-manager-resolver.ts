@@ -91,7 +91,6 @@ export class EntityManagerResolver {
             registerSubscriber: (subscriber: EventSubscriber): void => {
                 for (const connection of connections) {
                     if (
-                        // TODO: validate that it works with as any
                         subscriber.getSubscribedEntities &&
                         // @ts-ignore
                         connection.config.get('entities').includes(subscriber.getSubscribedEntities().pop())
@@ -118,9 +117,7 @@ export class EntityManagerResolver {
     create<T extends AnyEntity<T>, P extends string = never>(
         entityName: EntityName<T>,
         data: EntityData<T>,
-        options?: {
-            managed?: boolean;
-        },
+        options?: { managed?: boolean },
     ): New<T, P> {
         return this.ormResolver.em(entityName).create(entityName, data, options);
     }
