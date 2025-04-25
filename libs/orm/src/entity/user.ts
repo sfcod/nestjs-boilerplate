@@ -17,7 +17,7 @@ import { FILE_STORAGE_FILE_HELPER, FileHelper, UploadableField } from '@libs/fil
 import { Device } from './device';
 import { UserAttribute } from './user-attribute';
 import { UserSettings } from '../embeddable/user-settings';
-import { BinaryHexUuid } from '../extension/binary-hex-uuid';
+import { v4 } from 'uuid';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { TwoFactorAuth } from '../entity-enum/two-factor-auth';
 import { UserRole } from '../entity-enum/user-role';
@@ -41,7 +41,7 @@ import { UserRole } from '../entity-enum/user-role';
 })
 export class User implements UserInterface, User2FAInterface {
     @PrimaryKey({ fieldName: 'id', type: 'uuid' })
-    readonly id = BinaryHexUuid.getBinaryHexUuid();
+    readonly id = v4();
 
     @Property({ fieldName: 'first_name', nullable: true })
     firstName!: string;

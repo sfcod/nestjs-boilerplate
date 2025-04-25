@@ -1,8 +1,9 @@
 import { Command, Console } from 'nestjs-console';
 import { wrap } from '@mikro-orm/core';
-import { Admin, AdminStatus, BinaryHexUuid } from '@libs/orm';
+import { Admin, AdminStatus } from '@libs/orm';
 import { EntityManagerResolver } from '@libs/orm-core';
 import { hash } from 'bcrypt';
+import { v4 } from 'uuid';
 
 @Console({
     command: 'seed',
@@ -20,7 +21,7 @@ export class SeedCommand {
         const admin = new Admin();
         wrap(admin).assign(
             {
-                id: BinaryHexUuid.getBinaryHexUuid(),
+                id: v4(),
                 email: 'admin@mail.com',
                 name: 'Admin',
                 phoneVerified: true,

@@ -1,6 +1,6 @@
 import { Entity, Filter, ManyToOne, PrimaryKey, Property, Ref, Reference } from '@mikro-orm/core';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
-import { BinaryHexUuid } from '../extension/binary-hex-uuid';
+import { v4 } from 'uuid';
 import { User } from './user';
 
 @Entity({
@@ -16,7 +16,7 @@ import { User } from './user';
 })
 export class Notification {
     @PrimaryKey({ fieldName: 'id', type: 'uuid' })
-    readonly id = BinaryHexUuid.getBinaryHexUuid();
+    readonly id = v4();
 
     @ManyToOne(() => User, {
         fieldName: 'user_id',

@@ -10,7 +10,7 @@ import {
     Ref,
     Reference,
 } from '@mikro-orm/core';
-import { BinaryHexUuid } from '../extension/binary-hex-uuid';
+import { v4 } from 'uuid';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { AccessKeyStatus } from '../entity-enum/access-key-status';
 import { AccessKeyPermission } from './access-key-permission';
@@ -38,7 +38,7 @@ import { Admin } from './admin';
 })
 export class AccessKey {
     @PrimaryKey({ fieldName: 'id', type: 'uuid' })
-    readonly id = BinaryHexUuid.getBinaryHexUuid();
+    readonly id = v4();
 
     @Property({ fieldName: 'name', nullable: true })
     name!: string;
