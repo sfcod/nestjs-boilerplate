@@ -4,8 +4,9 @@ import { Test } from '@nestjs/testing';
 import { bootstrapApplication, bootstrapMicroservice } from '../../../../apps/bootstrap';
 import { EntityManagerResolver } from '@libs/orm-core';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import supertest, { SuperTest, agent as request } from 'supertest';
+import supertest, { agent as request } from 'supertest';
 import { MIKRO_ORM_DEFAULT } from '@libs/orm';
+import TestAgent from 'supertest/lib/agent';
 
 export type FakeModule = {
     instance: any;
@@ -22,7 +23,7 @@ export class Bootstrap {
     private static prev: BootstrapParams = null;
     private static isFakeApp = false;
 
-    public static getHttpRequest() {
+    public static getHttpRequest(): TestAgent<supertest.Test> {
         return request(this.na.getHttpServer());
     }
 

@@ -16,5 +16,5 @@ export class ResetPasswordInput {
         { message: 'User is inactive, please contact support' },
     )
     @IsEmail()
-    email!: string;
+    username!: string;
 }

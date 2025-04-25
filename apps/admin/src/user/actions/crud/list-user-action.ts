@@ -36,11 +36,9 @@ export class ListUserAction {
     @ApiForbiddenResponse()
     @ApiBadRequestResponse()
     async invoke(
-        @Query(new ClearMissingPropertiesPipe()) { page, limit, sort, name, ...query }: FilterUserInput,
+        @Query(new ClearMissingPropertiesPipe()) { page, limit, sort, ...query }: FilterUserInput,
     ): Promise<UserListOutput[]> {
-        const users = await this.paginator.paginate<User>(User, query, sort, page, limit, {
-            filters: name ? { name: { value: name } } : {},
-        });
+        const users = await this.paginator.paginate<User>(User, query, sort, page, limit);
 
         return this.mapper.map<UserListOutput, User>(UserListOutput, users);
     }
