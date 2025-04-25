@@ -38,11 +38,9 @@ export class UpdateUserAction {
     ) {}
 
     @Patch()
-    @UseInterceptors(FileInterceptor('image', { limits: { fileSize: Number(process.env.IMAGE_FILESIZE_LIMIT) } }))
     @HttpCode(HttpStatus.CREATED)
     @UseGuards(AuthGuard('jwt'), RolesGuard(UserRole.ROLE_USER), UpdateUserGuard)
     @ApiOkResponse({ type: UserOutput })
-    @ApiConsumes('multipart/form-data')
     @ApiBearerAuth()
     @ApiBadRequestResponse()
     @ApiUnauthorizedResponse()
@@ -51,7 +49,6 @@ export class UpdateUserAction {
         @Body(new ClearMissingPropertiesPipe())
         { password, timezone, ...data }: UpdateUserInput,
         @Param('id') id: string,
-        @UploadedFile() image,
     ) {
         const user = await this.em.findOneOrFail(User, id, {
             filters: { [SOFT_DELETABLE_QUERY_FILTER]: false },
@@ -60,7 +57,6 @@ export class UpdateUserAction {
         this.em.assign(user, data);
 
         user.setPlainPassword(password);
-        image && user.setImageFile(image);
         await this.updateAttribute(user, UserAttributeName.TIMEZONE, timezone);
 
         await this.em.persistAndFlush(user);

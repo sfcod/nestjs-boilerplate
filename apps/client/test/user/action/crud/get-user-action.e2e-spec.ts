@@ -27,7 +27,6 @@ describe('GetUser (e2e)', () => {
                 'firstName',
                 'lastName',
                 'gender',
-                'dob',
                 'phoneNumber',
                 'status',
                 'createdAt',

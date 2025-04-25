@@ -8,7 +8,6 @@ export async function makeUser(count = 1, fields?: Partial<User | any>): Promise
 
     const users = await makeData<User>(count, rest, async () => {
         const user = new User();
-        user.dob = DateTime.fromJSDate(faker.date.past()).toFormat('yyyy-MM-dd HH:mm:ss');
         user.gender = UserGender.FEMALE;
         user.phoneNumber = '4844######'.replace(/#+/g, (m) => faker.string.numeric(m.length));
         user.phoneVerified = true;

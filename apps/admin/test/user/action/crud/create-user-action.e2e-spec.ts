@@ -15,7 +15,6 @@ describe('CreateUser (e2e)', () => {
     const EMAIL = faker.internet.email();
     const PASSWORD = '12d^7Udad';
     const GENDER = faker.helpers.arrayElement(UserGender.getValues());
-    const DOB = '1970-01-27';
     const PHONE = '4844######'.replace(/#+/g, (m) => faker.string.numeric(m.length));
     const STATUS = UserStatus.STATUS_ACTIVE;
 
@@ -59,7 +58,6 @@ describe('CreateUser (e2e)', () => {
                 firstName: FIRSTNAME,
                 lastName: LASTNAME,
                 gender: GENDER,
-                dob: DOB,
                 phoneNumber: PHONE,
                 status: STATUS,
             });
@@ -72,11 +70,9 @@ describe('CreateUser (e2e)', () => {
                 'lastName',
                 'email',
                 'gender',
-                'dob',
                 'status',
                 'createdAt',
                 'updatedAt',
-                'dob',
                 'phoneNumber',
             ]),
         );
@@ -89,7 +85,6 @@ describe('CreateUser (e2e)', () => {
                 gender: GENDER,
                 phoneNumber: PHONE,
                 status: STATUS,
-                dob: DOB,
             }),
         );
         expect(sentToEmail).toBe(EMAIL);

@@ -44,16 +44,6 @@ export class UserOutput {
 
     @Expose()
     @ApiProperty()
-    @MapField<User>(async ({ e }) => (await e.getImage()) || null)
-    image: string | null;
-
-    @Expose()
-    @ApiProperty()
-    @MapField()
-    dob!: string;
-
-    @Expose()
-    @ApiProperty()
     @MapField()
     phoneNumber!: string;
 

@@ -51,18 +51,6 @@ export class CreateUserInput {
 
     @Expose()
     @ApiProperty()
-    @Callback<CreateUserInput, string>(
-        ({ value }) => {
-            return DateTime.now().diff(DateTime.fromJSDate(new Date(value)).startOf('day'), 'years').years >= 1; // 1 year old
-        },
-        { message: 'User must be at least 1 year old' },
-    )
-    @IsDateString()
-    @IsNotEmpty()
-    dob!: string;
-
-    @Expose()
-    @ApiProperty()
     @PhoneNumber('US')
     @IsNotEmpty()
     phoneNumber!: string;
