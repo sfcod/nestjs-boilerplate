@@ -2,12 +2,12 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import { User, UserStatus } from '@libs/orm';
-import { CredentialBruteForce } from '../service/brute-force/credential-brute-force';
-import { ContextIdFactory, ModuleRef } from '@nestjs/core';
+import { CredentialBruteForce } from '@libs/security';
+import { Request } from 'express';
 
 @Injectable()
 export class LocalUserStrategy extends PassportStrategy(Strategy, 'local-user') {
-    constructor(private moduleRef: ModuleRef) {
+    constructor(private readonly bruteForce: CredentialBruteForce) {
         super({
             usernameField: 'username',
             passwordField: 'password',
@@ -17,13 +17,11 @@ export class LocalUserStrategy extends PassportStrategy(Strategy, 'local-user') 
     }
 
     async validate(request: Request, username: string, password: string): Promise<any> {
-        const contextId = ContextIdFactory.getByRequest(request);
-        // "UserBruteForce" is a request-scoped provider
-        const bruteForce = await this.moduleRef.resolve(CredentialBruteForce, contextId, {
-            strict: false,
+        const user = await this.bruteForce.process<User>(request, {
+            pattern: ['user'],
+            username,
+            password,
         });
-
-        const user = await bruteForce.process<User>(['user'], username, password);
 
         if (
             ![

@@ -17,7 +17,7 @@ import { FILE_STORAGE_FILE_HELPER, FileHelper, UploadableField } from '@libs/fil
 import { Device } from './device';
 import { UserAttribute } from './user-attribute';
 import { UserSettings } from '../embeddable/user-settings';
-import { BinaryHexUuid } from '../extension/binary-hex-uuid';
+import { v4 } from 'uuid';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { TwoFactorAuth } from '../entity-enum/two-factor-auth';
 import { UserRole } from '../entity-enum/user-role';
@@ -41,7 +41,7 @@ import { UserRole } from '../entity-enum/user-role';
 })
 export class User implements UserInterface, User2FAInterface {
     @PrimaryKey({ fieldName: 'id', type: 'uuid' })
-    readonly id = BinaryHexUuid.getBinaryHexUuid();
+    readonly id = v4();
 
     @Property({ fieldName: 'first_name', nullable: true })
     firstName!: string;
@@ -54,9 +54,6 @@ export class User implements UserInterface, User2FAInterface {
 
     @Property({ fieldName: 'email', nullable: false })
     email!: string;
-
-    @Property({ fieldName: 'dob', columnType: 'DATE', nullable: true })
-    dob?: string;
 
     @Property({ fieldName: 'status', type: 'smallint' })
     status!: number;
@@ -116,15 +113,6 @@ export class User implements UserInterface, User2FAInterface {
     })
     devices = new Collection<Device>(this);
 
-    @Property({ fieldName: 'image', type: 'string', length: 255, nullable: true })
-    image!: string;
-
-    @UploadableField({
-        fileNameProperty: 'image',
-        mapping: 'private_media',
-    })
-    imageFile!: File;
-
     @OneToMany({
         entity: 'UserAttribute',
         mappedBy: 'user',
@@ -166,19 +154,6 @@ export class User implements UserInterface, User2FAInterface {
 
     getUsername(): string {
         return String(this.email);
-    }
-
-    setImageFile(file?: File) {
-        this.imageFile = file;
-        if (file) {
-            this.updatedAt = getCurrentTimestamp();
-        }
-    }
-
-    async getImage(): Promise<string> {
-        const fileHelper: FileHelper = Reflect.getMetadata(FILE_STORAGE_FILE_HELPER, this);
-
-        return await fileHelper.getUrl(this as any, 'imageFile');
     }
 
     getAuthenticatorIdentity(): string | null {

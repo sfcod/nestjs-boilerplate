@@ -55,16 +55,6 @@ export class UserOutput {
     @Expose()
     @MapField()
     @ApiProperty()
-    dob: string;
-
-    @Expose()
-    @MapField()
-    @ApiProperty()
-    job: string;
-
-    @Expose()
-    @MapField()
-    @ApiProperty()
     phoneNumber: string;
 
     @Expose()

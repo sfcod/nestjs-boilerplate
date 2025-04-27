@@ -22,6 +22,7 @@ export * from './middleware/role-permission.middleware';
 export * from './service/password-hash';
 export * from './service/jwt-token/refresh-token';
 export * from './service/jwt-token/auth-token';
+export * from './service/reset-password-service';
 export * from './service/role-permission';
 export * from './service/signer-builder';
 export * from './service/keys-pair/fully-keys-pair';

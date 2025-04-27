@@ -36,6 +36,8 @@ import { EmailCodeAuthenticationNotification } from './notification/email-code-a
 import { EmailCodeVerificationNotification } from './notification/email-code-verification-notification';
 import { PasswordSubscriber } from './entity-subscriber/password-subscriber';
 import { SmsSenderInterface } from './contract/sms-sender.interface';
+import { ResetPasswordBruteForce } from './service/brute-force/reset-password-brute-force';
+import { ResetPasswordService } from './service/reset-password-service';
 
 export interface ActionOptions {
     actions: {
@@ -68,7 +70,7 @@ const strategies = [
     LocalAdminStrategy,
 ];
 const tokens = [RefreshToken, AuthToken];
-const bruteForces = [CredentialBruteForce];
+const bruteForces = [CredentialBruteForce, ResetPasswordBruteForce];
 const subscribers = [UserAuthSignInSubscriber, PasswordSubscriber];
 const codeAuthenticators = [SmsCodeAuthenticator, EmailCodeAuthenticator];
 const codeVerificators = [SmsCodeVerification, EmailCodeVerification];
@@ -138,6 +140,7 @@ export class SecurityModule {
                 PasswordHash,
                 SignerBuilder,
                 CodeAuthenticator,
+                ResetPasswordService,
                 this.registerProvider<CodeStorageInterface>('CodeStorage', options.codeStorage),
                 this.registerProvider('CodeAuthenticators', {
                     useFactory: (...codeAuthenticators: CodeAuthenticatorInterface[]) => codeAuthenticators,
@@ -154,6 +157,7 @@ export class SecurityModule {
                 RolePermission,
                 SignerBuilder,
                 CodeAuthenticator,
+                ResetPasswordService,
             ],
         };
     }

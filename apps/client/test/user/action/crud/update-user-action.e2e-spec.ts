@@ -21,12 +21,12 @@ describe('UpdateUser (e2e)', () => {
         const res: Response = await Bootstrap.getHttpRequest()
             .patch(`/api-client/users/${user.id}`)
             .set('Authorization', `Bearer ${jwtToken}`)
-            .attach('image', join(appRoot, 'storage/data/image.jpg'))
-            .field({
+            .set('Content-Type', 'application/json')
+            .send({
                 firstName: FIRSTNAME,
             });
 
-        expect(res.statusCode).toBe(HttpStatus.OK);
+        expect(res.statusCode).toBe(HttpStatus.CREATED);
         expect(Object.keys(res.body)).toEqual(
             expect.arrayContaining([
                 'id',
@@ -34,7 +34,6 @@ describe('UpdateUser (e2e)', () => {
                 'firstName',
                 'lastName',
                 'gender',
-                'dob',
                 'phoneNumber',
                 'status',
                 'createdAt',

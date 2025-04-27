@@ -1,7 +1,7 @@
 import { Entity, ManyToOne, PrimaryKey, Property, Ref, Reference } from '@mikro-orm/core';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { User } from './user';
-import { BinaryHexUuid } from '../extension/binary-hex-uuid';
+import { v4 } from 'uuid';
 import { WebauthnDeviceInterface } from '@libs/webauthn';
 
 /**
@@ -14,7 +14,7 @@ import { WebauthnDeviceInterface } from '@libs/webauthn';
 })
 export class WebauthnDevice implements WebauthnDeviceInterface {
     @PrimaryKey({ fieldName: 'id', type: 'uuid' })
-    readonly id = BinaryHexUuid.getBinaryHexUuid();
+    readonly id = v4();
 
     @ManyToOne(() => User, {
         fieldName: 'user_id',

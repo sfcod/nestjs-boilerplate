@@ -5,10 +5,10 @@ import { ResetPasswordRequestEvent } from '../../event/reset-password-request.ev
 import { ResetPasswordInput } from '../../dto/input/reset-password-input';
 import { EntityManager } from '@mikro-orm/core';
 import { User } from '@libs/orm';
-import { CodeGenerator } from '@libs/core';
 import { ResetPasswordTokenNotification } from '../../notification/reset-password-token-notification';
 import { NotificationEmitter } from '@libs/notification';
 import { Request } from 'express';
+import { ResetPasswordService } from '@libs/security';
 
 @ApiTags('User')
 @Controller('api-client/users/reset-password')
@@ -16,8 +16,8 @@ export class ResetPasswordAction {
     constructor(
         private readonly eventEmitter: EventEmitter2,
         private readonly entityManager: EntityManager,
-        private readonly codeGenerator: CodeGenerator,
         private readonly notification: NotificationEmitter,
+        private readonly resetPasswordService: ResetPasswordService,
     ) {}
 
     @Post()
@@ -29,13 +29,12 @@ export class ResetPasswordAction {
             throw new HttpException('The email is invalid', HttpStatus.BAD_REQUEST);
         }
 
-        user.recoveryPasswordToken = this.codeGenerator.generateHexString(6);
-        await this.entityManager.persistAndFlush(user);
+        const code = await this.resetPasswordService.process(user);
         await this.notification.emit(
             ResetPasswordTokenNotification,
             {
-                user: user,
-                code: user.recoveryPasswordToken,
+                user,
+                code,
             },
             req.user,
         );
