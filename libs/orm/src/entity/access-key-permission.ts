@@ -1,14 +1,14 @@
 import { Entity, ManyToOne, PrimaryKey, Property, Ref, Reference } from '@mikro-orm/core';
-import { BinaryHexUuid } from '../extension/binary-hex-uuid';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { AccessKey } from './access-key';
+import { v4 } from 'uuid';
 
 @Entity({
     tableName: 'access_key_permission',
 })
 export class AccessKeyPermission {
     @PrimaryKey({ fieldName: 'id', type: 'uuid' })
-    readonly id = BinaryHexUuid.getBinaryHexUuid();
+    readonly id = v4();
 
     @ManyToOne(() => AccessKey, {
         fieldName: 'access_key_id',

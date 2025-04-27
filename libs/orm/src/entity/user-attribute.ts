@@ -1,5 +1,5 @@
 import { Entity, ManyToOne, PrimaryKey, Property, Ref, Reference, Unique } from '@mikro-orm/core';
-import { BinaryHexUuid } from '../extension/binary-hex-uuid';
+import { v4 } from 'uuid';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { User } from './user';
 
@@ -9,7 +9,7 @@ import { User } from './user';
 @Unique({ properties: ['user', 'name'] })
 export class UserAttribute<T = any> {
     @PrimaryKey({ fieldName: 'id', type: 'uuid' })
-    readonly id = BinaryHexUuid.getBinaryHexUuid();
+    readonly id = v4();
 
     @ManyToOne(() => User, {
         fieldName: 'user_id',

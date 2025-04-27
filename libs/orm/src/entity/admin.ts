@@ -1,6 +1,6 @@
 import { Entity, Enum, Filter, PrimaryKey, Property, raw } from '@mikro-orm/core';
 import { AuthenticatorType, User2FAInterface, UserInterface } from '@libs/security';
-import { BinaryHexUuid } from '../extension/binary-hex-uuid';
+import { v4 } from 'uuid';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { TwoFactorAuth } from '../entity-enum/two-factor-auth';
 import { AdminRole } from '../entity-enum/admin-role';
@@ -16,7 +16,7 @@ import { AdminRole } from '../entity-enum/admin-role';
 })
 export class Admin implements UserInterface, User2FAInterface {
     @PrimaryKey({ fieldName: 'id', type: 'uuid' })
-    readonly id = BinaryHexUuid.getBinaryHexUuid();
+    readonly id = v4();
 
     @Property({ fieldName: 'name', nullable: true })
     name!: string;

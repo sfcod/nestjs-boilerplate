@@ -6,7 +6,6 @@ import { OrmResolver } from './service/orm-resolver';
 import { EntityManagerResolver } from './service/entity-manager-resolver';
 import { NestMiddlewareConsumer } from '@mikro-orm/nestjs';
 import { MikroOrmMiddleware } from './middleware/mikro-orm-middleware';
-import { RelatedToSubscriber } from './entity-subscriber/related-to-subscriber';
 import { getConnectionServiceName } from './decorator/inject-entity-manager';
 
 @Module({})
@@ -39,7 +38,6 @@ export class OrmCoreModule implements OnApplicationShutdown {
                     },
                     inject: [MikroORM],
                 },
-                RelatedToSubscriber,
                 EntityManagerResolver,
                 {
                     provide: EntityManager,

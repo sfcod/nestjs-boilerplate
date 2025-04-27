@@ -3,10 +3,6 @@ export * from './decorator/related-to-one.decorator';
 export * from './decorator/inject-entity-manager';
 export * from './decorator/use-request-context.decorator';
 
-// extension
-export * from './extension/related-ref-uuid';
-export * from './extension/related-reference';
-
 // service
 export * from './service/entity-manager-resolver';
 export * from './service/orm-resolver';
