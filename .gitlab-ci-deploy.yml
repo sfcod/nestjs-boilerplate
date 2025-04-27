@@ -25,18 +25,12 @@ deploy:staging:
   script:
     - printf "[default]\naws_access_key_id = %s\naws_secret_access_key = %s\nregion = %s\n" "$AWS_TEST_ACCESS_KEY_ID" "$AWS_TEST_SECRET_ACCESS_KEY" "$AWS_TEST_REGION" >> ~/.aws/credentials
     - export VERSION_LABEL="${CI_COMMIT_SHA}-${AWS_TEST_EB_APP_ENVIRONMENT_NAME_STAGING}-$(date +%s)"
-    # Deploy web
-    - bash aws/web/build.sh
+    # Deploy services
+    - bash aws/build.sh
     - cd build_web && zip -qq -r "${CI_COMMIT_SHA}.zip" . ??* && cd ..
     - aws s3 cp "build_web/${CI_COMMIT_SHA}.zip" "s3://${AWS_TEST_EB_BUCKET_NAME}/${AWS_TEST_EB_APP_NAME}/${AWS_TEST_EB_APP_ENVIRONMENT_NAME_STAGING}/${CI_COMMIT_SHA}.zip"
     - aws elasticbeanstalk create-application-version --application-name "${AWS_TEST_EB_APP_NAME}" --version-label "$VERSION_LABEL" --source-bundle S3Bucket="${AWS_TEST_EB_BUCKET_NAME}",S3Key="${AWS_TEST_EB_APP_NAME}/${AWS_TEST_EB_APP_ENVIRONMENT_NAME_STAGING}/${CI_COMMIT_SHA}.zip" --region "${AWS_TEST_REGION}"
     - aws elasticbeanstalk update-environment --environment-name "${AWS_TEST_EB_APP_ENVIRONMENT_NAME_STAGING}" --application-name "${AWS_TEST_EB_APP_NAME}" --version-label "$VERSION_LABEL" --region "${AWS_TEST_REGION}"
-#    # Deploy worker
-#    - bash aws/worker/build.sh
-#    - cd build_worker && zip -qq -r "${CI_COMMIT_SHA}.zip" . ??* && cd ..
-#    - aws s3 cp "build_worker/${CI_COMMIT_SHA}.zip" "s3://${AWS_TEST_EB_BUCKET_NAME}/${AWS_TEST_EB_QUEUE_NAME}/${AWS_TEST_EB_QUEUE_ENVIRONMENT_NAME_STAGING}/${CI_COMMIT_SHA}.zip"
-#    - aws elasticbeanstalk create-application-version --application-name "${AWS_TEST_EB_QUEUE_NAME}" --version-label "$VERSION_LABEL" --source-bundle S3Bucket="${AWS_TEST_EB_BUCKET_NAME}",S3Key="${AWS_TEST_EB_QUEUE_NAME}/${AWS_TEST_EB_QUEUE_ENVIRONMENT_NAME_STAGING}/${CI_COMMIT_SHA}.zip" --region "${AWS_TEST_REGION}"
-#    - aws elasticbeanstalk update-environment --environment-name "${AWS_TEST_EB_QUEUE_ENVIRONMENT_NAME_STAGING}" --application-name "${AWS_TEST_EB_QUEUE_NAME}" --version-label "$VERSION_LABEL" --region "${AWS_TEST_REGION}"
 
 deploy:prod:
   extends: .deploy
@@ -52,19 +46,12 @@ deploy:prod:
   script:
     - printf "[default]\naws_access_key_id = %s\naws_secret_access_key = %s\nregion = %s\n" "$AWS_PROD_ACCESS_KEY_ID" "$AWS_PROD_SECRET_ACCESS_KEY" "$AWS_PROD_REGION" >> ~/.aws/credentials
     - export VERSION_LABEL="${CI_COMMIT_SHA}-${AWS_PROD_EB_APP_ENVIRONMENT_NAME}-$(date +%s)"
-    # Deploy web
-    - bash aws/web/build.sh
+    # Deploy services
+    - bash aws/build.sh
     - cd build_web && zip -qq -r "${CI_COMMIT_SHA}.zip" . ??* && cd ..
     - aws s3 cp "build_web/${CI_COMMIT_SHA}.zip" "s3://${AWS_PROD_EB_BUCKET_NAME}/${AWS_PROD_EB_APP_NAME}/${AWS_PROD_EB_APP_ENVIRONMENT_NAME}/${CI_COMMIT_SHA}.zip"
     - aws elasticbeanstalk create-application-version --application-name "${AWS_PROD_EB_APP_NAME}" --version-label "$VERSION_LABEL" --source-bundle S3Bucket="${AWS_PROD_EB_BUCKET_NAME}",S3Key="${AWS_PROD_EB_APP_NAME}/${AWS_PROD_EB_APP_ENVIRONMENT_NAME}/${CI_COMMIT_SHA}.zip" --region "${AWS_PROD_REGION}"
     - aws elasticbeanstalk update-environment --environment-name "${AWS_PROD_EB_APP_ENVIRONMENT_NAME}" --application-name "${AWS_PROD_EB_APP_NAME}" --version-label "$VERSION_LABEL" --region "${AWS_PROD_REGION}"
-#    # Deploy worker
-#    - bash aws/worker/build.sh
-#    - cd build_worker && zip -qq -r "${CI_COMMIT_SHA}.zip" . ??* && cd ..
-#    - aws s3 cp "build_worker/${CI_COMMIT_SHA}.zip" "s3://${AWS_PROD_EB_BUCKET_NAME}/${AWS_PROD_EB_QUEUE_NAME}/${AWS_PROD_EB_QUEUE_ENVIRONMENT_NAME}/${CI_COMMIT_SHA}.zip"
-#    - aws elasticbeanstalk create-application-version --application-name "${AWS_PROD_EB_QUEUE_NAME}" --version-label "$VERSION_LABEL" --source-bundle S3Bucket="${AWS_PROD_EB_BUCKET_NAME}",S3Key="${AWS_PROD_EB_QUEUE_NAME}/${AWS_PROD_EB_QUEUE_ENVIRONMENT_NAME}/${CI_COMMIT_SHA}.zip" --region "${AWS_PROD_REGION}"
-#    - aws elasticbeanstalk update-environment --environment-name "${AWS_PROD_EB_QUEUE_ENVIRONMENT_NAME}" --application-name "${AWS_PROD_EB_QUEUE_NAME}" --version-label "$VERSION_LABEL" --region "${AWS_PROD_REGION}"
-
 
 deploy:qa:
   extends: .deploy
@@ -79,16 +66,10 @@ deploy:qa:
   script:
     - printf "[default]\naws_access_key_id = %s\naws_secret_access_key = %s\nregion = %s\n" "$AWS_TEST_ACCESS_KEY_ID" "$AWS_TEST_SECRET_ACCESS_KEY" "$AWS_TEST_REGION" >> ~/.aws/credentials
     - export VERSION_LABEL="${CI_COMMIT_SHA}-${AWS_TEST_EB_APP_ENVIRONMENT_NAME_QA}-$(date +%s)"
-    # Deploy web
+    # Deploy services
     - ls -la
     - bash aws/web/build.sh
     - cd build_web && zip -qq -r "${CI_COMMIT_SHA}.zip" . ??* && cd ..
     - aws s3 cp "build_web/${CI_COMMIT_SHA}.zip" "s3://${AWS_TEST_EB_BUCKET_NAME}/${AWS_TEST_EB_APP_NAME}/${AWS_TEST_EB_APP_ENVIRONMENT_NAME_QA}/${CI_COMMIT_SHA}.zip"
     - aws elasticbeanstalk create-application-version --application-name "${AWS_TEST_EB_APP_NAME}" --version-label "$VERSION_LABEL" --source-bundle S3Bucket="${AWS_TEST_EB_BUCKET_NAME}",S3Key="${AWS_TEST_EB_APP_NAME}/${AWS_TEST_EB_APP_ENVIRONMENT_NAME_QA}/${CI_COMMIT_SHA}.zip" --region "${AWS_TEST_REGION}"
     - aws elasticbeanstalk update-environment --environment-name "${AWS_TEST_EB_APP_ENVIRONMENT_NAME_QA}" --application-name "${AWS_TEST_EB_APP_NAME}" --version-label "$VERSION_LABEL" --region "${AWS_TEST_REGION}"
-#    # Deploy worker
-#    - bash aws/worker/build.sh
-#    - cd build_worker && zip -qq -r "${CI_COMMIT_SHA}.zip" . ??* && cd ..
-#    - aws s3 cp "build_worker/${CI_COMMIT_SHA}.zip" "s3://${AWS_TEST_EB_BUCKET_NAME}/${AWS_TEST_EB_QUEUE_NAME}/${AWS_TEST_EB_QUEUE_ENVIRONMENT_NAME_QA}/${CI_COMMIT_SHA}.zip"
-#    - aws elasticbeanstalk create-application-version --application-name "${AWS_TEST_EB_QUEUE_NAME}" --version-label "$VERSION_LABEL" --source-bundle S3Bucket="${AWS_TEST_EB_BUCKET_NAME}",S3Key="${AWS_TEST_EB_QUEUE_NAME}/${AWS_TEST_EB_QUEUE_ENVIRONMENT_NAME_QA}/${CI_COMMIT_SHA}.zip" --region "${AWS_TEST_REGION}"
-#    - aws elasticbeanstalk update-environment --environment-name "${AWS_TEST_EB_QUEUE_ENVIRONMENT_NAME_QA}" --application-name "${AWS_TEST_EB_QUEUE_NAME}" --version-label "$VERSION_LABEL" --region "${AWS_TEST_REGION}"

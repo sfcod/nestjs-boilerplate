@@ -107,7 +107,7 @@ export class ScanBodyModel {
 export class UploadRecordFileSubscriber {
     constructor(private readonly em: EntityManager) {}
 
-    @OnEvent(`${UploadEvent.eventName}.aemass.scan`, { async: true, promisify: true })
+    @OnEvent(`${UploadEvent.eventName}.scan`, { async: true, promisify: true })
     async handleUpload(event: UploadEvent) {
         // If record exists then update it.
         const record = new Record();

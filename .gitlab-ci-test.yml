@@ -1,5 +1,5 @@
 .test:
-  image: node:18-alpine
+  image: node:22-alpine
   stage: test
   artifacts:
     expire_in: 1 week

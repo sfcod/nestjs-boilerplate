@@ -10,11 +10,9 @@
       - node_modules
       - package.json
       - .ebextensions
-      - .platform
       - .env
       - .env.local
       - .npmrc
-      - Procfile
       - tsconfig.json
   script:
     - npm run build
@@ -44,7 +42,6 @@ build:test:
   before_script:
     - npm ci
     - cp env/test/.env.local .env.local
-    - cp env/test/firebase.json firebase.json
 
 build:staging:
   extends: .build
@@ -57,7 +54,6 @@ build:staging:
   before_script:
     - npm ci
     - cp $ENV_STAGING .env.local
-    - cp $FIREBASE_STAGING firebase.json
 
 build:prod:
   extends: .build
@@ -69,7 +65,6 @@ build:prod:
   before_script:
     - npm ci
     - cp $ENV_PROD .env.local
-    - cp $FIREBASE_PROD firebase.json
 
 build:qa:
   extends: .build
@@ -81,4 +76,3 @@ build:qa:
   before_script:
     - npm ci
     - cp $ENV_QA .env.local
-    - cp $FIREBASE_QA firebase.json
