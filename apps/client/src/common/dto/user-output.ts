@@ -56,9 +56,4 @@ export class UserOutput {
     @MapField()
     @ApiProperty()
     phoneNumber: string;
-
-    @Expose()
-    @MapField()
-    @ApiProperty()
-    gender: string;
 }

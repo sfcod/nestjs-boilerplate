@@ -1,7 +1,7 @@
 import { Exclude, Expose } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { MapClass, MapField } from '@libs/core';
-import { User, UserAttribute, UserAttributeName, UserGender } from '@libs/orm';
+import { User, UserAttribute, UserAttributeName } from '@libs/orm';
 import { UserSettingsOutput } from './user-settings-output';
 
 @Exclude()
@@ -26,11 +26,6 @@ export class UserOutput {
     @ApiProperty()
     @MapField()
     lastName!: string;
-
-    @Expose()
-    @ApiProperty({ enum: UserGender.getValues() })
-    @MapField()
-    gender!: string;
 
     @Expose()
     @ApiProperty()

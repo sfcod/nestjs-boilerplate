@@ -3,9 +3,7 @@ import { SignerBuilder, UserInterface } from '@libs/security';
 import { INestApplication } from '@nestjs/common';
 import { EntityManagerResolver, OrmResolver } from '@libs/orm-core';
 import { SqlEntityManager } from '@mikro-orm/knex';
-import { AccessKey, truncateAll as truncateSql } from '@libs/orm';
-import { AccessKeyManager, GeneratedData } from '@libs/access-key';
-import { makeAccessKey } from './access-key';
+import { truncateAll as truncateSql } from '@libs/orm';
 import { hash } from 'bcrypt';
 
 export async function makeData<T>(
@@ -57,16 +55,6 @@ export async function refreshToken(user: any): Promise<string> {
     const signer = await signBuilder.getSigner();
 
     return (await signer.sign(user)).refreshToken;
-}
-
-export async function accessKeys(permission: string): Promise<{ generatedKey: GeneratedData; accessKey: AccessKey }> {
-    const generatedKey = await Bootstrap.get<AccessKeyManager>(AccessKeyManager).generate();
-    const accessKey = await makeAccessKey(1, {
-        key: generatedKey.hashedKey,
-        permissions: [permission],
-    });
-
-    return { generatedKey, accessKey };
 }
 
 function isUserInterface(entity: any): entity is UserInterface & { password: string } {

@@ -1,6 +1,4 @@
 // __utils__
-export * from './__utils__/access-key';
-export * from './__utils__/access-permission';
 export * from './__utils__/admin';
 export * from './__utils__/notification';
 export * from './__utils__/user';

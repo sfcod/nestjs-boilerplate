@@ -1,4 +1,4 @@
-import { User, UserGender, UserSocial, UserStatus } from '@libs/orm';
+import { User, UserSocial, UserStatus } from '@libs/orm';
 import { faker } from '@faker-js/faker';
 import { makeData } from './helpers';
 import { DateTime } from 'luxon';
@@ -8,7 +8,6 @@ export async function makeUser(count = 1, fields?: Partial<User | any>): Promise
 
     const users = await makeData<User>(count, rest, async () => {
         const user = new User();
-        user.gender = UserGender.FEMALE;
         user.phoneNumber = '4844######'.replace(/#+/g, (m) => faker.string.numeric(m.length));
         user.phoneVerified = true;
         user.emailVerified = true;

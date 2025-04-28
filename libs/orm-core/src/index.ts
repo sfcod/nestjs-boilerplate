@@ -1,5 +1,4 @@
 // decorator
-export * from './decorator/related-to-one.decorator';
 export * from './decorator/inject-entity-manager';
 export * from './decorator/use-request-context.decorator';
 

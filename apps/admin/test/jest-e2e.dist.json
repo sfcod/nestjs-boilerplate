@@ -8,7 +8,6 @@
   "moduleNameMapper": {
     "@app/admin/(.*)$": "<rootDir>/../src/$1",
     "^@libs/core(|/.*)$": "<rootDir>/../../../libs/core/src/$1",
-    "^@libs/access-key(|/.*)$": "<rootDir>/../../../libs/access-key/src/$1",
     "^@libs/file-storage(|/.*)$": "<rootDir>/../../../libs/file-storage/src/$1",
     "^@libs/file-uploader(|/.*)$": "<rootDir>/../../../libs/file-uploader/src/$1",
     "^@libs/orm-history(|/.*)$": "<rootDir>/../../../libs/orm-history/src/$1",

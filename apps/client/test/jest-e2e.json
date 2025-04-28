@@ -13,7 +13,6 @@
     "@app-client/common/(.*)": "<rootDir>/../src/common/$1",
     "@app-client/common": "<rootDir>/../src/common",
     "^@libs/core(|/.*)$": "<rootDir>/../../../libs/core/src/$1",
-    "^@libs/access-key(|/.*)$": "<rootDir>/../../../libs/access-key/src/$1",
     "^@libs/file-storage(|/.*)$": "<rootDir>/../../../libs/file-storage/src/$1",
     "^@libs/file-uploader(|/.*)$": "<rootDir>/../../../libs/file-uploader/src/$1",
     "^@libs/orm-history(|/.*)$": "<rootDir>/../../../libs/orm-history/src/$1",

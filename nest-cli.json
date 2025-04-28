@@ -74,15 +74,6 @@
         "tsConfigPath": "libs/core/tsconfig.lib.json"
       }
     },
-    "access-key": {
-      "type": "library",
-      "root": "libs/access-key",
-      "entryFile": "index",
-      "sourceRoot": "libs/access-key/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/access-key/tsconfig.lib.json"
-      }
-    },
     "file-storage": {
       "type": "library",
       "root": "libs/file-storage",

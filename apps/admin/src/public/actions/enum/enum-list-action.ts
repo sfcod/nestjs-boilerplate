@@ -1,15 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import {
-    AccessKeyStatus,
-    AccessPermission,
-    AdminRole,
-    AdminStatus,
-    NotificationStatus,
-    NotificationType,
-    UserGender,
-    UserRole,
-    UserStatus,
-} from '@libs/orm';
+import { AdminRole, AdminStatus, NotificationStatus, NotificationType, UserRole, UserStatus } from '@libs/orm';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JsonOutput } from '@libs/core';
 import { orderBy } from 'lodash';
@@ -57,11 +47,8 @@ export class EnumListAction {
             [AdminRole.name]: this.format(AdminRole.getReadableValues()),
             [UserStatus.name]: this.format(UserStatus.getReadableValues()),
             [AdminStatus.name]: this.format(AdminStatus.getReadableValues()),
-            [UserGender.name]: this.format(UserGender.getReadableValues()),
             [NotificationStatus.name]: this.format(NotificationStatus.getReadableValues()),
             [NotificationType.name]: this.format(NotificationType.getReadableValues()),
-            [AccessKeyStatus.name]: this.format(AccessKeyStatus.getReadableValues()),
-            [AccessPermission.name]: this.format(AccessPermission.getReadableValues()),
         });
     }
 

@@ -3,7 +3,6 @@ import { Module } from '@nestjs/common';
 import { PublicModule } from './public/public.module';
 import { SecurityModule } from './security/security.module';
 import { UserModule } from './user/user.module';
-import { AccessKeyModule } from './access-key/access-key.module';
 import { AdminModule } from './admin/admin.module';
 import { FileStorageModule } from '@libs/file-storage';
 import fileStorageConfig from '../../../config/file-storage.config';
@@ -31,12 +30,10 @@ export const APP_NAME = 'admin';
 @Module({
     imports: [
         // ------- >Action modules ------- //
-        AccessKeyModule,
         SecurityModule,
         PublicModule,
         UserModule,
         AdminModule,
-        AccessKeyModule,
         // ------- <Action modules ------- //
 
         // ------- >Service modules ------- //

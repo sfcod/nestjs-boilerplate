@@ -49,9 +49,6 @@ export class User implements UserInterface, User2FAInterface {
     @Property({ fieldName: 'last_name', nullable: true })
     lastName!: string;
 
-    @Property({ fieldName: 'gender', nullable: true, length: 50 })
-    gender: string;
-
     @Property({ fieldName: 'email', nullable: false })
     email!: string;
 

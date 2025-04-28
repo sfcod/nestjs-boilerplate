@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { UserGender, UserRole } from '@libs/orm';
+import { UserRole } from '@libs/orm';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JsonOutput } from '@libs/core';
 import { orderBy } from 'lodash';
@@ -44,7 +44,6 @@ export class EnumListAction {
     async invoke(): Promise<any> {
         return new JsonOutput({
             [UserRole.name]: this.format(UserRole.getReadableValues()),
-            [UserGender.name]: this.format(UserGender.getReadableValues()),
         });
     }
 

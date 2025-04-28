@@ -8,8 +8,7 @@ import helmet from 'helmet';
 import { json, urlencoded } from 'express';
 import { UnauthorizedExceptionFilter } from '@libs/security';
 import * as bodyParser from 'body-parser';
-import { microserviceInService } from '../../in-service';
-import { connectRmqMicroservice, setupSwagger } from '@libs/core';
+import { setupSwagger } from '@libs/core';
 
 export const instance = async (): Promise<NestExpressApplication> => {
     const app = await NestFactory.create<NestExpressApplication>(ClientModule, {
@@ -36,9 +35,6 @@ export const instance = async (): Promise<NestExpressApplication> => {
     await setupSwagger(app, { path: '/api-client', document: await createDocument(app), secured: true });
 
     app.useGlobalFilters(new UnauthorizedExceptionFilter());
-    const microservice = connectRmqMicroservice(app, 'client_queue');
-
-    await microserviceInService(microservice);
 
     // Security configs
     app.enableCors(corsConfig);

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { authToken, Bootstrap, makeAdmin } from '@libs/test';
-import { Admin, UserGender, UserStatus } from '@libs/orm';
+import { Admin, UserStatus } from '@libs/orm';
 import { createStubInstance, stub } from 'sinon';
 import { Mailer } from '@libs/mailer';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -14,7 +14,6 @@ describe('CreateUser (e2e)', () => {
     const LASTNAME = faker.person.lastName();
     const EMAIL = faker.internet.email();
     const PASSWORD = '12d^7Udad';
-    const GENDER = faker.helpers.arrayElement(UserGender.getValues());
     const PHONE = '4844######'.replace(/#+/g, (m) => faker.string.numeric(m.length));
     const STATUS = UserStatus.STATUS_ACTIVE;
 
@@ -57,7 +56,6 @@ describe('CreateUser (e2e)', () => {
                 password: PASSWORD,
                 firstName: FIRSTNAME,
                 lastName: LASTNAME,
-                gender: GENDER,
                 phoneNumber: PHONE,
                 status: STATUS,
             });
@@ -69,7 +67,6 @@ describe('CreateUser (e2e)', () => {
                 'firstName',
                 'lastName',
                 'email',
-                'gender',
                 'status',
                 'createdAt',
                 'updatedAt',
@@ -82,7 +79,6 @@ describe('CreateUser (e2e)', () => {
                 email: EMAIL,
                 firstName: FIRSTNAME,
                 lastName: LASTNAME,
-                gender: GENDER,
                 phoneNumber: PHONE,
                 status: STATUS,
             }),

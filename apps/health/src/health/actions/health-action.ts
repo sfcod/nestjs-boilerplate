@@ -1,7 +1,6 @@
 import { Controller, Get, Logger, ServiceUnavailableException, UseGuards } from '@nestjs/common';
 import { HealthCheck, HealthCheckService } from '@nestjs/terminus';
 import { DatabaseHealth } from '../service/database-health';
-import { RabbitHealth } from '../service/rabbit-health';
 import { RedisHealth } from '../service/redis-health';
 import { GatewayHealth } from '../service/gateway-health';
 import { HealthCheckStatus } from '@nestjs/terminus';
@@ -14,7 +13,6 @@ export class HealthAction {
     constructor(
         private readonly health: HealthCheckService,
         private readonly dbHealth: DatabaseHealth,
-        private readonly rabbitHealth: RabbitHealth,
         private readonly redisHealth: RedisHealth,
         private readonly gatewayHealth: GatewayHealth,
     ) {}
@@ -26,7 +24,6 @@ export class HealthAction {
         try {
             const healthCheckResult = await this.health.check([
                 ...(await this.dbHealth.check()),
-                ...(await this.rabbitHealth.check()),
                 ...(await this.redisHealth.check()),
                 ...(await this.gatewayHealth.check()),
             ]);

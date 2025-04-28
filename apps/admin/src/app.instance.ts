@@ -6,8 +6,7 @@ import corsConfig from '../../../config/cors.config';
 import { bootstrapApplication } from '../../bootstrap';
 import helmet from 'helmet';
 import { urlencoded, json } from 'express';
-import { microserviceInService } from '../../in-service';
-import { connectRmqMicroservice, setupSwagger } from '@libs/core';
+import { setupSwagger } from '@libs/core';
 
 export const instance = async (): Promise<NestExpressApplication> => {
     const app = await NestFactory.create<NestExpressApplication>(AdminPanelModule);
@@ -15,10 +14,6 @@ export const instance = async (): Promise<NestExpressApplication> => {
     await bootstrapApplication(app, AdminPanelModule);
 
     await setupSwagger(app, { path: '/api-admin', document: await createDocument(app), secured: true });
-
-    const microservice = connectRmqMicroservice(app, 'admin_queue');
-
-    await microserviceInService(microservice);
 
     // Security configs
     app.enableCors(corsConfig);
