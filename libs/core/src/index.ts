@@ -43,7 +43,6 @@ export * from './helper/query-param.helper';
 export * from './helper/retry.helper';
 export * from './helper/bull-mq.helper';
 export * from './helper/converter.helper';
-export * from './helper/rmq.helper';
 
 // interceptor
 export * from './interceptor/async-serializer.interceptor';

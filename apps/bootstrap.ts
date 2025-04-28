@@ -10,9 +10,7 @@ import { Reflector } from '@nestjs/core';
 import { useContainer } from 'class-validator';
 import { join } from 'path';
 import { path as appRoot } from 'app-root-path';
-import { RpcValidationFilter } from '@libs/microservice-event';
 import { NestMicroservice } from '@nestjs/microservices';
-import { microserviceInService } from './in-service';
 
 async function bootstrap(app: INestMicroservice | INestApplication, module: Type<any>) {
     // const app = await AppContext.instance(); //await NestFactory.create(AppModule);
@@ -48,8 +46,5 @@ export async function bootstrapApplication(app: NestExpressApplication, module: 
 export async function bootstrapMicroservice(app: INestMicroservice, module: Type<any>) {
     // Bootstrap microservice
     await bootstrap(app, module);
-    // Check server status
-    await microserviceInService(app);
     // Filters. Old filter: new RpcExceptionFilter()
-    app.useGlobalFilters(new RpcValidationFilter());
 }

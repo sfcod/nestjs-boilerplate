@@ -6,7 +6,6 @@ services:
   - mongo:4
   - name: mailhog/mailhog
     alias: mailhog
-  - rabbitmq:3-management
 
 stages:
   - build
