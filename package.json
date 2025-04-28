@@ -208,7 +208,6 @@
     ],
     "moduleNameMapper": {
       "^@libs/core(|/.*)$": "<rootDir>/libs/core/src",
-      "^@libs/access-key(|/.*)$": "<rootDir>/libs/access-key/src",
       "^@libs/file-storage(|/.*)$": "<rootDir>/libs/file-storage/src",
       "^@libs/file-uploader(|/.*)$": "<rootDir>/libs/file-uploader/src",
       "^@libs/mailer(|/.*)$": "<rootDir>/libs/mailer/src",

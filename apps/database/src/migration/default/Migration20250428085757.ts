@@ -1,17 +1,9 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class Migration20250425090618 extends Migration {
+export class Migration20250428085757 extends Migration {
     override async up(): Promise<void> {
         this.addSql(
             `create table "admin" ("id" uuid not null, "name" varchar(255) null, "email" varchar(255) not null, "phone_number" VARCHAR null, "phone_verification_code" varchar(6) null, "phone_verified" boolean not null default false, "two_factor_auth" text check ("two_factor_auth" in ('sms', 'email')) null, "roles" varchar(255) not null default '["ROLE_SYSTEM_ADMIN"]', "password" varchar(255) not null, "recovery_password_token" varchar(255) null, "status" smallint not null, "created_at" timestamp not null, "updated_at" timestamp not null, constraint "admin_pkey" primary key ("id"));`,
-        );
-
-        this.addSql(
-            `create table "access_key" ("id" uuid not null, "name" varchar(255) null, "key" varchar(255) not null, "salt" varchar(255) not null, "owner_id" uuid not null, "status" smallint not null, "created_at" timestamp not null, "updated_at" timestamp not null, constraint "access_key_pkey" primary key ("id"));`,
-        );
-
-        this.addSql(
-            `create table "access_key_permission" ("id" uuid not null, "access_key_id" uuid not null, "permission" varchar(255) not null, "created_at" timestamp not null, constraint "access_key_permission_pkey" primary key ("id"));`,
         );
 
         this.addSql(
@@ -49,14 +41,6 @@ export class Migration20250425090618 extends Migration {
         this.addSql(`create index "webauthn_device_credential_id_index" on "webauthn_device" ("credential_id");`);
 
         this.addSql(
-            `alter table "access_key" add constraint "access_key_owner_id_foreign" foreign key ("owner_id") references "admin" ("id") on update no action on delete no action;`,
-        );
-
-        this.addSql(
-            `alter table "access_key_permission" add constraint "access_key_permission_access_key_id_foreign" foreign key ("access_key_id") references "access_key" ("id") on update no action on delete cascade;`,
-        );
-
-        this.addSql(
             `alter table "notification" add constraint "notification_user_id_foreign" foreign key ("user_id") references "user" ("id") on update no action on delete cascade;`,
         );
 
@@ -78,12 +62,6 @@ export class Migration20250425090618 extends Migration {
     }
 
     override async down(): Promise<void> {
-        this.addSql(`alter table "access_key" drop constraint "access_key_owner_id_foreign";`);
-
-        this.addSql(
-            `alter table "access_key_permission" drop constraint "access_key_permission_access_key_id_foreign";`,
-        );
-
         this.addSql(`alter table "notification" drop constraint "notification_user_id_foreign";`);
 
         this.addSql(`alter table "device" drop constraint "device_owner_id_foreign";`);
@@ -95,10 +73,6 @@ export class Migration20250425090618 extends Migration {
         this.addSql(`alter table "webauthn_device" drop constraint "webauthn_device_user_id_foreign";`);
 
         this.addSql(`drop table if exists "admin" cascade;`);
-
-        this.addSql(`drop table if exists "access_key" cascade;`);
-
-        this.addSql(`drop table if exists "access_key_permission" cascade;`);
 
         this.addSql(`drop table if exists "user" cascade;`);
 

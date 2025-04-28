@@ -54,12 +54,6 @@
       "@libs/core/*": [
         "phy/core/*"
       ],
-      "@libs/access-key": [
-        "libs/access-key/src"
-      ],
-      "@libs/access-key/*": [
-        "libs/access-key/src/*"
-      ],
       "@libs/file-storage": [
         "libs/file-storage/src"
       ],

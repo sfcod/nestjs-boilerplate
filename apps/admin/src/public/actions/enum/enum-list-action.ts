@@ -1,7 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
 import {
-    AccessKeyStatus,
-    AccessPermission,
     AdminRole,
     AdminStatus,
     NotificationStatus,
@@ -60,8 +58,6 @@ export class EnumListAction {
             [UserGender.name]: this.format(UserGender.getReadableValues()),
             [NotificationStatus.name]: this.format(NotificationStatus.getReadableValues()),
             [NotificationType.name]: this.format(NotificationType.getReadableValues()),
-            [AccessKeyStatus.name]: this.format(AccessKeyStatus.getReadableValues()),
-            [AccessPermission.name]: this.format(AccessPermission.getReadableValues()),
         });
     }
 

@@ -1,7 +1,5 @@
 import {
     MIKRO_ORM_DEFAULT,
-    AccessKey,
-    AccessKeyPermission,
     Admin,
     Device,
     Notification,
@@ -17,17 +15,7 @@ import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const defaultOrm = [
-    Notification,
-    AccessKey,
-    AccessKeyPermission,
-    Admin,
-    User,
-    Device,
-    UserSocial,
-    UserAttribute,
-    WebauthnDevice,
-];
+const defaultOrm = [Notification, Admin, User, Device, UserSocial, UserAttribute, WebauthnDevice];
 
 export default [
     {
