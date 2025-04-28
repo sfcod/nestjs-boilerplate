@@ -3,7 +3,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Callback, PhoneNumber } from '@libs/core';
 import {
     IsDateString,
-    IsIn,
     IsNotEmpty,
     IsOptional,
     IsString,
@@ -14,7 +13,6 @@ import {
     ValidateNested,
 } from 'class-validator';
 import { DateTime } from 'luxon';
-import { UserGender } from '@libs/orm';
 import { PasswordValidation } from 'class-validator-password-check';
 import { passwordRequirement } from '../../../../../../config/password-requitement.config';
 import { UserSettingsInput } from './user-settings-input';
@@ -43,12 +41,6 @@ export class UpdateUserInput {
     @IsString()
     @IsOptional()
     password!: string;
-
-    @Expose()
-    @ApiProperty({ enum: UserGender.getValues() })
-    @IsIn(UserGender.getValues(), { message: 'Invalid value.' })
-    @IsOptional()
-    gender!: string;
 
     @Expose()
     @ApiProperty()

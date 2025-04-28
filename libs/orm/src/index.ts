@@ -17,7 +17,6 @@ export * from './entity-enum/notification-status';
 export * from './entity-enum/notification-type';
 export * from './entity-enum/two-factor-auth';
 export * from './entity-enum/user-attribute-name';
-export * from './entity-enum/user-gender';
 export * from './entity-enum/user-role';
 export * from './entity-enum/user-social-provider';
 export * from './entity-enum/user-status';

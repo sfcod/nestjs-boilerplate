@@ -1,20 +1,9 @@
 import { Exclude, Expose } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
-import {
-    IsDateString,
-    IsEmail,
-    IsIn,
-    IsNotEmpty,
-    IsOptional,
-    IsString,
-    MaxLength,
-    MinLength,
-    Validate,
-} from 'class-validator';
-import { Admin, User, UserGender, UserStatus } from '@libs/orm';
-import { Callback, PasswordValidation, PhoneNumber, UniqueEntity } from '@libs/core';
+import { IsEmail, IsIn, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength, Validate } from 'class-validator';
+import { Admin, User, UserStatus } from '@libs/orm';
+import { PasswordValidation, PhoneNumber, UniqueEntity } from '@libs/core';
 import { passwordRequirement } from '../../../../../../config/password-requitement.config';
-import { DateTime } from 'luxon';
 
 @Exclude()
 export class CreateUserInput {
@@ -60,11 +49,4 @@ export class CreateUserInput {
     @IsOptional()
     @IsIn(UserStatus.getValues(), { message: 'Status: wrong data.' })
     status!: number;
-
-    @Expose()
-    @ApiProperty()
-    @IsNotEmpty()
-    @MaxLength(50)
-    @IsIn(UserGender.getValues(), { message: 'Gender: wrong data.' })
-    gender!: string;
 }

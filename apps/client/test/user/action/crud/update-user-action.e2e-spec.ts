@@ -33,7 +33,6 @@ describe('UpdateUser (e2e)', () => {
                 'email',
                 'firstName',
                 'lastName',
-                'gender',
                 'phoneNumber',
                 'status',
                 'createdAt',
