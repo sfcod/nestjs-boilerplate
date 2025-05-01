@@ -1,13 +1,4 @@
-import {
-    MIKRO_ORM_DEFAULT,
-    Admin,
-    Device,
-    Notification,
-    User,
-    UserAttribute,
-    UserSocial,
-    WebauthnDevice,
-} from '@libs/orm';
+import { MIKRO_ORM_DEFAULT, Admin, Device, Notification, User, UserAttribute, UserSocial } from '@libs/orm';
 import { FlushMode, LoadStrategy } from '@mikro-orm/core';
 import { NotFoundException } from '@nestjs/common';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs/typings';
@@ -15,7 +6,7 @@ import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const defaultOrm = [Notification, Admin, User, Device, UserSocial, UserAttribute, WebauthnDevice];
+const defaultOrm = [Notification, Admin, User, Device, UserSocial, UserAttribute];
 
 export default [
     {

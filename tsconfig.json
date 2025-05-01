@@ -138,12 +138,6 @@
       "@libs/healthcheck/*": [
         "libs/healthcheck/src/*"
       ],
-      "@libs/webauthn": [
-        "libs/webauthn/src"
-      ],
-      "@libs/webauthn/*": [
-        "libs/webauthn/src/*"
-      ]
     }
   },
   "exclude": [
