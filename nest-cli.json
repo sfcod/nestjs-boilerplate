@@ -199,15 +199,6 @@
       "compilerOptions": {
         "tsConfigPath": "libs/microservice-event/tsconfig.lib.json"
       }
-    },
-    "webauthn": {
-      "type": "library",
-      "root": "libs/webauthn",
-      "entryFile": "index",
-      "sourceRoot": "libs/webauthn/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/webauthn/tsconfig.lib.json"
-      }
     }
   },
   "monorepo": true,

@@ -8,7 +8,6 @@ export * from './entity/notification';
 export * from './entity/user';
 export * from './entity/user-attribute';
 export * from './entity/user-social';
-export * from './entity/webauthn-device';
 
 // enums
 export * from './entity-enum/admin-role';
