@@ -41,21 +41,6 @@
         ]
       }
     },
-    "queue-processor": {
-      "type": "application",
-      "root": "apps/queue-processor",
-      "entryFile": "main",
-      "sourceRoot": "apps/queue-processor/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/queue-processor/tsconfig.app.json",
-        "assets": [
-          {
-            "include": "../test/jest-e2e.dist.json",
-            "outDir": "./dist/apps/queue-processor/apps/queue-processor/test"
-          }
-        ]
-      }
-    },
     "health": {
       "type": "application",
       "root": "apps/health",
@@ -191,13 +176,13 @@
         "tsConfigPath": "libs/orm-core/tsconfig.lib.json"
       }
     },
-    "microservice-event": {
+    "healthcheck": {
       "type": "library",
-      "root": "libs/microservice-event",
+      "root": "libs/healthcheck",
       "entryFile": "index",
-      "sourceRoot": "libs/microservice-event/src",
+      "sourceRoot": "libs/healthcheck/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/microservice-event/tsconfig.lib.json"
+        "tsConfigPath": "libs/healthcheck/tsconfig.lib.json"
       }
     },
     "webauthn": {

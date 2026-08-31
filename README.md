@@ -1,7 +1,7 @@
 ## Installation
 
 ### Prerequisites
- - Node 18.19.0+
+ - Node 24+
  - Docker
 
 ----------------

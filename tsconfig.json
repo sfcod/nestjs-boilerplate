@@ -24,9 +24,6 @@
       "@app/database/*": [
         "apps/database/src/*"
       ],
-      "@app/queue-processor/*": [
-        "apps/queue-processor/src/*"
-      ],
       "@app/health/*": [
         "apps/health/src/*"
       ],
@@ -42,17 +39,11 @@
       "@app-admin/common/*": [
         "apps/admin/src/common/*"
       ],
-      "@app-queue-processor/common": [
-        "apps/queue-processor/src/common"
-      ],
-      "@app-queue-processor/common/*": [
-        "apps/queue-processor/src/common/*"
-      ],
       "@libs/core": [
         "libs/core/src"
       ],
       "@libs/core/*": [
-        "phy/core/*"
+        "libs/core/src/*"
       ],
       "@libs/file-storage": [
         "libs/file-storage/src"
@@ -125,12 +116,6 @@
       ],
       "@libs/test/*": [
         "libs/test/src/*"
-      ],
-      "@libs/microservice-event": [
-        "libs/microservice-event/src"
-      ],
-      "@libs/microservice-event/*": [
-        "libs/microservice-event/src/*"
       ],
       "@libs/healthcheck": [
         "libs/healthcheck/src"
