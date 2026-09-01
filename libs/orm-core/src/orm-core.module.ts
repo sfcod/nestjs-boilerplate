@@ -71,7 +71,7 @@ export class OrmCoreModule implements OnApplicationShutdown {
             return consumer.httpAdapter.constructor.name.toLowerCase().startsWith('fastify');
         };
 
-        const forRoutesPath = isNestMiddleware(consumer) && usingFastify(consumer) ? '(.*)' : '*';
+        const forRoutesPath = isNestMiddleware(consumer) && usingFastify(consumer) ? '(.*)' : '{*splat}';
 
         consumer
             .apply(MikroOrmMiddleware) // register request context automatically

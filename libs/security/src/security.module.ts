@@ -202,6 +202,6 @@ export class SecurityModule {
     }
 
     configure(consumer: MiddlewareConsumer): any {
-        consumer.apply(RolePermissionMiddleware).forRoutes('*');
+        consumer.apply(RolePermissionMiddleware).forRoutes('{*splat}');
     }
 }

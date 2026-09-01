@@ -9,11 +9,11 @@ export const setupSwagger = async (app: INestApplication, { path, document, secu
     if (secured) {
         const user = process.env.SWAGGER_USER || 'swagger';
         const pass = process.env.SWAGGER_PASSWORD || 'swagger';
+        const auth = basicAuth({ challenge: true, users: { [user]: pass } });
 
-        app.use(
-            [`${path}/?$`, `${path}-yaml/?`, `${path}-json/?`],
-            basicAuth({ challenge: true, users: { [user]: pass } }),
-        );
+        app.use(path, auth);
+        app.use(`${path}-yaml`, auth);
+        app.use(`${path}-json`, auth);
     }
 
     SwaggerModule.setup(path, app, document);
