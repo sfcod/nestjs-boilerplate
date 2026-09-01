@@ -1,16 +1,5 @@
-import {
-    Cascade,
-    Collection,
-    Embedded,
-    Entity,
-    Enum,
-    Filter,
-    LoadStrategy,
-    OneToMany,
-    PrimaryKey,
-    Property,
-    raw,
-} from '@mikro-orm/core';
+import { Cascade, Collection, LoadStrategy, raw } from '@mikro-orm/core';
+import { Embedded, Entity, Enum, Filter, OneToMany, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
 import { AuthenticatorType, UserInterface, User2FAInterface } from '@libs/security';
 import { File } from '@libs/file-uploader';
 import { FILE_STORAGE_FILE_HELPER, FileHelper, UploadableField } from '@libs/file-storage';
@@ -34,7 +23,7 @@ import { UserRole } from '../entity-enum/user-role';
 @Filter({
     name: 'name',
     cond: (args) => ({
-        "concat(first_name, ' ', last_name)": {
+        [raw("concat(first_name, ' ', last_name)")]: {
             $ilike: `%${args.value}%`,
         },
     }),
@@ -83,6 +72,8 @@ export class User implements UserInterface, User2FAInterface {
         onCreate: () => getCurrentTimestamp(),
         columnType: 'timestamp',
         fieldName: 'created_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     createdAt: Date | string;
 
@@ -91,6 +82,8 @@ export class User implements UserInterface, User2FAInterface {
         onUpdate: () => getCurrentTimestamp(),
         columnType: 'timestamp',
         fieldName: 'updated_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     updatedAt: Date | string;
 
@@ -102,7 +95,7 @@ export class User implements UserInterface, User2FAInterface {
     deletedAt: number;
 
     @OneToMany({
-        entity: 'Device',
+        entity: () => Device,
         mappedBy: 'user',
         cascade: [Cascade.PERSIST, Cascade.REMOVE],
         orphanRemoval: true,
@@ -111,7 +104,7 @@ export class User implements UserInterface, User2FAInterface {
     devices = new Collection<Device>(this);
 
     @OneToMany({
-        entity: 'UserAttribute',
+        entity: () => UserAttribute,
         mappedBy: 'user',
         cascade: [Cascade.PERSIST, Cascade.REMOVE],
         orphanRemoval: true,

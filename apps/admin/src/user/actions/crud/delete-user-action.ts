@@ -32,6 +32,7 @@ export class DeleteUserAction {
     async invoke(@Param('id') id: string): Promise<any> {
         const user = await this.em.findOneOrFail(User, id);
 
-        await this.em.removeAndFlush(user);
+        this.em.remove(user);
+        await this.em.flush();
     }
 }

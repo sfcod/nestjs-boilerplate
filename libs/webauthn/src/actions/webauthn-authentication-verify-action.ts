@@ -66,7 +66,8 @@ export const createWebauthnAuthenticationVerifyAction = ({
             wrap(webauthnDevice).assign(deviceData, { em: this.em });
             webauthnDevice.lastUsedAt = getCurrentTimestamp();
 
-            await this.em.persistAndFlush(webauthnDevice);
+            this.em.persist(webauthnDevice);
+            await this.em.flush();
         }
     }
 

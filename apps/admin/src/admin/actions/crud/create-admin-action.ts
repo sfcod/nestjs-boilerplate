@@ -47,7 +47,8 @@ export class CreateAdminAction {
         admin.setPlainPassword(password);
         Object.assign(admin, rest);
 
-        await this.em.persistAndFlush(admin);
+        this.em.persist(admin);
+        await this.em.flush();
 
         await this.notification.emit(
             AdminCreatedByAdminNotification,

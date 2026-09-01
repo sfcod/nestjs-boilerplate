@@ -46,7 +46,8 @@ export class SocialResolver implements SocialResolverInterface {
             userSocial.socialUserId = data.id;
             userSocial.provider = data.provider;
 
-            await em.persistAndFlush(userSocial);
+            em.persist(userSocial);
+            await em.flush();
 
             return patient;
         } catch (e) {

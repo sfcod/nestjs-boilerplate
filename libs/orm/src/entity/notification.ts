@@ -1,4 +1,5 @@
-import { Entity, Filter, ManyToOne, PrimaryKey, Property, Ref, Reference } from '@mikro-orm/core';
+import { Ref, Reference, raw } from '@mikro-orm/core';
+import { Entity, Filter, ManyToOne, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { v4 } from 'uuid';
 import { User } from './user';
@@ -9,7 +10,7 @@ import { User } from './user';
 @Filter({
     name: 'search',
     cond: ({ value }) => ({
-        "concat(title, ' ', message)": {
+        [raw("concat(title, ' ', message)")]: {
             $ilike: `%${value}%`,
         },
     }),
@@ -37,6 +38,8 @@ export class Notification {
         onCreate: () => getCurrentTimestamp(),
         columnType: 'timestamp',
         fieldName: 'created_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     createdAt: Date | string;
 
@@ -45,6 +48,8 @@ export class Notification {
         onUpdate: () => getCurrentTimestamp(),
         columnType: 'timestamp',
         fieldName: 'updated_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     updatedAt: Date | string;
 

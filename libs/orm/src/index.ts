@@ -23,7 +23,6 @@ export * from './entity-enum/user-status';
 export * from './entity-enum/abstract-enum';
 
 // helpers
-export * from './helper/apply-filters.helper';
 export * from './helper/date-type.helper';
 export * from './helper/truncate.helper';
 

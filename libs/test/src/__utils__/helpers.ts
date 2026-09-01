@@ -2,7 +2,7 @@ import { Bootstrap } from './bootstrap';
 import { SignerBuilder, UserInterface } from '@libs/security';
 import { INestApplication } from '@nestjs/common';
 import { EntityManagerResolver, OrmResolver } from '@libs/orm-core';
-import { SqlEntityManager } from '@mikro-orm/knex';
+import { SqlEntityManager } from '@mikro-orm/sql';
 import { truncateAll as truncateSql } from '@libs/orm';
 import { hash } from 'bcrypt';
 
@@ -28,10 +28,11 @@ export async function makeData<T>(
         objects.push(entity);
     }
 
-    await emr
+    const em = emr
         .getEntityManager(objects[0] as any)
-        .fork({ clear: true, useContext: false, freshEventManager: true })
-        .persistAndFlush(objects);
+        .fork({ clear: true, useContext: false, freshEventManager: true });
+    em.persist(objects);
+    await em.flush();
 
     return count === 1 ? (objects[0] as T) : objects;
 }
@@ -39,7 +40,7 @@ export async function makeData<T>(
 export async function truncateTables(app?: INestApplication) {
     const resolver = app ? app.get(OrmResolver) : Bootstrap.get(OrmResolver);
     for (const connection of resolver.getConnections()) {
-        await truncateSql(connection.em as SqlEntityManager);
+        await truncateSql(connection.em as unknown as SqlEntityManager);
     }
 }
 

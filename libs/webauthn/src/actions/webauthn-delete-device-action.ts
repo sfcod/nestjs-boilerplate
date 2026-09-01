@@ -2,7 +2,7 @@ import { Controller, Delete, HttpCode, HttpStatus, Param, Type, UseFilters, UseG
 import { ApiNoContentResponse, ApiNotFoundResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { WebauthnDevice } from '@libs/orm';
 import { ApiDescription, Mapper, uuid } from '@libs/core';
-import { EntityManager } from '@mikro-orm/core';
+import { EntityManagerResolver } from '@libs/orm-core';
 import { WebauthnAuthenticator } from '../service/webauthn-authenticator';
 import { WebauthnExceptionFilter } from '../exception-filter/webauthn-exception-filter';
 
@@ -19,7 +19,7 @@ export const createWebauthnDeleteDeviceAction = ({
     @Controller(route || `auths/webauthn/device/${uuid('id')}`)
     class WebauthnDeleteDeviceAction {
         constructor(
-            private readonly em: EntityManager,
+            private readonly em: EntityManagerResolver,
             private readonly mapper: Mapper,
             private readonly webauthnAuthenticator: WebauthnAuthenticator,
         ) {}

@@ -61,7 +61,8 @@ export const createWebauthnRegistrationVerifyAction = ({
             const webauthnDevice = new WebauthnDevice(user);
             wrap(webauthnDevice).assign(deviceData, { em: this.em });
 
-            await this.em.persistAndFlush(webauthnDevice);
+            this.em.persist(webauthnDevice);
+            await this.em.flush();
 
             return webauthnDevice;
         }

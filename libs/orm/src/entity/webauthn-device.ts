@@ -1,4 +1,5 @@
-import { Entity, ManyToOne, PrimaryKey, Property, Ref, Reference } from '@mikro-orm/core';
+import { Ref, Reference } from '@mikro-orm/core';
+import { Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { User } from './user';
 import { v4 } from 'uuid';
@@ -54,6 +55,8 @@ export class WebauthnDevice implements WebauthnDeviceInterface {
         onCreate: () => getCurrentTimestamp,
         columnType: 'timestamp',
         fieldName: 'created_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     createdAt: Date | string;
 
@@ -62,6 +65,8 @@ export class WebauthnDevice implements WebauthnDeviceInterface {
         onUpdate: () => getCurrentTimestamp(),
         columnType: 'timestamp',
         fieldName: 'updated_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     updatedAt: Date | string;
 
@@ -69,6 +74,8 @@ export class WebauthnDevice implements WebauthnDeviceInterface {
         columnType: 'timestamp',
         fieldName: 'last_used_at',
         nullable: true,
+        type: 'string',
+        runtimeType: 'string',
     })
     lastUsedAt: Date | string | null = null;
 

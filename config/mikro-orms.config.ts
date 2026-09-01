@@ -12,6 +12,7 @@ import { FlushMode, LoadStrategy } from '@mikro-orm/core';
 import { NotFoundException } from '@nestjs/common';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs/typings';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
+import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -23,6 +24,7 @@ export default [
         clientUrl: process.env.DATABASE_URL_DEFAULT,
         driver: PostgreSqlDriver,
         entities: defaultOrm,
+        metadataProvider: ReflectMetadataProvider,
         loadStrategy: LoadStrategy.JOINED,
         findOneOrFailHandler: () => {
             throw new NotFoundException();

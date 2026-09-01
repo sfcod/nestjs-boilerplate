@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { User, UserAttribute, UserAttributeName } from '@libs/orm';
-import { EntityManager } from '@mikro-orm/core';
+import { EntityManagerResolver } from '@libs/orm-core';
 import { CodeGenerator } from '@libs/core';
 import { ResetPasswordBruteForce } from './brute-force/reset-password-brute-force';
 import { DateTime } from 'luxon';
@@ -12,7 +12,7 @@ export class ResetPasswordService {
     private readonly CODE_TTL = ms(process.env.RECOVERY_PASSWORD_TOKEN_TTL || '7 days'); // 7 days by default
 
     constructor(
-        private readonly em: EntityManager,
+        private readonly em: EntityManagerResolver,
         private readonly codeGenerator: CodeGenerator,
         private readonly bruteForce: ResetPasswordBruteForce,
     ) {}
@@ -51,7 +51,7 @@ export class ResetPasswordService {
     }
 
     private async getExpirationAttribute(user: User) {
-        return this.em.findOne(UserAttribute, {
+        return this.em.findOne<UserAttribute<string>>(UserAttribute, {
             user: user,
             name: UserAttributeName.RECOVERY_PASSWORD_EXPIRATION,
         });
