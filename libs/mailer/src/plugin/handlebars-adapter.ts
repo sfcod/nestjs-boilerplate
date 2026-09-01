@@ -8,7 +8,7 @@ import { get } from 'lodash';
 import * as glob from 'glob';
 import { MailerOptions } from '@nestjs-modules/mailer/dist/interfaces/mailer-options.interface';
 import { TemplateAdapter } from '@nestjs-modules/mailer/dist/interfaces/template-adapter.interface';
-import * as inlineCss from 'inline-css';
+import inlineCss from 'inline-css';
 import { Options } from 'inline-css';
 import handlebars from 'handlebars';
 import { HelperDeclareSpec } from 'handlebars';

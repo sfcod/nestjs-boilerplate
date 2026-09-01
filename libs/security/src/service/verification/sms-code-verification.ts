@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CodeStorageInterface } from '../../contract/code-storage.interface';
-import * as ms from 'ms';
+import ms from 'ms';
 import { AbstractCodeVerification, Composing as BaseComposing, ThrottleParams } from './abstract-code-verification';
 import { CodeGenerator } from '@libs/core';
 import { SmsSenderInterface } from '../../contract/sms-sender.interface';

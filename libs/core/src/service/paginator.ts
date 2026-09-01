@@ -2,7 +2,7 @@ import { AnyEntity, EntityManager, EntityName, EntityRepository, FilterQuery, Fi
 import { QueryOrderMap } from '@mikro-orm/core/enums';
 import { Inject, Injectable, Scope } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { EntityManagerResolver } from '@libs/orm-core';
 import { JsonOutput } from '../dto/json-output';
 

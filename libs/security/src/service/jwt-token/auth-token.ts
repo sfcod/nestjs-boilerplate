@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import * as ms from 'ms';
+import ms from 'ms';
 import { AbstractToken } from './abstract-token';
 import { JwtService } from '@nestjs/jwt';
 import { CodeStorageInterface } from '../../contract/code-storage.interface';

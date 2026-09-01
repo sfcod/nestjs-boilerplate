@@ -1,6 +1,6 @@
 import { CodeAuthenticatorInterface } from '../../contract/code-authenticator.interface';
 import { Inject, Injectable } from '@nestjs/common';
-import * as ms from 'ms';
+import ms from 'ms';
 import { User2FAInterface } from '../../contract/user-2fa.interface';
 import { storageKeyInDb } from '../../helper/storage.helper';
 import { CodeStorageInterface } from '../../contract/code-storage.interface';

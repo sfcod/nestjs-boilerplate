@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import { GlobOptionsWithFileTypesFalse, sync } from 'glob';
 import { INestApplication } from '@nestjs/common';
 import { OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
-import * as basicAuth from 'express-basic-auth';
+import basicAuth from 'express-basic-auth';
 
 type SetupSwaggerOptions = { path: string; document: OpenAPIObject; secured?: boolean };
 export const setupSwagger = async (app: INestApplication, { path, document, secured = true }: SetupSwaggerOptions) => {

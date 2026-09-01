@@ -17,10 +17,6 @@
             "include": "**/*.md",
             "outDir": "./dist/apps/client/apps/client/src",
             "watchAssets": true
-          },
-          {
-            "include": "../test/jest-e2e.dist.json",
-            "outDir": "./dist/apps/client/apps/client/test"
           }
         ],
         "tsConfigPath": "apps/client/tsconfig.app.json"
@@ -32,13 +28,7 @@
       "entryFile": "main",
       "sourceRoot": "apps/admin/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/admin/tsconfig.app.json",
-        "assets": [
-          {
-            "include": "../test/jest-e2e.dist.json",
-            "outDir": "./dist/apps/admin/apps/admin/test"
-          }
-        ]
+        "tsConfigPath": "apps/admin/tsconfig.app.json"
       }
     },
     "health": {

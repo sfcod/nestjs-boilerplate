@@ -1,5 +1,5 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import * as Twilio from 'twilio';
+import Twilio from 'twilio';
 import { WebhookRequestValidator } from './service/webhook-request-validator';
 import { SmsSender } from './service/sms-sender';
 

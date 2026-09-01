@@ -4,7 +4,7 @@ import { EntityManagerResolver } from '@libs/orm-core';
 import { CodeGenerator } from '@libs/core';
 import { ResetPasswordBruteForce } from './brute-force/reset-password-brute-force';
 import { DateTime } from 'luxon';
-import * as ms from 'ms';
+import ms from 'ms';
 import { Request } from 'express';
 
 @Injectable()

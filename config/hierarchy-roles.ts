@@ -1,5 +1,5 @@
 import { AdminRole } from '@libs/orm';
-import * as rbac from '@rbac/rbac';
+import rbac from '@rbac/rbac';
 import { UserRole } from '@libs/orm';
 
 const configuredRBAC = rbac({

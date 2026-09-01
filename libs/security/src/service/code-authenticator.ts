@@ -4,7 +4,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CodeStorageInterface } from '../contract/code-storage.interface';
 import { storageKeyInDb } from '../helper/storage.helper';
 import { DateTime } from 'luxon';
-import * as ms from 'ms';
+import ms from 'ms';
 import { CodeSendThrottleException } from '../exception/code-send-throttle-exception';
 import { CodeVerifyThrottleException } from '../exception/code-verify-throttle-exception';
 import { User2FAInterface } from '../contract/user-2fa.interface';
