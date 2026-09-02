@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Optional } from '@nestjs/common';
 import { MAILER_OPTIONS, MAILER_TRANSPORT_FACTORY, MailerService } from '@nestjs-modules/mailer';
 import { MailerOptions } from '@nestjs-modules/mailer/dist/interfaces/mailer-options.interface';
 import { MailerTransportFactory } from '@nestjs-modules/mailer/dist/interfaces/mailer-transport-factory.interface';
@@ -7,7 +7,7 @@ import { MailerTransportFactory } from '@nestjs-modules/mailer/dist/interfaces/m
 export class Mailer extends MailerService {
     constructor(
         @Inject(MAILER_OPTIONS) protected readonly mailerOptions2: MailerOptions,
-        @Inject(MAILER_TRANSPORT_FACTORY) protected readonly transportFactory2: MailerTransportFactory,
+        @Optional() @Inject(MAILER_TRANSPORT_FACTORY) protected readonly transportFactory2: MailerTransportFactory,
     ) {
         super(mailerOptions2, transportFactory2);
     }
