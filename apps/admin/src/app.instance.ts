@@ -7,6 +7,7 @@ import { bootstrapApplication } from '../../bootstrap';
 import helmet from 'helmet';
 import { urlencoded, json } from 'express';
 import { setupSwagger } from '@libs/core';
+import { Logger } from '@nestjs/common';
 
 export const instance = async (): Promise<NestExpressApplication> => {
     const app = await NestFactory.create<NestExpressApplication>(AdminPanelModule);
@@ -24,6 +25,7 @@ export const instance = async (): Promise<NestExpressApplication> => {
 
     await app.startAllMicroservices();
     await app.listen(parseInt(process.env.PORT_ADMIN, 10) || 3040);
+    new Logger('Bootstrap').log(`Application is running on: ${await app.getUrl()}`);
 
     return app;
 };
