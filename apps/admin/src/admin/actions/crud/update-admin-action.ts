@@ -47,8 +47,7 @@ export class UpdateAdminAction {
             admin.setPlainPassword(password);
         }
 
-        this.em.persist(admin);
-        await this.em.flush();
+        await this.em.persist(admin).flush();
 
         return this.mapper.map(AdminOutput, admin);
     }

@@ -29,7 +29,6 @@ export class SeedCommand {
             },
             { em },
         );
-        em.persist(admin);
-        await em.flush();
+        await em.persist(admin).flush();
     }
 }

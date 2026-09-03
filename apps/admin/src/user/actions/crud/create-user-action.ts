@@ -52,8 +52,7 @@ export class CreateUserAction {
         user.status = status ?? UserStatus.STATUS_PENDING_PHONE_VERIFICATION;
         const tempPassword = await this.userProcessTemporaryPassword.process(user);
 
-        this.em.persist(user);
-        await this.em.flush();
+        await this.em.persist(user).flush();
 
         await this.notification.emit(UserCreatedByAdminNotification, { user, password: tempPassword }, request.user);
 

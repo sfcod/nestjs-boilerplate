@@ -29,8 +29,7 @@ export async function makeData<T>(
     }
 
     const em = emr.fork({ clear: true, useContext: false, freshEventManager: true });
-    em.persist(objects);
-    await em.flush();
+    await em.persist(objects).flush();
 
     return count === 1 ? (objects[0] as T) : objects;
 }
