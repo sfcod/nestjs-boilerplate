@@ -34,8 +34,7 @@ export class ResetPasswordService {
         }
 
         user.recoveryPasswordToken = null;
-        this.em.remove(attr);
-        await this.em.flush();
+        await this.em.remove(attr).flush();
 
         return user;
     }
