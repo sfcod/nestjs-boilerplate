@@ -9,7 +9,7 @@
 
 ### 1. Start docker containers required for the project: 
 ```bash
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 If need to override ports, envs, etc, create `docker-compose.override.yml` file in project root, 
