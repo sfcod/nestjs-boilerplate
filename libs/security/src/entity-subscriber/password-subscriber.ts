@@ -1,17 +1,14 @@
-import { EntityName, EventArgs, EventSubscriber } from '@mikro-orm/core';
+import { EntityName, EventArgs, EventSubscriber, MikroORM } from '@mikro-orm/core';
 import { hash } from 'bcrypt';
 import { Admin, User } from '@libs/orm';
 import { Injectable } from '@nestjs/common';
-import { OrmResolver } from '@libs/orm-core';
 
 type Entities = Admin | User;
 
 @Injectable()
 export class PasswordSubscriber implements EventSubscriber<Entities> {
-    constructor(private ormResolver: OrmResolver) {
-        for (const connection of this.ormResolver.getConnections()) {
-            connection.em.getEventManager().registerSubscriber(this);
-        }
+    constructor(private readonly orm: MikroORM) {
+        this.orm.em.getEventManager().registerSubscriber(this);
     }
 
     getSubscribedEntities(): EntityName<Entities>[] {

@@ -157,15 +157,6 @@
         "tsConfigPath": "libs/test/tsconfig.lib.json"
       }
     },
-    "orm-core": {
-      "type": "library",
-      "root": "libs/orm-core",
-      "entryFile": "index",
-      "sourceRoot": "libs/orm-core/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/orm-core/tsconfig.lib.json"
-      }
-    },
     "healthcheck": {
       "type": "library",
       "root": "libs/healthcheck",
@@ -173,15 +164,6 @@
       "sourceRoot": "libs/healthcheck/src",
       "compilerOptions": {
         "tsConfigPath": "libs/healthcheck/tsconfig.lib.json"
-      }
-    },
-    "webauthn": {
-      "type": "library",
-      "root": "libs/webauthn",
-      "entryFile": "index",
-      "sourceRoot": "libs/webauthn/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/webauthn/tsconfig.lib.json"
       }
     }
   },

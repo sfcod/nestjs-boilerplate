@@ -6,14 +6,13 @@ import {
     ValidatorConstraintInterface,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-import { CountOptions, EntityName, raw } from '@mikro-orm/core';
+import { CountOptions, EntityManager, EntityName, raw } from '@mikro-orm/core';
 import { SOFT_DELETABLE_QUERY_FILTER } from '@libs/soft-delete';
-import { OrmResolver } from '@libs/orm-core';
 
 @Injectable()
 @ValidatorConstraint({ async: true })
 export class UniqueEntityConstraint implements ValidatorConstraintInterface {
-    constructor(private readonly resolver: OrmResolver) {}
+    constructor(private readonly em: EntityManager) {}
 
     async validate(value: any, args: ValidationArguments) {
         const [fields, target, filters, caseSensitive] = args.constraints;
@@ -30,8 +29,7 @@ export class UniqueEntityConstraint implements ValidatorConstraintInterface {
         if ((args.object as any).id) {
             query = { ...query, 'id:ne': (args.object as any).id };
         }
-        const count = await this.resolver
-            .em(target)
+        const count = await this.em
             .fork()
             .count(target, query, {
                 filters: {

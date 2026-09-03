@@ -3,14 +3,13 @@ import { QueryOrderMap } from '@mikro-orm/core/enums';
 import { Inject, Injectable, Scope } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
 import _ from 'lodash';
-import { EntityManagerResolver } from '@libs/orm-core';
 import { JsonOutput } from '../dto/json-output';
 
 @Injectable({ scope: Scope.REQUEST })
 export class Paginator {
     constructor(
         @Inject(REQUEST) private request,
-        @Inject(EntityManager) private readonly em: EntityManagerResolver,
+        private readonly em: EntityManager,
     ) {}
 
     async paginate<T extends JsonOutput | AnyEntity<T>>(
@@ -46,7 +45,7 @@ export class Paginator {
             filterQuery.orderBy = this.removeEmptyObjects(sort);
         } else {
             // check if entity has id column
-            const meta = this.em.getEntityManager(entity).getMetadata().find((entity as any).name);
+            const meta = this.em.getMetadata().find((entity as any).name);
             if (meta.properties.id) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore

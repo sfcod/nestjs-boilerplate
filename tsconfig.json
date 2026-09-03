@@ -125,12 +125,6 @@
       "@libs/twilio/*": [
         "libs/twilio/src/*"
       ],
-      "@libs/orm-core": [
-        "libs/orm-core/src"
-      ],
-      "@libs/orm-core/*": [
-        "libs/orm-core/src/*"
-      ],
       "@libs/orm": [
         "libs/orm/src"
       ],
@@ -154,12 +148,6 @@
       ],
       "@libs/healthcheck/*": [
         "libs/healthcheck/src/*"
-      ],
-      "@libs/webauthn": [
-        "libs/webauthn/src"
-      ],
-      "@libs/webauthn/*": [
-        "libs/webauthn/src/*"
       ]
     }
   },

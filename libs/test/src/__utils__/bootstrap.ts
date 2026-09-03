@@ -2,10 +2,9 @@ import '../../../../apps/polyfills';
 import { INestApplication, Type } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { bootstrapApplication, bootstrapMicroservice } from '../../../../apps/bootstrap';
-import { EntityManagerResolver } from '@libs/orm-core';
+import { EntityManager } from '@mikro-orm/core';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import supertest, { agent as request } from 'supertest';
-import { MIKRO_ORM_DEFAULT } from '@libs/orm';
 import TestAgent from 'supertest/lib/agent';
 
 export type FakeModule = {
@@ -65,13 +64,12 @@ export class Bootstrap {
 
     /**
      * Return clear EM without any subsciber inside. It is totally clear EM with entities.
-     * @param connectionName
      */
-    public static getEntityManager(connectionName: string = MIKRO_ORM_DEFAULT): EntityManagerResolver {
+    public static getEntityManager(): EntityManager {
         const na = Bootstrap.na;
-        const em = na.get<EntityManagerResolver>(EntityManagerResolver);
+        const em = na.get<EntityManager>(EntityManager);
 
-        return em.getEntityManager(connectionName).fork({ clear: true, useContext: false, freshEventManager: true });
+        return em.fork({ clear: true, useContext: false, freshEventManager: true });
     }
 
     public static get<T = any>(type: Type<T> | string): T {

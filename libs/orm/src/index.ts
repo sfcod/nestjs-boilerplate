@@ -8,7 +8,6 @@ export * from './entity/notification';
 export * from './entity/user';
 export * from './entity/user-attribute';
 export * from './entity/user-social';
-export * from './entity/webauthn-device';
 
 // enums
 export * from './entity-enum/admin-role';
@@ -25,5 +24,8 @@ export * from './entity-enum/abstract-enum';
 // helpers
 export * from './helper/date-type.helper';
 export * from './helper/truncate.helper';
+
+// decorators
+export * from './decorator/use-request-context.decorator';
 
 export * from './orm.module';

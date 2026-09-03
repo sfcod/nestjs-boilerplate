@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { EntityManager } from '@mikro-orm/core';
 import { User, UserSocial } from '@libs/orm';
 import { UserFormattedData } from './user-formatted-data';
 import { SocialDeleteData } from './social-delete-data';
 import { EmptySocialDataException } from '../exception/empty-social-data-exception';
-import { EntityManagerResolver } from '@libs/orm-core';
 
 export interface SocialResolverInterface {
     findUserByProvider: (data: UserFormattedData) => Promise<User | null>;
@@ -14,7 +14,7 @@ export interface SocialResolverInterface {
 
 @Injectable()
 export class SocialResolver implements SocialResolverInterface {
-    constructor(private readonly em: EntityManagerResolver) {}
+    constructor(private readonly em: EntityManager) {}
 
     async findUserByProvider(data: UserFormattedData): Promise<User | null> {
         const userSocial = await this.em.getRepository(UserSocial).findOne(
@@ -33,7 +33,7 @@ export class SocialResolver implements SocialResolverInterface {
     }
 
     async authUser(data: UserFormattedData): Promise<User | null> {
-        const em = this.em.getEntityManager(User).fork();
+        const em = this.em.fork();
 
         const patient = await em.getRepository(User).findOne({ email: data.email });
         if (!patient) {
@@ -73,7 +73,7 @@ export class SocialResolver implements SocialResolverInterface {
             throw new EmptySocialDataException();
         }
 
-        await this.em.removeAndFlush(userSocial);
+        await this.em.remove(userSocial).flush();
         return userSocial.id;
     }
 

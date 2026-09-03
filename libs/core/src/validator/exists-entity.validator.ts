@@ -6,9 +6,8 @@ import {
     ValidatorConstraintInterface,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-import { EntityName, FilterQuery } from '@mikro-orm/core';
+import { EntityManager, EntityName, FilterQuery } from '@mikro-orm/core';
 import { AnyEntity } from '@mikro-orm/core/typings';
-import { OrmResolver } from '@libs/orm-core';
 
 type ValidationOptions<T> = BaseValidationOptions & {
     where?: FilterQuery<T>;
@@ -18,7 +17,7 @@ type ValidationOptions<T> = BaseValidationOptions & {
 @Injectable()
 @ValidatorConstraint({ async: true })
 export class ExistsEntityConstraint implements ValidatorConstraintInterface {
-    constructor(private readonly resolver: OrmResolver) {}
+    constructor(private readonly em: EntityManager) {}
 
     async validate(value: any, args: ValidationArguments) {
         const [fields, target, where, filters] = args.constraints;
@@ -30,7 +29,7 @@ export class ExistsEntityConstraint implements ValidatorConstraintInterface {
         if ((args.object as any).id) {
             query = { ...query, 'id:ne': (args.object as any).id };
         }
-        const entity = await this.resolver.em(target).fork().findOne(target, query, { filters });
+        const entity = await this.em.fork().findOne(target, query, { filters });
 
         return !!entity;
     }
