@@ -36,7 +36,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/src/main",
-    "all": "concurrently \"npm run start:dev -- admin\" \"npm run start:dev -- client\" \"npm run start:dev -- database\" \"npm run start:dev -- health\"",
+    "all": "concurrently \"npm run start:dev -- admin\" \"npm run start:dev -- client\"",
     "lint": "NODE_OPTIONS=--max_old_space_size=4096 ./node_modules/eslint/bin/eslint.js \"{src,apps,libs,test,database}/**/*.ts\" --fix",
     "lint-errors": "NODE_OPTIONS=--max_old_space_size=4096 ./node_modules/eslint/bin/eslint.js \"{src,apps,libs,test,database}/**/*.ts\" --quiet",
     "test:e2e:admin": "node --max_old_space_size=5120 ./node_modules/vitest/vitest.mjs run --project admin",
