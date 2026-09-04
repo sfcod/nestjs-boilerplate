@@ -1,9 +1,5 @@
 export const uuid = (name: string) => `:uuid__${name}`;
 
-export const number = (name: string) => {
-    return `:${name}([0-9]*)`;
-};
+export const number = (name: string) => `:number__${name}`;
 
-export const string = (name: string) => {
-    return `:${name}([a-z0-9]*)`;
-};
+export const string = (name: string) => `:string__${name}`;

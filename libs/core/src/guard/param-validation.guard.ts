@@ -4,7 +4,11 @@ import { isUUID } from 'class-validator';
 
 const UUID_PARAM_PREFIX = 'uuid__';
 const SLUG_PARAM_PREFIX = 'slug__';
+const NUMBER_PARAM_PREFIX = 'number__';
+const STRING_PARAM_PREFIX = 'string__';
 const SLUG_REGEX = /^[a-zA-Z0-9-%]+$/;
+const NUMBER_REGEX = /^[0-9]+$/;
+const STRING_REGEX = /^[a-z0-9]+$/;
 
 @Injectable()
 export class ParamValidationGuard implements CanActivate {
@@ -25,6 +29,18 @@ export class ParamValidationGuard implements CanActivate {
                     throw new NotFoundException();
                 }
                 req.params[key.slice(SLUG_PARAM_PREFIX.length)] = value;
+                delete req.params[key];
+            } else if (key.startsWith(NUMBER_PARAM_PREFIX)) {
+                if (!NUMBER_REGEX.test(value)) {
+                    throw new NotFoundException();
+                }
+                req.params[key.slice(NUMBER_PARAM_PREFIX.length)] = value;
+                delete req.params[key];
+            } else if (key.startsWith(STRING_PARAM_PREFIX)) {
+                if (!STRING_REGEX.test(value)) {
+                    throw new NotFoundException();
+                }
+                req.params[key.slice(STRING_PARAM_PREFIX.length)] = value;
                 delete req.params[key];
             }
         }
