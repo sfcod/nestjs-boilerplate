@@ -3,6 +3,7 @@ import { ClassSerializerInterceptor, INestApplication, INestMicroservice, Type, 
 import {
     AsyncSerializerInterceptor,
     deviceMiddleware,
+    ParamValidationGuard,
     validationHttpExceptionFactory,
     validationRpcExceptionFactory,
 } from '@libs/core';
@@ -31,6 +32,12 @@ async function bootstrap(app: INestMicroservice | INestApplication, module: Type
 
 export async function bootstrapApplication(app: NestExpressApplication, module: Type<any>) {
     await bootstrap(app, module);
+
+    // Express 5 defaults to the 'simple' query parser; restore Express 4's 'extended' (qs-based)
+    // parsing since sort[field]-style nested query params rely on it (e.g. admin/user list filters).
+    app.set('query parser', 'extended');
+
+    app.useGlobalGuards(new ParamValidationGuard());
 
     app.use(deviceMiddleware);
     app.useGlobalInterceptors(

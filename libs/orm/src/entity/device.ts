@@ -1,4 +1,5 @@
-import { Entity, ManyToOne, PrimaryKey, Property, Ref, Reference, Unique } from '@mikro-orm/core';
+import { Ref, Reference } from '@mikro-orm/core';
+import { Entity, ManyToOne, PrimaryKey, Property, Unique } from '@mikro-orm/decorators/legacy';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { v4 } from 'uuid';
 import { User } from './user';
@@ -33,6 +34,8 @@ export class Device {
         onCreate: () => getCurrentTimestamp(),
         columnType: 'timestamp',
         fieldName: 'created_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     createdAt: Date | string;
 
@@ -41,6 +44,8 @@ export class Device {
         onUpdate: () => getCurrentTimestamp(),
         columnType: 'timestamp',
         fieldName: 'updated_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     updatedAt: Date | string;
 

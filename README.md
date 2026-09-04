@@ -1,7 +1,7 @@
 ## Installation
 
 ### Prerequisites
- - Node 18.19.0+
+ - Node 24+
  - Docker
 
 ----------------
@@ -9,7 +9,7 @@
 
 ### 1. Start docker containers required for the project: 
 ```bash
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 If need to override ports, envs, etc, create `docker-compose.override.yml` file in project root, 

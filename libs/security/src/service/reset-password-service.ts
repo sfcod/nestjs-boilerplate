@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { User, UserAttribute, UserAttributeName } from '@libs/orm';
 import { EntityManager } from '@mikro-orm/core';
+import { User, UserAttribute, UserAttributeName } from '@libs/orm';
 import { CodeGenerator } from '@libs/core';
 import { ResetPasswordBruteForce } from './brute-force/reset-password-brute-force';
 import { DateTime } from 'luxon';
-import * as ms from 'ms';
+import ms from 'ms';
 import { Request } from 'express';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class ResetPasswordService {
     async process(user: User) {
         user.recoveryPasswordToken = this.codeGenerator.generateHexString(6);
         const attr = await this.createExpirationAttribute(user);
-        await this.em.persistAndFlush([user, attr]);
+        await this.em.persist([user, attr]).flush();
 
         return user.recoveryPasswordToken;
     }
@@ -34,8 +34,7 @@ export class ResetPasswordService {
         }
 
         user.recoveryPasswordToken = null;
-        this.em.remove(attr);
-        await this.em.flush();
+        await this.em.remove(attr).flush();
 
         return user;
     }
@@ -51,7 +50,7 @@ export class ResetPasswordService {
     }
 
     private async getExpirationAttribute(user: User) {
-        return this.em.findOne(UserAttribute, {
+        return this.em.findOne<UserAttribute<string>>(UserAttribute, {
             user: user,
             name: UserAttributeName.RECOVERY_PASSWORD_EXPIRATION,
         });

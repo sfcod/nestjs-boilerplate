@@ -1,4 +1,5 @@
-import { Entity, ManyToOne, PrimaryKey, Property, Ref, Reference } from '@mikro-orm/core';
+import { Ref, Reference } from '@mikro-orm/core';
+import { Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
 import { v4 } from 'uuid';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
 import { User } from './user';
@@ -37,6 +38,8 @@ export class UserSocial {
         onCreate: () => getCurrentTimestamp(),
         columnType: 'timestamp',
         fieldName: 'created_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     createdAt: Date | string;
 
@@ -45,6 +48,8 @@ export class UserSocial {
         onUpdate: () => getCurrentTimestamp(),
         columnType: 'timestamp',
         fieldName: 'updated_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     updatedAt: Date | string;
 

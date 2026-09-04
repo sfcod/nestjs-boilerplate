@@ -33,8 +33,7 @@ export class SignUpAction {
 
         wrap(user).assign(data);
 
-        this.em.persist(user);
-        await this.em.flush();
+        await this.em.persist(user).flush();
 
         return this.mapper.map(UserOutput, user);
     }

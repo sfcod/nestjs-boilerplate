@@ -27,7 +27,7 @@ export class ChangePasswordAction {
 
         user.setPlainPassword(data.password);
 
-        await this.entityManager.persistAndFlush(user);
+        await this.entityManager.persist(user).flush();
         const signer = (await this.signerBuilder.signedBy('fully'))
             ? await this.signerBuilder.getSigner()
             : await this.signerBuilder.getGuestSigner();

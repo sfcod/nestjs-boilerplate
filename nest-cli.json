@@ -17,10 +17,6 @@
             "include": "**/*.md",
             "outDir": "./dist/apps/client/apps/client/src",
             "watchAssets": true
-          },
-          {
-            "include": "../test/jest-e2e.dist.json",
-            "outDir": "./dist/apps/client/apps/client/test"
           }
         ],
         "tsConfigPath": "apps/client/tsconfig.app.json"
@@ -32,28 +28,7 @@
       "entryFile": "main",
       "sourceRoot": "apps/admin/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/admin/tsconfig.app.json",
-        "assets": [
-          {
-            "include": "../test/jest-e2e.dist.json",
-            "outDir": "./dist/apps/admin/apps/admin/test"
-          }
-        ]
-      }
-    },
-    "queue-processor": {
-      "type": "application",
-      "root": "apps/queue-processor",
-      "entryFile": "main",
-      "sourceRoot": "apps/queue-processor/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/queue-processor/tsconfig.app.json",
-        "assets": [
-          {
-            "include": "../test/jest-e2e.dist.json",
-            "outDir": "./dist/apps/queue-processor/apps/queue-processor/test"
-          }
-        ]
+        "tsConfigPath": "apps/admin/tsconfig.app.json"
       }
     },
     "health": {
@@ -182,31 +157,13 @@
         "tsConfigPath": "libs/test/tsconfig.lib.json"
       }
     },
-    "orm-core": {
+    "healthcheck": {
       "type": "library",
-      "root": "libs/orm-core",
+      "root": "libs/healthcheck",
       "entryFile": "index",
-      "sourceRoot": "libs/orm-core/src",
+      "sourceRoot": "libs/healthcheck/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/orm-core/tsconfig.lib.json"
-      }
-    },
-    "microservice-event": {
-      "type": "library",
-      "root": "libs/microservice-event",
-      "entryFile": "index",
-      "sourceRoot": "libs/microservice-event/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/microservice-event/tsconfig.lib.json"
-      }
-    },
-    "webauthn": {
-      "type": "library",
-      "root": "libs/webauthn",
-      "entryFile": "index",
-      "sourceRoot": "libs/webauthn/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/webauthn/tsconfig.lib.json"
+        "tsConfigPath": "libs/healthcheck/tsconfig.lib.json"
       }
     }
   },

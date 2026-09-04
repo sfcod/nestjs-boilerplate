@@ -59,7 +59,7 @@ export class UpdateUserAction {
         user.setPlainPassword(password);
         await this.updateAttribute(user, UserAttributeName.TIMEZONE, timezone);
 
-        await this.em.persistAndFlush(user);
+        await this.em.persist(user).flush();
 
         return this.mapper.map(UserOutput, user);
     }

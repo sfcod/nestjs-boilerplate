@@ -1,5 +1,5 @@
 .test:
-  image: node:22-alpine
+  image: node:24-alpine
   stage: test
   artifacts:
     expire_in: 1 week
@@ -81,7 +81,7 @@ test:admin:
   #      - test/jest-e2e.json
   script:
     - NODE_ENV=test CONNECTION=default npm run migration:up
-    - NODE_ENV=test npm run test:e2e:admin:dist all
+    - NODE_ENV=test npm run test:e2e:admin
 #    - NODE_ENV=test npm run test:e2e:admin apps/admin/test/[a-i]*
 #    - NODE_ENV=test npm run test:e2e:admin apps/admin/test/[j-o]*
 #    - NODE_ENV=test npm run test:e2e:admin apps/admin/test/[p-z]*

@@ -31,6 +31,6 @@ export class DeleteAdminAction {
     async invoke(@Param('id') id: string): Promise<void> {
         const admin = await this.em.getRepository(Admin).findOneOrFail(id);
 
-        await this.em.removeAndFlush(admin);
+        await this.em.remove(admin).flush();
     }
 }

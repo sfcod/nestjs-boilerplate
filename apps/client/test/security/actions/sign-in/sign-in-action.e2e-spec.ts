@@ -1,14 +1,14 @@
 import { HttpStatus } from '@nestjs/common';
-import { MIKRO_ORM_DEFAULT, User, TwoFactorAuth } from '@libs/orm';
+import { User, TwoFactorAuth } from '@libs/orm';
 import { makeUser, Bootstrap } from '@libs/test';
-import { EntityManagerResolver } from '@libs/orm-core';
+import { EntityManager } from '@mikro-orm/core';
 import { JwtTokenHandler } from '@libs/security/strategy/jwt-token-handler';
 import { Response } from 'supertest';
 
 describe('UserSignIn (e2e)', () => {
     let userSms: User;
     let userEmail: User;
-    let em: EntityManagerResolver;
+    let em: EntityManager;
     let tokenHandler: JwtTokenHandler;
 
     const PASSWORD = '123123';
@@ -24,7 +24,7 @@ describe('UserSignIn (e2e)', () => {
             twoFactorAuth: TwoFactorAuth.EMAIL,
         } as any);
 
-        em = Bootstrap.getEntityManager(MIKRO_ORM_DEFAULT);
+        em = Bootstrap.getEntityManager();
         tokenHandler = await Bootstrap.resolve('AuthTokenHandler');
     });
 

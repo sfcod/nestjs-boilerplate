@@ -1,14 +1,14 @@
 import { HttpStatus } from '@nestjs/common';
-import { MIKRO_ORM_DEFAULT, Admin, TwoFactorAuth } from '@libs/orm';
+import { Admin, TwoFactorAuth } from '@libs/orm';
 import { makeAdmin, Bootstrap } from '@libs/test';
-import { EntityManagerResolver } from '@libs/orm-core';
+import { EntityManager } from '@mikro-orm/core';
 import { JwtTokenHandler } from '@libs/security/strategy/jwt-token-handler';
 import { Response } from 'supertest';
 
 describe('AdminSignIn (e2e)', () => {
     let userSms: Admin;
     let userEmail: Admin;
-    let em: EntityManagerResolver;
+    let em: EntityManager;
     let tokenHandler: JwtTokenHandler;
 
     const PASSWORD = '123123';
@@ -24,7 +24,7 @@ describe('AdminSignIn (e2e)', () => {
             twoFactorAuth: TwoFactorAuth.EMAIL,
         } as any);
 
-        em = Bootstrap.getEntityManager(MIKRO_ORM_DEFAULT);
+        em = Bootstrap.getEntityManager();
         tokenHandler = await Bootstrap.resolve('AuthTokenHandler');
     });
 

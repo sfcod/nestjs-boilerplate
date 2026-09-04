@@ -4,7 +4,7 @@ import { storageKeyInDb } from '../../helper/storage.helper';
 import { DateTime } from 'luxon';
 import { CodeSendThrottleException } from '../../exception/code-send-throttle-exception';
 import { CodeVerifyThrottleException } from '../../exception/code-verify-throttle-exception';
-import * as ms from 'ms';
+import ms from 'ms';
 
 export type Composing = { to: string; code: string; template?: string };
 export type ThrottleParams = { throttleKey?: string; throttleTime?: number };

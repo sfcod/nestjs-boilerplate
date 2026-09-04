@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": true,
     "allowJs": true,
     "removeComments": true,
@@ -10,10 +11,41 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
+    "rootDir": "./",
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
+    "strict": false,
     "strictBindCallApply": true,
+    "ignoreDeprecations": "6.0",
+    "types": [
+      "app-root-path",
+      "bcrypt",
+      "cache-manager",
+      "cheerio",
+      "create-hmac",
+      "express",
+      "fs-extra",
+      "inline-css",
+      "lodash",
+      "ms",
+      "multer",
+      "node",
+      "node-jose",
+      "nodemailer",
+      "object-hash",
+      "passport-jwt",
+      "passport-local",
+      "preview-email",
+      "qrcode",
+      "qs",
+      "redlock",
+      "request-ip",
+      "sinon",
+      "supertest",
+      "uuid",
+      "vitest/globals"
+    ],
     "paths": {
       "@app/admin/*": [
         "apps/admin/src/*"
@@ -23,9 +55,6 @@
       ],
       "@app/database/*": [
         "apps/database/src/*"
-      ],
-      "@app/queue-processor/*": [
-        "apps/queue-processor/src/*"
       ],
       "@app/health/*": [
         "apps/health/src/*"
@@ -42,17 +71,11 @@
       "@app-admin/common/*": [
         "apps/admin/src/common/*"
       ],
-      "@app-queue-processor/common": [
-        "apps/queue-processor/src/common"
-      ],
-      "@app-queue-processor/common/*": [
-        "apps/queue-processor/src/common/*"
-      ],
       "@libs/core": [
         "libs/core/src"
       ],
       "@libs/core/*": [
-        "phy/core/*"
+        "libs/core/src/*"
       ],
       "@libs/file-storage": [
         "libs/file-storage/src"
@@ -102,12 +125,6 @@
       "@libs/twilio/*": [
         "libs/twilio/src/*"
       ],
-      "@libs/orm-core": [
-        "libs/orm-core/src"
-      ],
-      "@libs/orm-core/*": [
-        "libs/orm-core/src/*"
-      ],
       "@libs/orm": [
         "libs/orm/src"
       ],
@@ -126,23 +143,11 @@
       "@libs/test/*": [
         "libs/test/src/*"
       ],
-      "@libs/microservice-event": [
-        "libs/microservice-event/src"
-      ],
-      "@libs/microservice-event/*": [
-        "libs/microservice-event/src/*"
-      ],
       "@libs/healthcheck": [
         "libs/healthcheck/src"
       ],
       "@libs/healthcheck/*": [
         "libs/healthcheck/src/*"
-      ],
-      "@libs/webauthn": [
-        "libs/webauthn/src"
-      ],
-      "@libs/webauthn/*": [
-        "libs/webauthn/src/*"
       ]
     }
   },

@@ -8,6 +8,6 @@ export class DbNotificationManager implements NotificationManagerInterface {
     constructor(private readonly em: EntityManager) {}
 
     public async process(notification: Notification): Promise<void> {
-        await this.em.persistAndFlush(notification);
+        await this.em.persist(notification).flush();
     }
 }

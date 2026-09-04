@@ -1,40 +1,33 @@
-import { Injectable } from '@nestjs/common';
-import { HealthIndicator, HealthIndicatorResult, HealthCheckError, TimeoutError } from '@nestjs/terminus';
+import { Injectable, Scope } from '@nestjs/common';
+import { HealthIndicatorResult, HealthIndicatorService } from '@nestjs/terminus';
 import { RedisService } from '@songkeys/nestjs-redis';
-import { promiseTimeout, TimeoutError as PromiseTimeoutError } from '@nestjs/terminus/dist/utils';
 
 export interface RedisIndicatorOptions {
     redisService?: RedisService;
     timeout?: number;
 }
 
-@Injectable()
-export class RedisHealthIndicator extends HealthIndicator {
-    public constructor(protected readonly redisService: RedisService) {
-        super();
-    }
+@Injectable({ scope: Scope.TRANSIENT })
+export class RedisHealthIndicator {
+    public constructor(
+        protected readonly redisService: RedisService,
+        private readonly healthIndicatorService: HealthIndicatorService,
+    ) {}
 
-    async pingCheck(key: string, options: RedisIndicatorOptions = { timeout: 2000 }): Promise<HealthIndicatorResult> {
-        try {
-            const redis = options.redisService || this.redisService;
-            const pong = await promiseTimeout(options.timeout, redis.getClient().ping());
-            const isHealthy = pong === 'PONG';
-            const result = this.getStatus(key, isHealthy);
+    async pingCheck<Key extends string>(
+        key: Key,
+        options: RedisIndicatorOptions = { timeout: 2000 },
+    ): Promise<HealthIndicatorResult<Key>> {
+        return this.healthIndicatorService
+            .check(key)
+            .attempt(async () => {
+                const redis = options.redisService || this.redisService;
+                const pong = await redis.getClient().ping();
 
-            if (isHealthy) {
-                return result;
-            }
-
-            throw new HealthCheckError(`${key} is not available`, result);
-        } catch (err) {
-            if (err instanceof PromiseTimeoutError) {
-                throw new TimeoutError(
-                    options.timeout,
-                    this.getStatus(key, false, {
-                        message: `timeout of ${options.timeout}ms exceeded`,
-                    }),
-                );
-            }
-        }
+                if (pong !== 'PONG') {
+                    throw new Error(`${key} is not available`);
+                }
+            })
+            .withTimeout(options.timeout ?? 2000);
     }
 }

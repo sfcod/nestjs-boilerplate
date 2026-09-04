@@ -27,7 +27,7 @@ export class VerifyCodeAction {
         }
         user.recoveryPasswordToken = null;
 
-        await this.entityManager.persistAndFlush(user);
+        await this.entityManager.persist(user).flush();
 
         // Need to reset the brute force counter on login
         await this.credentialBruteForce.reset(req, CredentialBruteForce.USERNAME_AND_IP_KEY_PREFIX, {

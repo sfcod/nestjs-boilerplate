@@ -1,5 +1,6 @@
-import { MetadataStorage, Utils } from '@mikro-orm/core';
+import { Utils } from '@mikro-orm/core';
 import { EntityManager } from '@mikro-orm/core';
+import { Filter } from '@mikro-orm/decorators/legacy';
 
 export type SoftDeletableOptions = {
     fieldName: string;
@@ -22,12 +23,11 @@ export function SoftDeletable<T extends Partial<SoftDeletableOptions>, U = any>(
         const options = { ...defaultOptions, ...decoratorOptions };
         Reflect.defineMetadata(SOFT_DELETABLE_OPTIONS, options, (target as any).prototype);
 
-        const entityMetadata = MetadataStorage.getMetadataFromDecorator(target);
-        entityMetadata.filters[SOFT_DELETABLE_QUERY_FILTER] = {
+        Filter({
             name: SOFT_DELETABLE_QUERY_FILTER,
             cond: { [options.fieldName]: null },
             default: true,
             entity: Utils.asArray(target).map((n) => Utils.className(n as any)),
-        };
+        } as any)(target as any);
     };
 }

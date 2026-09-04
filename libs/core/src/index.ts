@@ -34,6 +34,9 @@ export * from './dto/json-output';
 export * from './exception/mapper.exception';
 export * from './exception/timeout-exception-filter';
 
+// guard
+export * from './guard/param-validation.guard';
+
 // helper
 export * from './helper/exception.helper';
 export * from './helper/swagger.helper';

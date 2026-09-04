@@ -1,4 +1,5 @@
-import { Entity, Enum, Filter, PrimaryKey, Property, raw } from '@mikro-orm/core';
+import { raw } from '@mikro-orm/core';
+import { Entity, Enum, Filter, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
 import { AuthenticatorType, User2FAInterface, UserInterface } from '@libs/security';
 import { v4 } from 'uuid';
 import { getCurrentTimestamp } from '../helper/date-type.helper';
@@ -52,6 +53,8 @@ export class Admin implements UserInterface, User2FAInterface {
         onCreate: () => getCurrentTimestamp(),
         columnType: 'timestamp',
         fieldName: 'created_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     createdAt: Date | string;
 
@@ -60,6 +63,8 @@ export class Admin implements UserInterface, User2FAInterface {
         onUpdate: () => getCurrentTimestamp(),
         columnType: 'timestamp',
         fieldName: 'updated_at',
+        type: 'string',
+        runtimeType: 'string',
     })
     updatedAt: Date | string;
 

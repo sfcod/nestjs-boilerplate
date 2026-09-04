@@ -1,7 +1,6 @@
 import { Command, Console } from 'nestjs-console';
-import { wrap } from '@mikro-orm/core';
+import { EntityManager, wrap } from '@mikro-orm/core';
 import { Admin, AdminStatus } from '@libs/orm';
-import { EntityManagerResolver } from '@libs/orm-core';
 import { hash } from 'bcrypt';
 import { v4 } from 'uuid';
 
@@ -10,14 +9,14 @@ import { v4 } from 'uuid';
     description: 'A command to create users',
 })
 export class SeedCommand {
-    constructor(private readonly emResolver: EntityManagerResolver) {}
+    constructor(private readonly em: EntityManager) {}
 
     @Command({
         command: 'run',
         description: 'Run seeds',
     })
     async run(command: any): Promise<void> {
-        const em = this.emResolver.getEntityManager(Admin).fork();
+        const em = this.em.fork();
         const admin = new Admin();
         wrap(admin).assign(
             {
@@ -30,6 +29,6 @@ export class SeedCommand {
             },
             { em },
         );
-        await em.persistAndFlush(admin);
+        await em.persist(admin).flush();
     }
 }

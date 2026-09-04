@@ -9,6 +9,7 @@ import { json, urlencoded } from 'express';
 import { UnauthorizedExceptionFilter } from '@libs/security';
 import * as bodyParser from 'body-parser';
 import { setupSwagger } from '@libs/core';
+import { Logger } from '@nestjs/common';
 
 export const instance = async (): Promise<NestExpressApplication> => {
     const app = await NestFactory.create<NestExpressApplication>(ClientModule, {
@@ -45,6 +46,7 @@ export const instance = async (): Promise<NestExpressApplication> => {
 
     await app.startAllMicroservices();
     await app.listen(parseInt(process.env.PORT_CLIENT, 10) || 3010);
+    new Logger('Bootstrap').log(`Application is running on: ${await app.getUrl()}`);
 
     return app;
 };

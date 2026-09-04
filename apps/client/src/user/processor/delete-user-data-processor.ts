@@ -3,7 +3,7 @@ import { QueueInputType } from '@libs/core';
 import { Job } from 'bullmq';
 import { Injectable } from '@nestjs/common';
 import { EntityManager, MikroORM } from '@mikro-orm/core';
-import { UseRequestContext } from '@libs/orm-core';
+import { UseRequestContext } from '@libs/orm';
 import { DELETE_USER_DATA_QUEUE } from '@libs/core';
 
 @Processor(DELETE_USER_DATA_QUEUE, {
