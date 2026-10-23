@@ -1,7 +1,7 @@
 ## Installation
 
 ### Prerequisites
- - Node 24+
+ - Node 24.22.1+ (earlier versions are affected by CVE-2026-111497)
  - Docker
 
 ----------------
