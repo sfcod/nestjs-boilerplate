@@ -1,4 +1,4 @@
-image: node:24-alpine
+image: node:24.22.1-alpine
 
 services:
   - redis:5
